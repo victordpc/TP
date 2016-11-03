@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package TPMV;
 
-/**
- *
- * @author yhondri
- */
 public class ByteCodeProgram {
 
     private final ByteCode[] program;
@@ -23,8 +14,7 @@ public class ByteCodeProgram {
     }
 
     public void addByteCode(ByteCode byteCode) {
-        program[nextProgramPosition] = byteCode;
-        nextProgramPosition++;
+        program[nextProgramPosition++] = byteCode;
         showProgramInfo();
     }
 
@@ -46,7 +36,7 @@ public class ByteCodeProgram {
     }
 
     public void run() {
-        for (int i = 0; i < nextProgramPosition; i++) {
+        for (int i = 0; i < nextProgramPosition && !cpu.getHalt(); i++) {
             ByteCode byteCode = program[i];
             if (cpu.execute(byteCode)) {
                 switch (byteCode.name) {
@@ -67,9 +57,6 @@ public class ByteCodeProgram {
     }
 
     public void replace(int position, ByteCode newInstruction) {
-        int temp = nextProgramPosition;
-        nextProgramPosition = position;
-        addByteCode(newInstruction);
-        nextProgramPosition = temp;
+    	this.program[position]=newInstruction;
     }
 }

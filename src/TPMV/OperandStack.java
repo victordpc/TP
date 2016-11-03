@@ -1,62 +1,64 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package TPMV;
 
-/**
- *
- * @author yhondri
- */
 public class OperandStack {
 
-    private final int[] stack;
-    private final int STACK_SIZE = 1000;
-    private int nextOperand;
+	private int stack[];
+	private int contador;
+	private int STACK_SIZE=1000;
 
     public OperandStack() {
         this.stack = new int[STACK_SIZE];
-        this.nextOperand = -1;
+		this.contador = 0;
     }
 
     public int length() {
-        int stackSize = 0;
-        if (nextOperand > 0) {
-            stackSize = nextOperand;
-        }
-        return stackSize;
+        return contador;
     }
 
-    public int read(int pos) {
-        return stack[pos];
-    }
+	public boolean push(int operando){
+		boolean resultado = false;
 
-    public void write(int operand) {
-        if (nextOperand < 0) {
-            nextOperand = 0;
-        }
-        stack[nextOperand] = operand;
-        nextOperand += 1;
-    }
+		if (contador >= this.stack.length) {
+			this.redim();
+		}
+		this.stack[contador++]=operando;
+		resultado = true;
 
-    public int getLastValue() {
-        int position = 0;
-        if ((nextOperand - 1) > 0) {
-            position = nextOperand - 1;
-            nextOperand -= 1;
+		return resultado;
+	}
+
+	public int pop(){
+	int resultado = 0;
+		if (contador>0)
+			resultado = this.stack[--contador];
+		else
+			resultado = this.stack[0];
+		return resultado;
+	}
+	
+	public int getLastPosition(){
+		int resultado = 0;
+		if (contador >0)
+			resultado = stack[contador -1];
+		else
+			resultado = stack[0];
+		return resultado;
+	}
+
+	public String toString(){
+		String resultado="";
+        if (this.stack.length == 0) {
+            resultado="<vacía>";
         } else {
-            nextOperand = -1;
+            for (int i = 0; i < contador; i++) {
+                resultado += this.stack[i] + " ";
+            }
         }
-        return stack[position];
-    }
-    
-    public int getLastPosition() {
-        int position = 0;
-        if(nextOperand > 0) {
-            position = nextOperand - 1;
-        }
-        return position;
-    }
-
+        return resultado;
+	}
+	
+	private void redim(){
+		int newSize = this.stack.length + this.STACK_SIZE;
+        this.stack = java.util.Arrays.copyOf(this.stack, newSize);
+	}
 }
