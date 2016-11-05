@@ -33,7 +33,7 @@ public class Command {
                 engine.executeNewInst(instruction);
                 break;
             case RUN:
-                engine.executeRun();
+                engine.excuteCommandRun();
                 break;
             case RESET:
                 engine.executeReset();

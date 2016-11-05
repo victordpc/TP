@@ -7,10 +7,12 @@ public class Engine {
     private boolean end;
     private ByteCodeProgram byteCodeProgram;
     private final Scanner scanner;
+    private final CPU cpu;
 
     public Engine() {
         this.byteCodeProgram = new ByteCodeProgram();
-        scanner = new Scanner(System.in);
+        this.cpu = new CPU();
+        this.scanner = new Scanner(System.in);
     }
 
     public void start() {
@@ -40,17 +42,35 @@ public class Engine {
 
     public void executeQuit() {
         end = true;
-        byteCodeProgram.showProgramInfo();
+        System.out.println(byteCodeProgram.toString());
         System.out.println("\nFin de la ejecucion....");
     }
 
     public void executeNewInst(ByteCode byteCode) {
         byteCodeProgram.addByteCode(byteCode);
+        System.out.println(byteCodeProgram.toString());
     }
 
-    public void executeRun() {
-        byteCodeProgram.run();
-    }
+    public void excuteCommandRun() {
+    	this.cpu.reset();
+        for (int i = 0; i < this.byteCodeProgram.getLength() && !cpu.isHalted(); i++) {
+            ByteCode byteCode = this.byteCodeProgram.getProgram(i);
+            if (cpu.execute(byteCode)) {
+            	String status = "El estado de la maquina tras ejecutar el bytecode ";
+                switch (byteCode.name) {
+                    case PUSH:
+                    case LOAD:
+                    case STORE:
+                    	status += byteCode.getName() + " " + byteCode.getParam() + " es:";
+                        break;
+                    default:
+                    	status += byteCode.getName() + " es:";
+                        break;
+                }
+                System.out.println(status +"\n"+cpu.toString());
+            }
+        }
+     }
 
     public void executeReplace(int position) {
         System.out.print("Nueva instrucción: ");
