@@ -38,7 +38,7 @@ public class OperandStack {
 	
 	public int getLastPosition(){
 		int resultado = 0;
-		if (contador >0)
+		if (contador > 0)
 			resultado = stack[contador -1];
 		else
 			resultado = stack[0];
@@ -60,5 +60,9 @@ public class OperandStack {
 	private void redim(){
 		int newSize = this.stack.length + this.STACK_SIZE;
         this.stack = java.util.Arrays.copyOf(this.stack, newSize);
+	}
+	
+	public void reset() {
+		contador = 0;
 	}
 }

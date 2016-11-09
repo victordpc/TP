@@ -57,24 +57,29 @@ public class CPU {
             	this.halt=true;
             	break;
             case OUT:
-                System.out.println("El último valor en la pila es: " 
-                		+ stack.getLastPosition());
+                System.out.println("El último valor en la pila es: " + stack.getLastPosition());
                 break;
             default:
                 break;
         }
         return success;
     }
-
-    public void showStatus() {
-        System.out.print("Estado de la CPU:\nMemoria: ");
-        System.out.println(this.memory.toString());
-        System.out.print("Pila: ");
-        System.out.println(this.stack.toString());
-        System.out.print("\n\n");
+    
+    @Override
+    public String toString() {
+		String resultado="Estado de la CPU:\nMemoria: ";
+		resultado += this.memory.toString() + "\n";
+		resultado += "Pila:" + "\n";
+		resultado += this.stack.toString() + "\n\n";
+		return resultado;
     }
 
-	public boolean getHalt() {
+	public boolean isHalted() {
 		return halt;
+	}
+	
+	public void reset() {
+		this.stack.reset();
+		this.stack.reset();
 	}
 }
