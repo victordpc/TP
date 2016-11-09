@@ -24,17 +24,17 @@ public class ByteCodeProgram {
     
     public String toString() {
     	String objectInfo = "";
-    	objectInfo += "Programa almacenado: \n";
+    	objectInfo += "Programa almacenado: " + System.getProperty("line.separator");
           for (int i = 0; i < nextProgramPosition; i++) {
               ByteCode storedByteCode = program[i];
               switch (storedByteCode.name) {
                   case PUSH:
                   case LOAD:
                   case STORE:
-                	  objectInfo += i + ": " + storedByteCode.getName().toString() + " " + storedByteCode.getParam() + "\n";
+                	  objectInfo += i + ": " + storedByteCode.getName().toString() + " " + storedByteCode.getParam() + System.getProperty("line.separator");
                       break;
                   default:
-                	  objectInfo += i + ": " + storedByteCode.getName().toString() + "\n";
+                	  objectInfo += i + ": " + storedByteCode.getName().toString() + System.getProperty("line.separator");
                       break;
               }
           }    

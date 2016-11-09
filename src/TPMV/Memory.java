@@ -56,6 +56,12 @@ public class Memory {
     private void resize(int pos) {
         int newSize = ((pos / REDIM_SIZE) + 1) * REDIM_SIZE;
         memory = java.util.Arrays.copyOf(this.memory, newSize);
+        
+        // Integer[] temp = new Integer[((pos / redimSize) + 1) * redimSize];
+        // if (this.memory != null)
+        // System.arraycopy(this.memory, 0, temp, 0,
+        // Math.min(this.memory.length, temp.length));
+        // this.memory = temp;
     }
     
     public void reset() {

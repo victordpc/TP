@@ -32,11 +32,11 @@ public class Engine {
     }
 
     public void executeHelp() {
-        System.out.println("HELP: Muestra esta ayuda \n"
-                + "QUIT: Cierra la aplicación \n"
-                + "RUN: Ejecuta el programa \n"
-                + "NEWINST BYTECODE: Introduce una nueva instrucción al programa \n"
-                + "RESET: Vacía el programa actual \n"
+        System.out.println("HELP: Muestra esta ayuda " + System.getProperty("line.separator")
+                + "QUIT: Cierra la aplicación " + System.getProperty("line.separator")
+                + "RUN: Ejecuta el programa " + System.getProperty("line.separator")
+                + "NEWINST BYTECODE: Introduce una nueva instrucción al programa " + System.getProperty("line.separator")
+                + "RESET: Vacía el programa actual " + System.getProperty("line.separator")
                 + "REPLACE N: Reemplaza la instrucción N por la solicitada al usuario");
     }
 
@@ -67,7 +67,7 @@ public class Engine {
                     	status += byteCode.getName() + " es:";
                         break;
                 }
-                System.out.println(status +"\n"+cpu.toString());
+                System.out.println(status +System.getProperty("line.separator")+cpu.toString());
             }
         }
      }

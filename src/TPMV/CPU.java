@@ -67,10 +67,10 @@ public class CPU {
     
     @Override
     public String toString() {
-		String resultado="Estado de la CPU:\nMemoria: ";
-		resultado += this.memory.toString() + "\n";
-		resultado += "Pila:" + "\n";
-		resultado += this.stack.toString() + "\n\n";
+		String resultado="Estado de la CPU: " + System.getProperty("line.separator") + "Memoria: ";
+		resultado += this.memory.toString() + System.getProperty("line.separator");
+		resultado += "Pila:" + System.getProperty("line.separator");
+		resultado += this.stack.toString() + System.getProperty("line.separator") + System.getProperty("line.separator");
 		return resultado;
     }
 
