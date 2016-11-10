@@ -14,8 +14,10 @@ public class CommandParser {
                 command = new Command(ENUM_COMMAND.valueOf(commandString));
                 break;
             case "REPLACE":
-                int position = Integer.parseInt(instructionArray[1]);
-                command = new Command(ENUM_COMMAND.valueOf(commandString), position);
+            	if (instructionArray.length==2){
+            		int position = Integer.parseInt(instructionArray[1]);
+            		command = new Command(ENUM_COMMAND.valueOf(commandString), position);
+            	}
                 break;
             case "NEWINST":
                 ByteCode newByteCode = ByteCodeParser.parse(line);

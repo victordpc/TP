@@ -17,76 +17,99 @@ public class Engine {
 
 	public void start() {
 		end = false;
+		System.out.println("Inicio del programa");
+		System.out.print(System.getProperty("line.separator"));
+		System.out.println("Empieze la introducci髇 de comandos:");
+		System.out.print(System.getProperty("line.separator"));
+
 		while (!end) {
 			String line = scanner.nextLine();
 			Command command = CommandParser.parse(line);
-			System.out.println("Comienza la ejecuci贸n de " + line);
 			if (command != null) {
+				System.out.println("Comienza la ejecuci髇 de "
+						+ command.toString());
 				if (!command.execute(this)) {
-					throw new UnsupportedOperationException("Not supported yet.");
+					System.out.println("Error en la ejecuci髇 del comando"
+							+ System.getProperty("line.separator"));
 				}
 			} else {
-				System.out.print("Error: Ejecucion incorrecta del comando");
+				System.out.println("Comienza la ejecuci髇 de " + line);
+				System.out.print("Error: Ejecucion incorrecta del comando"
+						+ System.getProperty("line.separator"));
 			}
 		}
+		System.out.print(System.getProperty("line.separator"));
 	}
 
-	public void executeHelp() {
-		System.out.println("HELP: Muestra esta ayuda " + System.getProperty("line.separator")
-				+ "QUIT: Cierra la aplicaci贸n " + System.getProperty("line.separator") + "RUN: Ejecuta el programa "
-				+ System.getProperty("line.separator")
-				+ "NEWINST BYTECODE: Introduce una nueva instrucci贸n al programa "
-				+ System.getProperty("line.separator") + "RESET: Vac铆a el programa actual "
-				+ System.getProperty("line.separator")
-				+ "REPLACE N: Reemplaza la instrucci贸n N por la solicitada al usuario");
+	static public boolean executeHelp() {
+		System.out
+				.println("HELP: Muestra esta ayuda "
+						+ System.getProperty("line.separator")
+						+ "QUIT: Cierra la aplicaci髇 "
+						+ System.getProperty("line.separator")
+						+ "RUN: Ejecuta el programa "
+						+ System.getProperty("line.separator")
+						+ "NEWINST BYTECODE: Introduce una nueva instrucci髇 al programa "
+						+ System.getProperty("line.separator")
+						+ "RESET: Vac韆 el programa actual "
+						+ System.getProperty("line.separator")
+						+ "REPLACE N: Reemplaza la instrucci髇 N por la solicitada al usuario");
+		return true;
 	}
 
-	public void executeQuit() {
+	public boolean executeQuit() {
 		end = true;
 		System.out.println(byteCodeProgram.toString());
-		System.out.println("\nFin de la ejecucion....");
+		System.out.println(System.getProperty("line.separator")
+				+ "Fin de la ejecucion...."
+				+ System.getProperty("line.separator"));
+		return true;
 	}
 
-	public void executeNewInst(ByteCode byteCode) {
-		byteCodeProgram.addByteCode(byteCode);
+	public boolean executeNewInst(ByteCode byteCode) {
+		boolean resultado = byteCodeProgram.addByteCode(byteCode);
 		System.out.println(byteCodeProgram.toString());
+		return resultado;
 	}
 
-	public void excuteCommandRun() {
+	public boolean excuteCommandRun() {
 		this.cpu.reset();
 		for (int i = 0; i < this.byteCodeProgram.getLength() && !cpu.isHalted(); i++) {
 			ByteCode byteCode = this.byteCodeProgram.getProgram(i);
 			if (cpu.execute(byteCode)) {
-				String status = "El estado de la maquina tras ejecutar el bytecode ";
-				switch (byteCode.name) {
-				case PUSH:
-				case LOAD:
-				case STORE:
-					status += byteCode.getName() + " " + byteCode.getParam() + " es:";
-					break;
-				default:
-					status += byteCode.getName() + " es:";
-					break;
-				}
-				System.out.println(status + System.getProperty("line.separator") + cpu.toString());
+				System.out
+				.println("El estado de la maquina tras ejecutar el bytecode "
+						+ byteCode.toString()
+						+ " es:"
+						+ System.getProperty("line.separator")
+						+ cpu.toString()
+						+ System.getProperty("line.separator"));
 			} else {
-				System.out.println("Error: Ejecucion incorrecta del comando " + System.getProperty("line.separator")
-						+ this.byteCodeProgram.toString());
+				System.out.println("Error: Ejecucion incorrecta del comando "
+						+ System.getProperty("line.separator")
+						+ this.byteCodeProgram.toString()
+						+ System.getProperty("line.separator") + cpu.toString()
+						+ System.getProperty("line.separator"));
+				return false;
 			}
 		}
+		return true;
 	}
 
-	public void executeReplace(int position) {
-		System.out.print("Nueva instrucci贸n: ");
-		String line = "newinst ";
-		line += scanner.nextLine();
-		Command command = CommandParser.parse(line);
-		if (command != null) {
-			byteCodeProgram.replace(position, command.getByteCode());
+	public boolean executeReplace(int position) {
+		System.out.print("Nueva instrucci髇: ");
+		String line = scanner.nextLine();
+		ByteCode bc = ByteCodeParser.parse("newinst " + line);
+		if (bc != null) {
+			byteCodeProgram.replace(position, bc);
+			System.out.println(byteCodeProgram.toString()
+					+ System.getProperty("line.separator"));
+			return true;
 		}
+		return false;
 	}
 
-	public void executeReset() {
-		byteCodeProgram = new ByteCodeProgram();
+	public boolean executeReset() {
+		return byteCodeProgram.reset();
 	}
 }

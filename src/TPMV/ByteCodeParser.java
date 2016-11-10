@@ -6,16 +6,14 @@ public class ByteCodeParser {
 		ByteCode resultado = null;
 		String[] instructionArray = entrada.split(" ");
 		String commandString = instructionArray[1].toUpperCase();
-		
+
 		switch (commandString) {
 		case "PUSH":
 		case "LOAD":
 		case "STORE":
 			if (instructionArray.length == 3) {
-				resultado = 
-						new ByteCode(
-								ENUM_BYTECODE.valueOf(commandString),
-								Integer.parseInt(instructionArray[2]));
+				resultado = new ByteCode(ENUM_BYTECODE.valueOf(commandString),
+						Integer.parseInt(instructionArray[2]));
 			}
 			break;
 		case "ADD":
@@ -29,7 +27,7 @@ public class ByteCodeParser {
 			}
 			break;
 		}
-		
+
 		return resultado;
 	}
 }

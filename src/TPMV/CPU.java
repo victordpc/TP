@@ -18,12 +18,15 @@ public class CPU {
 		int value2;
 		switch (instruction.getName()) {
 		case PUSH:
-			stack.push(instruction.getParam());
-			success = true;
+			if (stack.length() >= 1) {
+				success = stack.push(instruction.getParam());
+			}
 			break;
 		case STORE:
-			int value = stack.pop();
-			success = memory.write(instruction.getParam(), value);
+			if (stack.length() >= 1) {
+				int value = stack.pop();
+				success = memory.write(instruction.getParam(), value);
+			}
 			break;
 		case LOAD:
 			memory.read(instruction.getParam());
@@ -65,7 +68,9 @@ public class CPU {
 			this.halt = true;
 			break;
 		case OUT:
-			System.out.println("El Ãºltimo valor en la pila es: " + stack.getLastPosition());
+			System.out.println("El último valor en la pila es: "
+					+ stack.getLastPosition()
+					+ System.getProperty("line.separator"));
 			break;
 		default:
 			break;
@@ -75,10 +80,13 @@ public class CPU {
 
 	@Override
 	public String toString() {
-		String resultado = "Estado de la CPU: " + System.getProperty("line.separator") + "Memoria: ";
-		resultado += this.memory.toString() + System.getProperty("line.separator");
+		String resultado = "Estado de la CPU: "
+				+ System.getProperty("line.separator") + "Memoria: ";
+		resultado += this.memory.toString()
+				+ System.getProperty("line.separator");
 		resultado += "Pila:" + System.getProperty("line.separator");
-		resultado += this.stack.toString() + System.getProperty("line.separator")
+		resultado += this.stack.toString()
+				+ System.getProperty("line.separator")
 				+ System.getProperty("line.separator");
 		return resultado;
 	}
@@ -88,7 +96,7 @@ public class CPU {
 	}
 
 	public void reset() {
-		this.stack.reset();
+		this.memory.reset();
 		this.stack.reset();
 	}
 }
