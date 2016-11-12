@@ -1,7 +1,7 @@
 package TPMV;
 
 /**
- * Clase que contiene el procesamiento de la máquina virtual, contiene una
+ * Clase que contiene el procesamiento de la maquina virtual, contiene una
  * memoria y una pila de operandos.
  */
 public class CPU {
@@ -20,11 +20,11 @@ public class CPU {
 	}
 
 	/**
-	 * Ejecuta el ByteCode recibido por parámetro.
+	 * Ejecuta el ByteCode recibido por parametro.
 	 * 
 	 * @param instruccion
-	 *            Instrucción a ejecutar.
-	 * @return Resultado cierto o falso de la ejecución del la instrucción.
+	 *            Instruccion a ejecutar.
+	 * @return Resultado cierto o falso de la ejecucion del la instruccion.
 	 */
 	public boolean execute(ByteCode instruccion) {
 		boolean success = false;
@@ -81,7 +81,7 @@ public class CPU {
 			break;
 		case OUT:
 			System.out.println(
-					"El último valor en la pila es: " + stack.getLastPosition() + System.getProperty("line.separator"));
+					"El ultimo valor en la pila es: " + stack.getLastPosition() + System.getProperty("line.separator"));
 			break;
 		default:
 			break;

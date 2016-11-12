@@ -1,7 +1,7 @@
 package TPMV;
 
 /**
- * Clase de inicio de nuestra aplicación
+ * Clase de inicio de nuestra aplicacion
  */
 public class Main {
 

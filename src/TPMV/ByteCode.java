@@ -1,7 +1,7 @@
 package TPMV;
 
 /**
- * Clase que representa las instrucciones que puede manejar la máquina virtual.
+ * Clase que representa las instrucciones que puede manejar la maquina virtual.
  */
 public class ByteCode {
 
@@ -15,7 +15,7 @@ public class ByteCode {
 	 *            Nombre del enumerado ENUM_BYTECODE que identifica que ByteCode
 	 *            estamos creando.
 	 * @param parametro
-	 *            Parámetro necesario para las instrucciones PUSH, STORE, LOAD.
+	 *            Parametro necesario para las instrucciones PUSH, STORE, LOAD.
 	 */
 	public ByteCode(ENUM_BYTECODE name, int parametro) {
 		this.name = name;
