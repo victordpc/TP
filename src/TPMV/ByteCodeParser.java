@@ -6,11 +6,11 @@ package TPMV;
 public class ByteCodeParser {
 
 	/**
-	 * Convierte un string recibido por parámetro a un objeto de tipo ByteCode.
+	 * Convierte un string recibido por parametro a un objeto de tipo ByteCode.
 	 * 
 	 * @param linea
-	 *            Línea de texto escrita con el usuario.
-	 * @return Objeto ByteCode correspondiente a la línea escrita por el
+	 *            Linea de texto escrita con el usuario.
+	 * @return Objeto ByteCode correspondiente a la linea escrita por el
 	 *         usuario, si es un ByteCode incorrecto devuelve null.
 	 */
 	public static ByteCode parse(String linea) {

@@ -41,7 +41,7 @@ public enum ENUM_BYTECODE {
 	 */
 	OUT,
 	/**
-	 * Para la ejecución del programa.
+	 * Para la ejecucion del programa.
 	 */
 	HALT
 }

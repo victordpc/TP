@@ -31,7 +31,7 @@ public class OperandStack {
 	 * 
 	 * @param operando
 	 *            Valor que introduce
-	 * @return Éxito o fracaso de la operación.
+	 * @return Exito o fracaso de la operacion.
 	 */
 	public boolean push(int operando) {
 		if (contador < this.stack.length) {
@@ -68,7 +68,7 @@ public class OperandStack {
 
 	public String toString() {
 		if (this.stack.length == 0) {
-			return "<vacía>";
+			return "<vacia>";
 		} else {
 			String resultado = "";
 			for (int i = 0; i < contador; i++) {

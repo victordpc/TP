@@ -17,11 +17,11 @@ public class ByteCodeProgram {
 	}
 
 	/**
-	 * A帽ade un elemento de tipo ByteCode en la 煤ltima posici贸n del programa.
+	 * A馻de un elemento de tipo ByteCode en la ultima posicion del programa.
 	 * 
 	 * @param byteCode
-	 *            ByteCode que a帽adimos.
-	 * @return 脡xito o fracaso de la operaci贸n.
+	 *            ByteCode que a馻dimos.
+	 * @return Exito o fracaso de la operacion.
 	 */
 	public boolean addByteCode(ByteCode byteCode) {
 		if (nextProgramPosition < EXTEND_VALUE) {
@@ -33,10 +33,10 @@ public class ByteCodeProgram {
 
 	/**
 	 * Obtiene el objeto de tipo ByteCode almacenado en el programa en la
-	 * posici贸n indicada.
+	 * posicion indicada.
 	 * 
 	 * @param posicion
-	 *            Posici贸n de la cual obtenemos el objeto ByteCode almacenado.
+	 *            Posicion de la cual obtenemos el objeto ByteCode almacenado.
 	 * @return Valor almacenado.
 	 */
 	public ByteCode getProgram(int posicion) {
@@ -44,12 +44,12 @@ public class ByteCodeProgram {
 	}
 
 	/**
-	 * Sustituye el valor de una posici贸n del programa por un valor dado.
+	 * Sustituye el valor de una posicion del programa por un valor dado.
 	 * 
 	 * @param position
-	 *            脥ndice del array en el que queremos sustituir su valor.
+	 *            Indice del array en el que queremos sustituir su valor.
 	 * @param newInstruction
-	 *            Instrucci贸n que queremos insertar.
+	 *            Instruccion que queremos insertar.
 	 */
 	public void replace(int position, ByteCode newInstruction) {
 		this.program[position] = newInstruction;
@@ -76,9 +76,9 @@ public class ByteCodeProgram {
 	}
 
 	/**
-	 * Obtiene el valor del n煤mero de elementos almacenados en el programa.
+	 * Obtiene el valor del numero de elementos almacenados en el programa.
 	 * 
-	 * @return N煤mero de elementos almacendos en el programa.
+	 * @return Numero de elementos almacendos en el programa.
 	 */
 	public int getLength() {
 		return this.nextProgramPosition;

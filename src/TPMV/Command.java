@@ -45,11 +45,11 @@ public class Command {
 	}
 
 	/**
-	 * Función que realiza las llamadas a los métodos asociados a cada comando.
+	 * Funcion que realiza las llamadas a los metodos asociados a cada comando.
 	 * 
 	 * @param engine
 	 *            Instancia en la que se ejecutan los comandos.
-	 * @return Éxito o fracaso de la operación.
+	 * @return exito o fracaso de la operaci�n.
 	 */
 	public boolean execute(Engine engine) {
 		switch (command) {
