@@ -2,6 +2,10 @@ package TPMV;
 
 import java.util.Scanner;
 
+/**
+ * Clase para representar el bucle de control de la aplicacio虂n, se piden los
+ * comandos a ejecutar y se realizan las ejecuciones de los comandos.
+ */
 public class Engine {
 
 	private boolean end;
@@ -9,86 +13,102 @@ public class Engine {
 	private final Scanner scanner;
 	private final CPU cpu;
 
+	/**
+	 * Constructor de la clase
+	 */
 	public Engine() {
 		this.byteCodeProgram = new ByteCodeProgram();
 		this.cpu = new CPU();
 		this.scanner = new Scanner(System.in);
 	}
 
+	/**
+	 * Inicia la ejecuci贸n de la m谩quina virtual leyendo sucesivamente los
+	 * comandos introducidos por el usuario
+	 */
 	public void start() {
 		end = false;
 		System.out.println("Inicio del programa");
 		System.out.print(System.getProperty("line.separator"));
-		System.out.println("Empieze la introducci髇 de comandos:");
+		System.out.println("Empieze la introducci贸n de comandos:");
 		System.out.print(System.getProperty("line.separator"));
 
 		while (!end) {
 			String line = scanner.nextLine();
 			Command command = CommandParser.parse(line);
 			if (command != null) {
-				System.out.println("Comienza la ejecuci髇 de "
-						+ command.toString());
+				System.out.println("Comienza la ejecuci贸n de " + command.toString());
 				if (!command.execute(this)) {
-					System.out.println("Error en la ejecuci髇 del comando"
-							+ System.getProperty("line.separator"));
+					System.out.println("Error en la ejecuci贸n del comando" + System.getProperty("line.separator"));
 				}
 			} else {
-				System.out.println("Comienza la ejecuci髇 de " + line);
-				System.out.print("Error: Ejecucion incorrecta del comando"
-						+ System.getProperty("line.separator"));
+				System.out.println("Comienza la ejecuci贸n de " + line);
+				System.out.print("Error: Ejecucion incorrecta del comando" + System.getProperty("line.separator"));
 			}
 		}
 		System.out.print(System.getProperty("line.separator"));
 	}
 
+	/**
+	 * Ejecuta el comando HELP, mostrando por pantalla la informaci贸n de los
+	 * posibles comandos que puede introducir el usuario.
+	 * 
+	 * @return Exito o fracaso de la operaci贸n
+	 */
 	static public boolean executeHelp() {
-		System.out
-				.println("HELP: Muestra esta ayuda "
-						+ System.getProperty("line.separator")
-						+ "QUIT: Cierra la aplicaci髇 "
-						+ System.getProperty("line.separator")
-						+ "RUN: Ejecuta el programa "
-						+ System.getProperty("line.separator")
-						+ "NEWINST BYTECODE: Introduce una nueva instrucci髇 al programa "
-						+ System.getProperty("line.separator")
-						+ "RESET: Vac韆 el programa actual "
-						+ System.getProperty("line.separator")
-						+ "REPLACE N: Reemplaza la instrucci髇 N por la solicitada al usuario");
+		System.out.println("HELP: Muestra esta ayuda " + System.getProperty("line.separator")
+				+ "QUIT: Cierra la aplicaci贸n " + System.getProperty("line.separator") + "RUN: Ejecuta el programa "
+				+ System.getProperty("line.separator")
+				+ "NEWINST BYTECODE: Introduce una nueva instrucci贸n al programa "
+				+ System.getProperty("line.separator") + "RESET: Vac铆a el programa actual "
+				+ System.getProperty("line.separator")
+				+ "REPLACE N: Reemplaza la instrucci贸n N por la solicitada al usuario");
 		return true;
 	}
 
+	/**
+	 * Ejecuta el comando QUIT finalizando la ejecuci贸n.
+	 * 
+	 * @return Exito o fracaso de la operaci贸n.
+	 */
 	public boolean executeQuit() {
 		end = true;
 		System.out.println(byteCodeProgram.toString());
-		System.out.println(System.getProperty("line.separator")
-				+ "Fin de la ejecucion...."
+		System.out.println(System.getProperty("line.separator") + "Fin de la ejecucion...."
 				+ System.getProperty("line.separator"));
 		return true;
 	}
 
+	/**
+	 * Ejecuta el comando NEWINST para agregar una nueva instrucci贸n al
+	 * programa.
+	 * 
+	 * @param byteCode
+	 *            ByteCode con la instrucci贸n codificada.
+	 * @return Exito o fracaso de la operaci贸n
+	 */
 	public boolean executeNewInst(ByteCode byteCode) {
 		boolean resultado = byteCodeProgram.addByteCode(byteCode);
 		System.out.println(byteCodeProgram.toString());
 		return resultado;
 	}
 
+	/**
+	 * Ejecuta el comando RUN, reinicia la CPU y recorre el programa efectuando
+	 * las operaciones incluidas en el.
+	 * 
+	 * @return Exito o fracaso de la operaci贸n
+	 */
 	public boolean excuteCommandRun() {
 		this.cpu.reset();
 		for (int i = 0; i < this.byteCodeProgram.getLength() && !cpu.isHalted(); i++) {
 			ByteCode byteCode = this.byteCodeProgram.getProgram(i);
 			if (cpu.execute(byteCode)) {
-				System.out
-				.println("El estado de la maquina tras ejecutar el bytecode "
-						+ byteCode.toString()
-						+ " es:"
-						+ System.getProperty("line.separator")
-						+ cpu.toString()
-						+ System.getProperty("line.separator"));
+				System.out.println("El estado de la maquina tras ejecutar el bytecode " + byteCode.toString() + " es:"
+						+ System.getProperty("line.separator") + cpu.toString() + System.getProperty("line.separator"));
 			} else {
-				System.out.println("Error: Ejecucion incorrecta del comando "
-						+ System.getProperty("line.separator")
-						+ this.byteCodeProgram.toString()
-						+ System.getProperty("line.separator") + cpu.toString()
+				System.out.println("Error: Ejecucion incorrecta del comando " + System.getProperty("line.separator")
+						+ this.byteCodeProgram.toString() + System.getProperty("line.separator") + cpu.toString()
 						+ System.getProperty("line.separator"));
 				return false;
 			}
@@ -96,20 +116,34 @@ public class Engine {
 		return true;
 	}
 
+	/**
+	 * Ejecuta el comando REPLACE, sustituyendo el valor del programa en el
+	 * indice indicado como par谩metro por una nueva instrucci贸n que se pide al
+	 * usuario.
+	 * 
+	 * @param position
+	 *            脥ndice en el cual se efectua el remplazo.
+	 * @return Exito o fracaso de la operaci贸n
+	 */
 	public boolean executeReplace(int position) {
-		System.out.print("Nueva instrucci髇: ");
+		System.out.print("Nueva instrucci贸n: ");
 		String line = scanner.nextLine();
 		ByteCode bc = ByteCodeParser.parse("newinst " + line);
 		if (bc != null) {
 			byteCodeProgram.replace(position, bc);
-			System.out.println(byteCodeProgram.toString()
-					+ System.getProperty("line.separator"));
+			System.out.println(byteCodeProgram.toString() + System.getProperty("line.separator"));
 			return true;
 		}
 		return false;
 	}
 
+	/**
+	 * Ejecuta el comando RESET, reiniciando el programa.
+	 * 
+	 * @return Exito o fracaso de la operaci贸n
+	 */
 	public boolean executeReset() {
-		return byteCodeProgram.reset();
+		byteCodeProgram.reset();
+		return true;
 	}
 }
