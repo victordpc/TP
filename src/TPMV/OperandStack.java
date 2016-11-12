@@ -1,61 +1,86 @@
 package TPMV;
 
+/**
+ * Clase que representa una pila de valores enteros.
+ */
 public class OperandStack {
 
 	private int stack[];
 	private int contador;
 	private int STACK_SIZE = 1000;
 
+	/**
+	 * Constructor de la clase.
+	 */
 	public OperandStack() {
 		this.stack = new int[STACK_SIZE];
 		this.contador = 0;
 	}
 
-	public int length() {
+	/**
+	 * Devuelve el numero de elementos almacenados en la pila.
+	 * 
+	 * @return Numero de elementos en la pila.
+	 */
+	public int getLength() {
 		return stack.length;
 	}
 
+	/**
+	 * Introduce un valor en cima de la pila.
+	 * 
+	 * @param operando
+	 *            Valor que introduce
+	 * @return Éxito o fracaso de la operación.
+	 */
 	public boolean push(int operando) {
-		boolean resultado = false;
-
 		if (contador < this.stack.length) {
 			this.stack[contador++] = operando;
-			resultado = true;
-		}
-
-		return resultado;
+			return true;
+		} else
+			return false;
 	}
 
+	/**
+	 * Saca el valor de la cima de la pila y lo devuelve.
+	 * 
+	 * @return Valor en la cima de la pila.
+	 */
 	public int pop() {
-		int resultado = 0;
 		if (contador > 0)
-			resultado = this.stack[--contador];
+			return this.stack[--contador];
 		else
-			resultado = this.stack[0];
-		return resultado;
+			return this.stack[0];
 	}
 
+	/**
+	 * Obtiene el valor almacenado en la cima de la pila.
+	 * 
+	 * @return Valor en la cima de la pila
+	 */
 	public int getLastPosition() {
-		int resultado = 0;
 		if (contador > 0)
-			resultado = stack[contador - 1];
+			return stack[contador - 1];
 		else
-			resultado = stack[0];
-		return resultado;
+			return stack[0];
+
 	}
 
 	public String toString() {
-		String resultado = "";
 		if (this.stack.length == 0) {
-			resultado = "<vac�a>";
+			return "<vacía>";
 		} else {
+			String resultado = "";
 			for (int i = 0; i < contador; i++) {
 				resultado += this.stack[i] + " ";
 			}
+			return resultado;
 		}
-		return resultado;
 	}
 
+	/**
+	 * Resetea la pila.
+	 */
 	public void reset() {
 		contador = 0;
 	}

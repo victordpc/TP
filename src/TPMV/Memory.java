@@ -1,16 +1,31 @@
 package TPMV;
 
+/**
+ * Clase que representa la memoria de la m谩quina virtual.
+ */
 public class Memory {
 
 	private Integer[] memory;
 	private final int REDIM_SIZE = 1000;
 	private boolean isEmpty;
 
+	/**
+	 * Constructor de la clase.
+	 */
 	public Memory() {
 		memory = new Integer[REDIM_SIZE];
 		this.isEmpty = true;
 	}
 
+	/**
+	 * Escribe un valor en una direcci贸n de la memoria.
+	 * 
+	 * @param pos
+	 *            Direcci贸n en la que se escribe.
+	 * @param value
+	 *            Valor a almacenar
+	 * @return Exito o fracaso de la operaci贸n.
+	 */
 	public boolean write(int pos, int value) {
 		boolean result = false;
 		if (pos >= 0) {
@@ -24,6 +39,13 @@ public class Memory {
 		return result;
 	}
 
+	/**
+	 * Lee el valor de una direcci贸n de memoria.
+	 * 
+	 * @param pos
+	 *            Direcci贸n de memoria en la que se lee.
+	 * @return Valor almacenado en la direcci贸n de memoria indicada
+	 */
 	public Integer read(int pos) {
 		Integer value;
 		if (memory[pos] == null) {
@@ -38,7 +60,7 @@ public class Memory {
 	public String toString() {
 		String resultado = "";
 		if (this.isEmpty) {
-			resultado = "<vac韆>";
+			resultado = "<vac铆a>";
 		} else {
 			for (int i = 0; i < this.memory.length; i++) {
 				Integer value = this.memory[i];
@@ -60,6 +82,9 @@ public class Memory {
 		this.memory = auxiliar;
 	}
 
+	/**
+	 * Resetea la memoria.
+	 */
 	public void reset() {
 		memory = new Integer[REDIM_SIZE];
 	}
