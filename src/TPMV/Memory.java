@@ -7,14 +7,12 @@ public class Memory {
 
 	private Integer[] memory;
 	private final int REDIM_SIZE = 1000;
-	private boolean isEmpty;
 
 	/**
 	 * Constructor de la clase.
 	 */
 	public Memory() {
-		memory = new Integer[REDIM_SIZE];
-		this.isEmpty = true;
+		this.memory = new Integer[REDIM_SIZE];
 	}
 
 	/**
@@ -34,7 +32,6 @@ public class Memory {
 			}
 			this.memory[pos] = value;
 			result = true;
-			this.isEmpty = false;
 		}
 		return result;
 	}
@@ -48,28 +45,31 @@ public class Memory {
 	 */
 	public Integer read(int pos) {
 		Integer value;
-		if (memory[pos] == null) {
-			memory[pos] = 0;
+		if (this.memory[pos] == null) {
+			this.memory[pos] = 0;
 			value = 0;
 		} else {
-			value = memory[pos];
+			value = this.memory[pos];
 		}
 		return value;
 	}
 
 	public String toString() {
-		String resultado = "";
-		if (this.isEmpty) {
-			resultado = "<vacia>";
-		} else {
-			for (int i = 0; i < this.memory.length; i++) {
-				Integer value = this.memory[i];
-				if (value != null) {
-					resultado += "[" + i + "]:" + value.intValue() + " ";
-				}
+		String resultado = "Memoria: ";
+		boolean isEmpty=true;
+		
+		for (int i = 0; i < this.memory.length; i++) {
+			Integer value = this.memory[i];
+			if (value != null) {
+				resultado += "[" + i + "]:" + value.intValue() + " ";
+				isEmpty=false;
 			}
 		}
 
+		if (isEmpty) {
+			resultado = "<vacia>";
+		}
+		
 		return resultado;
 	}
 
@@ -86,7 +86,7 @@ public class Memory {
 	 * Resetea la memoria.
 	 */
 	public void reset() {
-		memory = new Integer[REDIM_SIZE];
+		this.memory = new Integer[REDIM_SIZE];
 	}
 
 }

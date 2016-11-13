@@ -10,8 +10,8 @@ public class CommandParser {
 	 * 
 	 * @param linea
 	 *            Texto escrito por el usuario.
-	 * @return Objeto Command correspondiente a la línea escrita por el usuario,
-	 *         si no se corresponde con un comando válido devuelve null.
+	 * @return Objeto Command correspondiente a la linea escrita por el usuario,
+	 *         si no se corresponde con un comando valido devuelve null.
 	 */
 	public static Command parse(String linea) {
 		String[] instructionArray = linea.split(" ");

@@ -1,3 +1,4 @@
+
 package TPMV;
 
 /**
@@ -23,7 +24,7 @@ public class OperandStack {
 	 * @return Numero de elementos en la pila.
 	 */
 	public int getLength() {
-		return stack.length;
+		return this.stack.length;
 	}
 
 	/**
@@ -34,8 +35,8 @@ public class OperandStack {
 	 * @return Exito o fracaso de la operacion.
 	 */
 	public boolean push(int operando) {
-		if (contador < this.stack.length) {
-			this.stack[contador++] = operando;
+		if (this.contador < this.stack.length) {
+			this.stack[this.contador++] = operando;
 			return true;
 		} else
 			return false;
@@ -47,8 +48,8 @@ public class OperandStack {
 	 * @return Valor en la cima de la pila.
 	 */
 	public int pop() {
-		if (contador > 0)
-			return this.stack[--contador];
+		if (this.contador > 0)
+			return this.stack[--this.contador];
 		else
 			return this.stack[0];
 	}
@@ -59,10 +60,10 @@ public class OperandStack {
 	 * @return Valor en la cima de la pila
 	 */
 	public int getLastPosition() {
-		if (contador > 0)
-			return stack[contador - 1];
+		if (this.contador > 0)
+			return this.stack[this.contador - 1];
 		else
-			return stack[0];
+			return this.stack[0];
 
 	}
 
@@ -70,8 +71,8 @@ public class OperandStack {
 		if (this.stack.length == 0) {
 			return "<vacia>";
 		} else {
-			String resultado = "";
-			for (int i = 0; i < contador; i++) {
+			String resultado = "Pila: ";
+			for (int i = 0; i < this.contador; i++) {
 				resultado += this.stack[i] + " ";
 			}
 			return resultado;
@@ -82,6 +83,6 @@ public class OperandStack {
 	 * Resetea la pila.
 	 */
 	public void reset() {
-		contador = 0;
+		this.contador = 0;
 	}
 }
