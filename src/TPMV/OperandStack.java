@@ -19,9 +19,9 @@ public class OperandStack {
 	}
 
 	/**
-	 * Devuelve el numero de elementos almacenados en la pila.
+	 * Devuelve el número de elementos almacenados en la pila.
 	 * 
-	 * @return Numero de elementos en la pila.
+	 * @return número de elementos en la pila.
 	 */
 	public int getLength() {
 		return this.stack.length;
@@ -31,8 +31,8 @@ public class OperandStack {
 	 * Introduce un valor en cima de la pila.
 	 * 
 	 * @param operando
-	 *            Valor que introduce
-	 * @return Exito o fracaso de la operacion.
+	 *            valor que introduce
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
 	public boolean push(int operando) {
 		if (this.contador < this.stack.length) {
@@ -45,25 +45,25 @@ public class OperandStack {
 	/**
 	 * Saca el valor de la cima de la pila y lo devuelve.
 	 * 
-	 * @return Valor en la cima de la pila.
+	 * @return valor en la cima de la pila.
 	 */
-	public int pop() {
+	public Integer pop() {
 		if (this.contador > 0)
 			return this.stack[--this.contador];
 		else
-			return this.stack[0];
+			return null;
 	}
 
 	/**
 	 * Obtiene el valor almacenado en la cima de la pila.
 	 * 
-	 * @return Valor en la cima de la pila
+	 * @return valor en la cima de la pila
 	 */
-	public int getLastPosition() {
+	public Integer getLastPosition() {
 		if (this.contador > 0)
 			return this.stack[this.contador - 1];
 		else
-			return this.stack[0];
+			return null;
 
 	}
 

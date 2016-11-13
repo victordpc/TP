@@ -57,20 +57,10 @@ public class ByteCodeProgram {
 
 	public String toString() {
 		String objectInfo = "";
-		objectInfo += "Programa almacenado: " + System.getProperty("line.separator");
-		for (int i = 0; i < this.nextProgramPosition; i++) {
-			ByteCode storedByteCode = this.program[i];
-			switch (storedByteCode.name) {
-			case PUSH:
-			case LOAD:
-			case STORE:
-				objectInfo += i + ": " + storedByteCode.getName().toString() + " " + storedByteCode.getParam()
-						+ System.getProperty("line.separator");
-				break;
-			default:
-				objectInfo += i + ": " + storedByteCode.getName().toString() + System.getProperty("line.separator");
-				break;
-			}
+		if (nextProgramPosition > 0) {
+			objectInfo += "Programa almacenado: " + System.getProperty("line.separator");
+			for (int i = 0; i < this.nextProgramPosition; i++)
+				objectInfo += this.program[i].toString() + System.getProperty("line.separator");
 		}
 		return objectInfo;
 	}

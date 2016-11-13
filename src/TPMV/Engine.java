@@ -3,7 +3,7 @@ package TPMV;
 import java.util.Scanner;
 
 /**
- * Clase para representar el bucle de control de la aplicacion, se piden los
+ * Clase para representar el bucle de control de la aplicación, se piden los
  * comandos a ejecutar y se realizan las ejecuciones de los comandos.
  */
 public class Engine {
@@ -37,23 +37,23 @@ public class Engine {
 			String line = this.scanner.nextLine();
 			Command command = CommandParser.parse(line);
 			if (command != null) {
-				System.out.println("Comienza la ejecucion de " + command.toString());
+				System.out.println("Comienza la ejecución de " + command.toString());
 				if (!command.execute(this)) {
-					System.out.println("Error en la ejecucion del comando" + System.getProperty("line.separator"));
+					System.out.println("Error en la ejecución del comando" + System.getProperty("line.separator"));
 				}
 			} else {
-				System.out.println("Comienza la ejecucion de " + line);
-				System.out.print("Error: Ejecucion incorrecta del comando" + System.getProperty("line.separator"));
+				System.out.println("Comienza la ejecución de " + line);
+				System.out.print("Error: Ejecución incorrecta del comando" + System.getProperty("line.separator"));
 			}
 		}
 		System.out.print(System.getProperty("line.separator"));
 	}
 
 	/**
-	 * Ejecuta el comando HELP, mostrando por pantalla la informacion de los
+	 * Ejecuta el comando {@code HELP}, mostrando por pantalla la información de los
 	 * posibles comandos que puede introducir el usuario.
 	 * 
-	 * @return Exito o fracaso de la operacion
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
 	static public boolean executeHelp() {
 		System.out.println("HELP: Muestra esta ayuda " + System.getProperty("line.separator")
@@ -67,9 +67,9 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando QUIT finalizando la ejecucion.
+	 * Ejecuta el comando {@code QUIT} finalizando la ejecución.
 	 * 
-	 * @return Exito o fracaso de la operacion.
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
 	public boolean executeQuit() {
 		this.end = true;
@@ -80,12 +80,12 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando NEWINST para agregar una nueva instruccion al
+	 * Ejecuta el comando {@code NEWINST} para agregar una nueva instrucción al
 	 * programa.
 	 * 
 	 * @param byteCode
-	 *            ByteCode con la instruccion codificada.
-	 * @return Exito o fracaso de la operacion
+	 *            ByteCode con la instrucción codificada.
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
 	public boolean executeNewInst(ByteCode byteCode) {
 		boolean resultado = byteCodeProgram.addByteCode(byteCode);
@@ -94,14 +94,14 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando RUN, reinicia la CPU y recorre el programa efectuando
+	 * Ejecuta el comando {@code RUN}, reinicia la CPU y recorre el programa efectuando
 	 * las operaciones.
 	 * 
-	 * @return Exito o fracaso de la operacion
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
 	public boolean excuteCommandRun() {
-		this.cpu.reset();
-		for (int i = 0; i < this.byteCodeProgram.getLength() && !this.cpu.isHalted(); i++) {
+		boolean resultado = true;
+		for (int i = 0; i < this.byteCodeProgram.getLength() && !this.cpu.isHalted() && resultado; i++) {
 			ByteCode byteCode = this.byteCodeProgram.getProgram(i);
 			if (this.cpu.execute(byteCode)) {
 				System.out.println("El estado de la maquina tras ejecutar el bytecode " + byteCode.toString() + " es:"
@@ -110,20 +110,21 @@ public class Engine {
 				System.out.println("Error: Ejecucion incorrecta del comando " + System.getProperty("line.separator")
 						+ this.byteCodeProgram.toString() + System.getProperty("line.separator") + this.cpu.toString()
 						+ System.getProperty("line.separator"));
-				return false;
+				resultado= false;
 			}
 		}
-		return true;
+		this.cpu.reset();
+		return resultado;
 	}
 
 	/**
-	 * Ejecuta el comando REPLACE, sustituyendo el valor del programa en el
+	 * Ejecuta el comando {@code REPLACE}, sustituyendo el valor del programa en el
 	 * indice indicado como parametro por una nueva instruccion que se pide al
 	 * usuario.
 	 * 
 	 * @param position
-	 *            Indice en el cual se efectua el remplazo.
-	 * @return Exito o fracaso de la operacion
+	 *            índice en el cual se efectua el remplazo.
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
 	public boolean executeReplace(int position) {
 		System.out.print("Nueva instruccion: ");
@@ -138,9 +139,9 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando RESET, reiniciando el programa.
+	 * Ejecuta el comando {@code RESET}, reiniciando el programa.
 	 * 
-	 * @return Exito o fracaso de la operacion
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
 	public boolean executeReset() {
 		this.byteCodeProgram.reset();

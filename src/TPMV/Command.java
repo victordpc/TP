@@ -12,7 +12,7 @@ public class Command {
 	 * Constructor de la clase
 	 * 
 	 * @param command
-	 *            Comando con el que construimos la clase.
+	 *            comando con el que construimos la clase.
 	 */
 	public Command(ENUM_COMMAND command) {
 		this.command = command;
@@ -22,9 +22,9 @@ public class Command {
 	 * Constructor de la clase
 	 * 
 	 * @param command
-	 *            Comando con el que construimos la clase.
+	 *            comando con el que construimos la clase.
 	 * @param instruction
-	 *            ByteCode asociado al comando
+	 *            {@code ByteCode} asociado al comando
 	 */
 	public Command(ENUM_COMMAND command, ByteCode instruction) {
 		this.command = command;
@@ -35,9 +35,9 @@ public class Command {
 	 * Constructor de la clase
 	 * 
 	 * @param command
-	 *            Comando con el que construimos la clase.
+	 *            comando con el que construimos la clase.
 	 * @param replace
-	 *            Parametro asociado al comando.
+	 *            parámetro asociado al comando.
 	 */
 	public Command(ENUM_COMMAND command, int replace) {
 		this.command = command;
@@ -45,11 +45,11 @@ public class Command {
 	}
 
 	/**
-	 * Funcion que realiza las llamadas a los metodos asociados a cada comando.
+	 * Función que realiza las llamadas a los metodos asociados a cada comando.
 	 * 
 	 * @param engine
-	 *            Instancia en la que se ejecutan los comandos.
-	 * @return exito o fracaso de la operacion.
+	 *            instancia en la que se ejecutan los comandos.
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
 	public boolean execute(Engine engine) {
 		switch (this.command) {
