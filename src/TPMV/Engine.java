@@ -27,14 +27,14 @@ public class Engine {
 	 * comandos introducidos por el usuario
 	 */
 	public void start() {
-		end = false;
+		this.end = false;
 		System.out.println("Inicio del programa");
 		System.out.print(System.getProperty("line.separator"));
 		System.out.println("Empieze la introduccion de comandos:");
 		System.out.print(System.getProperty("line.separator"));
 
-		while (!end) {
-			String line = scanner.nextLine();
+		while (!this.end) {
+			String line = this.scanner.nextLine();
 			Command command = CommandParser.parse(line);
 			if (command != null) {
 				System.out.println("Comienza la ejecucion de " + command.toString());
@@ -57,11 +57,11 @@ public class Engine {
 	 */
 	static public boolean executeHelp() {
 		System.out.println("HELP: Muestra esta ayuda " + System.getProperty("line.separator")
-				+ "QUIT: Cierra la aplicacion " + System.getProperty("line.separator") + "RUN: Ejecuta el programa "
-				+ System.getProperty("line.separator")
+				+ "QUIT: Cierra la aplicacion " + System.getProperty("line.separator") 
+				+ "RUN: Ejecuta el programa "+ System.getProperty("line.separator")
 				+ "NEWINST BYTECODE: Introduce una nueva instruccion al programa "
-				+ System.getProperty("line.separator") + "RESET: VacIa el programa actual "
-				+ System.getProperty("line.separator")
+				+ System.getProperty("line.separator") 
+				+ "RESET: VacIa el programa actual "+ System.getProperty("line.separator")
 				+ "REPLACE N: Reemplaza la instruccion N por la solicitada al usuario");
 		return true;
 	}
@@ -72,7 +72,7 @@ public class Engine {
 	 * @return Exito o fracaso de la operacion.
 	 */
 	public boolean executeQuit() {
-		end = true;
+		this.end = true;
 		System.out.println(byteCodeProgram.toString());
 		System.out.println(System.getProperty("line.separator") + "Fin de la ejecucion...."
 				+ System.getProperty("line.separator"));
@@ -101,14 +101,14 @@ public class Engine {
 	 */
 	public boolean excuteCommandRun() {
 		this.cpu.reset();
-		for (int i = 0; i < this.byteCodeProgram.getLength() && !cpu.isHalted(); i++) {
+		for (int i = 0; i < this.byteCodeProgram.getLength() && !this.cpu.isHalted(); i++) {
 			ByteCode byteCode = this.byteCodeProgram.getProgram(i);
-			if (cpu.execute(byteCode)) {
+			if (this.cpu.execute(byteCode)) {
 				System.out.println("El estado de la maquina tras ejecutar el bytecode " + byteCode.toString() + " es:"
-						+ System.getProperty("line.separator") + cpu.toString() + System.getProperty("line.separator"));
+						+ System.getProperty("line.separator") + this.cpu.toString() + System.getProperty("line.separator"));
 			} else {
 				System.out.println("Error: Ejecucion incorrecta del comando " + System.getProperty("line.separator")
-						+ this.byteCodeProgram.toString() + System.getProperty("line.separator") + cpu.toString()
+						+ this.byteCodeProgram.toString() + System.getProperty("line.separator") + this.cpu.toString()
 						+ System.getProperty("line.separator"));
 				return false;
 			}
@@ -143,7 +143,7 @@ public class Engine {
 	 * @return Exito o fracaso de la operacion
 	 */
 	public boolean executeReset() {
-		byteCodeProgram.reset();
+		this.byteCodeProgram.reset();
 		return true;
 	}
 }

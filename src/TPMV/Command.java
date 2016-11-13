@@ -49,22 +49,22 @@ public class Command {
 	 * 
 	 * @param engine
 	 *            Instancia en la que se ejecutan los comandos.
-	 * @return exito o fracaso de la operación.
+	 * @return exito o fracaso de la operacion.
 	 */
 	public boolean execute(Engine engine) {
-		switch (command) {
+		switch (this.command) {
 		case HELP:
 			return Engine.executeHelp();
 		case QUIT:
 			return engine.executeQuit();
 		case NEWINST:
-			return engine.executeNewInst(instruction);
+			return engine.executeNewInst(this.instruction);
 		case RUN:
 			return engine.excuteCommandRun();
 		case RESET:
 			return engine.executeReset();
 		case REPLACE:
-			return engine.executeReplace(replace);
+			return engine.executeReplace(this.replace);
 		}
 		return false;
 	}

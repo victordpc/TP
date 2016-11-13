@@ -13,19 +13,19 @@ public class ByteCodeProgram {
 	 * Constructor de la clase
 	 */
 	public ByteCodeProgram() {
-		program = new ByteCode[EXTEND_VALUE];
+		this.program = new ByteCode[EXTEND_VALUE];
 	}
 
 	/**
-	 * Añade un elemento de tipo ByteCode en la ultima posicion del programa.
+	 * Aï¿½ade un elemento de tipo ByteCode en la ultima posicion del programa.
 	 * 
 	 * @param byteCode
-	 *            ByteCode que añadimos.
+	 *            ByteCode que aï¿½adimos.
 	 * @return Exito o fracaso de la operacion.
 	 */
 	public boolean addByteCode(ByteCode byteCode) {
-		if (nextProgramPosition < EXTEND_VALUE) {
-			program[nextProgramPosition++] = byteCode;
+		if (this.nextProgramPosition < EXTEND_VALUE) {
+			this.program[this.nextProgramPosition++] = byteCode;
 			return true;
 		} else
 			return false;
@@ -40,7 +40,7 @@ public class ByteCodeProgram {
 	 * @return Valor almacenado.
 	 */
 	public ByteCode getProgram(int posicion) {
-		return program[posicion];
+		return this.program[posicion];
 	}
 
 	/**
@@ -58,8 +58,8 @@ public class ByteCodeProgram {
 	public String toString() {
 		String objectInfo = "";
 		objectInfo += "Programa almacenado: " + System.getProperty("line.separator");
-		for (int i = 0; i < nextProgramPosition; i++) {
-			ByteCode storedByteCode = program[i];
+		for (int i = 0; i < this.nextProgramPosition; i++) {
+			ByteCode storedByteCode = this.program[i];
 			switch (storedByteCode.name) {
 			case PUSH:
 			case LOAD:
@@ -89,6 +89,6 @@ public class ByteCodeProgram {
 	 * cero.
 	 */
 	public void reset() {
-		nextProgramPosition = 0;
+		this.nextProgramPosition = 0;
 	}
 }
