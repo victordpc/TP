@@ -1,7 +1,7 @@
 package TPMV;
 
 /**
- * Clase que representa la memoria de la maquina virtual.
+ * Clase que representa la memoria de la máquina virtual.
  */
 public class Memory {
 
@@ -16,13 +16,13 @@ public class Memory {
 	}
 
 	/**
-	 * Escribe un valor en una direccion de la memoria.
+	 * Escribe un valor en una dirección de la memoria.
 	 * 
 	 * @param pos
-	 *            Direccion en la que se escribe.
+	 *            direccion en la que se escribe.
 	 * @param value
-	 *            Valor a almacenar
-	 * @return Exito o fracaso de la operacion.
+	 *            valor a almacenar
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
 	public boolean write(int pos, int value) {
 		boolean result = false;
@@ -37,21 +37,17 @@ public class Memory {
 	}
 
 	/**
-	 * Lee el valor de una direccion de memoria.
+	 * Lee el valor de una dirección de memoria.
 	 * 
 	 * @param pos
-	 *            Direccion de memoria en la que se lee.
-	 * @return Valor almacenado en la direccion de memoria indicada
+	 *            dirección de memoria en la que se lee.
+	 * @return valor almacenado en la dirección de memoria indicada
 	 */
 	public Integer read(int pos) {
-		Integer value;
-		if (this.memory[pos] == null) {
-			this.memory[pos] = 0;
-			value = 0;
-		} else {
-			value = this.memory[pos];
-		}
-		return value;
+		if (pos >= 0)
+			return this.memory[pos];
+		else
+			return null;
 	}
 
 	public String toString() {

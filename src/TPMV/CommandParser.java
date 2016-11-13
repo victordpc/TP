@@ -6,12 +6,12 @@ package TPMV;
 public class CommandParser {
 
 	/**
-	 * Convierte un string recibido a un objeto de tipo Command.
+	 * Convierte un texto a un objeto de tipo {@code Command}.
 	 * 
 	 * @param linea
-	 *            Texto escrito por el usuario.
-	 * @return Objeto Command correspondiente a la linea escrita por el usuario,
-	 *         si no se corresponde con un comando valido devuelve null.
+	 *            cadena de texto
+	 * @return {@code Command} correspondiente al texto, si es incorrecto
+	 *         devuelve {@code null}
 	 */
 	public static Command parse(String linea) {
 		String[] instructionArray = linea.split(" ");

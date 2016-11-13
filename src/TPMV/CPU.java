@@ -20,11 +20,12 @@ public class CPU {
 	}
 
 	/**
-	 * Ejecuta el ByteCode recibido por parametro.
+	 * Ejecuta el {@code ByteCode} recibido por parametro.
 	 * 
 	 * @param instruccion
-	 *            Instruccion a ejecutar.
-	 * @return Resultado cierto o falso de la ejecucion del la instruccion.
+	 *            instrucción a ejecutar.
+	 *            
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
 	public boolean execute(ByteCode instruccion) {
 		boolean success = false;
@@ -40,7 +41,9 @@ public class CPU {
 			}
 			break;
 		case LOAD:
-			success = this.stack.push(memory.read(instruccion.getParam()));
+			Integer valor = this.memory.read(instruccion.getParam());
+			if (valor != null)
+				success = this.stack.push(valor);
 			break;
 		case ADD:
 			if (this.stack.getLength() >= 2) {
@@ -76,8 +79,12 @@ public class CPU {
 			this.halt = true;
 			break;
 		case OUT:
-			System.out.println(
-					"El ultimo valor en la pila es: " + this.stack.getLastPosition() + System.getProperty("line.separator"));
+			Integer valorPila = this.stack.getLastPosition();
+			if (valorPila!=null)
+			System.out.println("El ultimo valor en la pila es: " + valorPila
+					+ System.getProperty("line.separator"));
+			else
+				System.out.println("La pila no contiene valores");
 			break;
 		default:
 			break;
@@ -87,7 +94,7 @@ public class CPU {
 
 	@Override
 	public String toString() {
-		String resultado = "Estado de la CPU: " + System.getProperty("line.separator") ;
+		String resultado = "Estado de la CPU: " + System.getProperty("line.separator");
 		resultado += this.memory.toString() + System.getProperty("line.separator");
 		resultado += System.getProperty("line.separator");
 		resultado += this.stack.toString() + System.getProperty("line.separator")
@@ -98,7 +105,7 @@ public class CPU {
 	/**
 	 * Devuelve el valor del atributo halt.
 	 * 
-	 * @return Valor del atributo halt
+	 * @return valor del atributo halt
 	 */
 	public boolean isHalted() {
 		return this.halt;

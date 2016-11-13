@@ -9,7 +9,7 @@ public enum ENUM_COMMAND {
 	 */
 	HELP,
 	/**
-	 * Cierra la aplicacion.
+	 * Cierra la aplicación.
 	 */
 	QUIT,
 	/**
@@ -21,11 +21,11 @@ public enum ENUM_COMMAND {
 	 */
 	RUN,
 	/**
-	 * Inicializa el programa actual.
+	 * Inicialíza el programa actual.
 	 */
 	RESET,
 	/**
-	 * Solicita una nueva instruccion bytecode que remplaza a una existente.
+	 * Solicita una nueva instruccion {@code ByteCode} que remplaza a una existente.
 	 */
 	REPLACE
 }
