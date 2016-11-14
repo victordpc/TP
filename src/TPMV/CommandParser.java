@@ -27,7 +27,8 @@ public class CommandParser {
 		case "REPLACE":
 			if (instructionArray.length == 2) {
 				int position = Integer.parseInt(instructionArray[1]);
-				command = new Command(ENUM_COMMAND.valueOf(commandString), position);
+				if (position >= 0)
+					command = new Command(ENUM_COMMAND.valueOf(commandString), position);
 			}
 			break;
 		case "NEWINST":

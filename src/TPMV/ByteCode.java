@@ -12,10 +12,11 @@ public class ByteCode {
 	 * Constructor de la clase
 	 * 
 	 * @param name
-	 *            nombre del enumerado {@code ENUM_BYTECODE} que identifica que {@code ByteCode}
-	 *            estamos creando.
+	 *            nombre del enumerado {@code ENUM_BYTECODE} que identifica que
+	 *            {@code ByteCode} estamos creando.
 	 * @param parametro
-	 *            entero necesario para las instrucciones {@code PUSH}, {@code STORE}, {@code LOAD}.
+	 *            entero necesario para las instrucciones {@code PUSH},
+	 *            {@code STORE}, {@code LOAD}.
 	 */
 	public ByteCode(ENUM_BYTECODE name, int parametro) {
 		this.name = name;
@@ -26,8 +27,8 @@ public class ByteCode {
 	 * Constructor de la clase
 	 * 
 	 * @param name
-	 *            nombre del enumerado {@code ENUM_BYTECODE} que identifica que {@code ByteCode}
-	 *            estamos creando.
+	 *            nombre del enumerado {@code ENUM_BYTECODE} que identifica que
+	 *            {@code ByteCode} estamos creando.
 	 */
 	public ByteCode(ENUM_BYTECODE name) {
 		this.name = name;

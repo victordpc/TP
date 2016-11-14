@@ -50,18 +50,18 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando {@code HELP}, mostrando por pantalla la información de los
-	 * posibles comandos que puede introducir el usuario.
+	 * Ejecuta el comando {@code HELP}, mostrando por pantalla la información de
+	 * los posibles comandos que puede introducir el usuario.
 	 * 
 	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
 	static public boolean executeHelp() {
 		System.out.println("HELP: Muestra esta ayuda " + System.getProperty("line.separator")
-				+ "QUIT: Cierra la aplicacion " + System.getProperty("line.separator") 
-				+ "RUN: Ejecuta el programa "+ System.getProperty("line.separator")
+				+ "QUIT: Cierra la aplicacion " + System.getProperty("line.separator") + "RUN: Ejecuta el programa "
+				+ System.getProperty("line.separator")
 				+ "NEWINST BYTECODE: Introduce una nueva instruccion al programa "
-				+ System.getProperty("line.separator") 
-				+ "RESET: VacIa el programa actual "+ System.getProperty("line.separator")
+				+ System.getProperty("line.separator") + "RESET: VacIa el programa actual "
+				+ System.getProperty("line.separator")
 				+ "REPLACE N: Reemplaza la instruccion N por la solicitada al usuario");
 		return true;
 	}
@@ -94,8 +94,8 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando {@code RUN}, reinicia la CPU y recorre el programa efectuando
-	 * las operaciones.
+	 * Ejecuta el comando {@code RUN}, reinicia la CPU y recorre el programa
+	 * efectuando las operaciones.
 	 * 
 	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
@@ -105,12 +105,13 @@ public class Engine {
 			ByteCode byteCode = this.byteCodeProgram.getProgram(i);
 			if (this.cpu.execute(byteCode)) {
 				System.out.println("El estado de la maquina tras ejecutar el bytecode " + byteCode.toString() + " es:"
-						+ System.getProperty("line.separator") + this.cpu.toString() + System.getProperty("line.separator"));
+						+ System.getProperty("line.separator") + this.cpu.toString()
+						+ System.getProperty("line.separator"));
 			} else {
 				System.out.println("Error: Ejecucion incorrecta del comando " + System.getProperty("line.separator")
 						+ this.byteCodeProgram.toString() + System.getProperty("line.separator") + this.cpu.toString()
 						+ System.getProperty("line.separator"));
-				resultado= false;
+				resultado = false;
 			}
 		}
 		this.cpu.reset();
@@ -118,9 +119,9 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando {@code REPLACE}, sustituyendo el valor del programa en el
-	 * indice indicado como parametro por una nueva instruccion que se pide al
-	 * usuario.
+	 * Ejecuta el comando {@code REPLACE}, sustituyendo el valor del programa en
+	 * el indice indicado como parametro por una nueva instruccion que se pide
+	 * al usuario.
 	 * 
 	 * @param position
 	 *            índice en el cual se efectua el remplazo.

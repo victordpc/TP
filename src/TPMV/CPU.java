@@ -24,7 +24,7 @@ public class CPU {
 	 * 
 	 * @param instruccion
 	 *            instrucción a ejecutar.
-	 *            
+	 * 
 	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
 	public boolean execute(ByteCode instruccion) {
@@ -80,9 +80,9 @@ public class CPU {
 			break;
 		case OUT:
 			Integer valorPila = this.stack.getLastPosition();
-			if (valorPila!=null)
-			System.out.println("El ultimo valor en la pila es: " + valorPila
-					+ System.getProperty("line.separator"));
+			if (valorPila != null)
+				System.out
+						.println("El ultimo valor en la pila es: " + valorPila + System.getProperty("line.separator"));
 			else
 				System.out.println("La pila no contiene valores");
 			break;
