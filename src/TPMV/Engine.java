@@ -34,7 +34,7 @@ public class Engine {
 		System.out.print(System.getProperty("line.separator"));
 
 		while (!this.end) {
-			String line = this.scanner.nextLine();
+			String line = this.scanner.nextLine().trim();
 			Command command = CommandParser.parse(line);
 			if (command != null) {
 				System.out.println("Comienza la ejecución de " + command.toString());
