@@ -1,7 +1,7 @@
 package TPMV;
 
 /**
- * Clase que contiene el procesamiento de la máquina virtual, contiene una
+ * Clase que contiene el procesamiento de la maquina virtual, contiene una
  * memoria y una pila de operandos.
  */
 public class CPU {
@@ -20,11 +20,12 @@ public class CPU {
 	}
 
 	/**
-	 * Ejecuta el ByteCode recibido por parámetro.
+	 * Ejecuta el {@code ByteCode} recibido por parametro.
 	 * 
 	 * @param instruccion
-	 *            Instrucción a ejecutar.
-	 * @return Resultado cierto o falso de la ejecución del la instrucción.
+	 *            instrucción a ejecutar.
+	 *            
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
 	public boolean execute(ByteCode instruccion) {
 		boolean success = false;
@@ -32,47 +33,45 @@ public class CPU {
 		int value2;
 		switch (instruccion.getName()) {
 		case PUSH:
-			if (stack.getLength() >= 1) {
-				success = stack.push(instruccion.getParam());
-			}
+			success = this.stack.push(instruccion.getParam());
 			break;
 		case STORE:
-			if (stack.getLength() >= 1) {
-				success = memory.write(instruccion.getParam(), stack.pop());
+			if (this.stack.getLength() >= 1) {
+				success = this.memory.write(instruccion.getParam(), this.stack.pop());
 			}
 			break;
 		case LOAD:
-			success = this.stack.push(memory.read(instruccion.getParam()));
+			Integer valor = this.memory.read(instruccion.getParam());
+			if (valor != null)
+				success = this.stack.push(valor);
 			break;
 		case ADD:
-			if (stack.getLength() >= 2) {
-				value2 = stack.pop();
-				value1 = stack.pop();
-				stack.push(value1 + value2);
-				success = true;
+			if (this.stack.getLength() >= 2) {
+				value2 = this.stack.pop();
+				value1 = this.stack.pop();
+				success = this.stack.push(value1 + value2);
 			}
 			break;
 		case SUB:
-			if (stack.getLength() >= 2) {
-				value2 = stack.pop();
-				value1 = stack.pop();
-				stack.push(value1 - value2);
-				success = true;
+			if (this.stack.getLength() >= 2) {
+				value2 = this.stack.pop();
+				value1 = this.stack.pop();
+				success = this.stack.push(value1 - value2);
 			}
 			break;
 		case MUL:
-			if (stack.getLength() >= 2) {
-				value2 = stack.pop();
-				value1 = stack.pop();
-				stack.push(value1 * value2);
+			if (this.stack.getLength() >= 2) {
+				value2 = this.stack.pop();
+				value1 = this.stack.pop();
+				this.stack.push(value1 * value2);
 				success = true;
 			}
 			break;
 		case DIV:
-			if (stack.getLength() >= 2) {
-				value2 = stack.pop();
-				value1 = stack.pop();
-				stack.push(value1 / value2);
+			if (this.stack.getLength() >= 2) {
+				value2 = this.stack.pop();
+				value1 = this.stack.pop();
+				this.stack.push(value1 / value2);
 				success = true;
 			}
 			break;
@@ -80,8 +79,12 @@ public class CPU {
 			this.halt = true;
 			break;
 		case OUT:
-			System.out.println(
-					"El último valor en la pila es: " + stack.getLastPosition() + System.getProperty("line.separator"));
+			Integer valorPila = this.stack.getLastPosition();
+			if (valorPila!=null)
+			System.out.println("El ultimo valor en la pila es: " + valorPila
+					+ System.getProperty("line.separator"));
+			else
+				System.out.println("La pila no contiene valores");
 			break;
 		default:
 			break;
@@ -91,9 +94,9 @@ public class CPU {
 
 	@Override
 	public String toString() {
-		String resultado = "Estado de la CPU: " + System.getProperty("line.separator") + "Memoria: ";
+		String resultado = "Estado de la CPU: " + System.getProperty("line.separator");
 		resultado += this.memory.toString() + System.getProperty("line.separator");
-		resultado += "Pila:" + System.getProperty("line.separator");
+		resultado += System.getProperty("line.separator");
 		resultado += this.stack.toString() + System.getProperty("line.separator")
 				+ System.getProperty("line.separator");
 		return resultado;
@@ -102,10 +105,10 @@ public class CPU {
 	/**
 	 * Devuelve el valor del atributo halt.
 	 * 
-	 * @return Valor del atributo halt
+	 * @return valor del atributo halt
 	 */
 	public boolean isHalted() {
-		return halt;
+		return this.halt;
 	}
 
 	/**

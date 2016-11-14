@@ -13,19 +13,19 @@ public class ByteCodeProgram {
 	 * Constructor de la clase
 	 */
 	public ByteCodeProgram() {
-		program = new ByteCode[EXTEND_VALUE];
+		this.program = new ByteCode[EXTEND_VALUE];
 	}
 
 	/**
 	 * Añade un elemento de tipo ByteCode en la última posición del programa.
 	 * 
 	 * @param byteCode
-	 *            ByteCode que añadimos.
-	 * @return Éxito o fracaso de la operación.
+	 *            {@code ByteCode} que añadimos.
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
 	public boolean addByteCode(ByteCode byteCode) {
-		if (nextProgramPosition < EXTEND_VALUE) {
-			program[nextProgramPosition++] = byteCode;
+		if (this.nextProgramPosition < EXTEND_VALUE) {
+			this.program[this.nextProgramPosition++] = byteCode;
 			return true;
 		} else
 			return false;
@@ -36,20 +36,20 @@ public class ByteCodeProgram {
 	 * posición indicada.
 	 * 
 	 * @param posicion
-	 *            Posición de la cual obtenemos el objeto ByteCode almacenado.
-	 * @return Valor almacenado.
+	 *            índice que queremos recuperar
+	 * @return valor almacenado.
 	 */
 	public ByteCode getProgram(int posicion) {
-		return program[posicion];
+		return this.program[posicion];
 	}
 
 	/**
-	 * Sustituye el valor de una posición del programa por un valor dado.
+	 * Sustituye el valor de una posicion del programa por un valor dado.
 	 * 
 	 * @param position
-	 *            Índice del array en el que queremos sustituir su valor.
+	 *            índice del array en el que queremos sustituir su valor.
 	 * @param newInstruction
-	 *            Instrucción que queremos insertar.
+	 *            instruccion que queremos insertar.
 	 */
 	public void replace(int position, ByteCode newInstruction) {
 		this.program[position] = newInstruction;
@@ -57,28 +57,18 @@ public class ByteCodeProgram {
 
 	public String toString() {
 		String objectInfo = "";
-		objectInfo += "Programa almacenado: " + System.getProperty("line.separator");
-		for (int i = 0; i < nextProgramPosition; i++) {
-			ByteCode storedByteCode = program[i];
-			switch (storedByteCode.name) {
-			case PUSH:
-			case LOAD:
-			case STORE:
-				objectInfo += i + ": " + storedByteCode.getName().toString() + " " + storedByteCode.getParam()
-						+ System.getProperty("line.separator");
-				break;
-			default:
-				objectInfo += i + ": " + storedByteCode.getName().toString() + System.getProperty("line.separator");
-				break;
-			}
+		if (nextProgramPosition > 0) {
+			objectInfo += "Programa almacenado: " + System.getProperty("line.separator");
+			for (int i = 0; i < this.nextProgramPosition; i++)
+				objectInfo += this.program[i].toString() + System.getProperty("line.separator");
 		}
 		return objectInfo;
 	}
 
 	/**
-	 * Obtiene el valor del número de elementos almacenados en el programa.
+	 * Obtiene el valor del numero de elementos almacenados en el programa.
 	 * 
-	 * @return Número de elementos almacendos en el programa.
+	 * @return número de elementos almacendos en el programa.
 	 */
 	public int getLength() {
 		return this.nextProgramPosition;
@@ -89,6 +79,6 @@ public class ByteCodeProgram {
 	 * cero.
 	 */
 	public void reset() {
-		nextProgramPosition = 0;
+		this.nextProgramPosition = 0;
 	}
 }

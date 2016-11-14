@@ -1,17 +1,17 @@
 package TPMV;
 
 /**
- * Clase que se encarga de convertir textos en ByteCodes
+ * Clase que se encarga de convertir textos en {@code ByteCode}
  */
 public class ByteCodeParser {
 
 	/**
-	 * Convierte un string recibido por parámetro a un objeto de tipo ByteCode.
+	 * Convierte un texto a un objeto de tipo {@code ByteCode}.
 	 * 
 	 * @param linea
-	 *            Línea de texto escrita con el usuario.
-	 * @return Objeto ByteCode correspondiente a la línea escrita por el
-	 *         usuario, si es un ByteCode incorrecto devuelve null.
+	 *            cadena de texto.
+	 * @return {@code ByteCode} correspondiente al texto, si es incorrecto
+	 *         devuelve {@code null}.
 	 */
 	public static ByteCode parse(String linea) {
 		ByteCode resultado = null;

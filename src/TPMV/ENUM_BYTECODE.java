@@ -1,7 +1,7 @@
 package TPMV;
 
 /**
- * Enumerado para indicar los ByteCode admitidos por el sistema.
+ * Enumerado para indicar los {@code ByteCode} admitidos por el sistema.
  */
 public enum ENUM_BYTECODE {
 	/**

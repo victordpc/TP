@@ -5,7 +5,7 @@ package TPMV;
  */
 public enum ENUM_COMMAND {
 	/**
-	 * Muestra información sobre los comandos disponibles.
+	 * Muestra informacion sobre los comandos disponibles.
 	 */
 	HELP,
 	/**
@@ -13,7 +13,7 @@ public enum ENUM_COMMAND {
 	 */
 	QUIT,
 	/**
-	 * Introduce una instrucción bytecode al programa actual.
+	 * Introduce una instruccion bytecode al programa actual.
 	 */
 	NEWINST,
 	/**
@@ -21,11 +21,11 @@ public enum ENUM_COMMAND {
 	 */
 	RUN,
 	/**
-	 * Inicializa el programa actual.
+	 * Inicialíza el programa actual.
 	 */
 	RESET,
 	/**
-	 * Solicita una nueva instrucción bytecode que remplaza a una existente.
+	 * Solicita una nueva instruccion {@code ByteCode} que remplaza a una existente.
 	 */
 	REPLACE
 }
