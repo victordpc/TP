@@ -60,7 +60,7 @@ public class ByteCodeProgram {
 		if (nextProgramPosition > 0) {
 			objectInfo += "Programa almacenado: " + System.getProperty("line.separator");
 			for (int i = 0; i < this.nextProgramPosition; i++)
-				objectInfo += this.program[i].toString() + System.getProperty("line.separator");
+				objectInfo += i +": " + this.program[i].toString() + System.getProperty("line.separator");
 		}
 		return objectInfo;
 	}

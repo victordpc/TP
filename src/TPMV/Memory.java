@@ -63,7 +63,7 @@ public class Memory {
 		}
 
 		if (isEmpty) {
-			resultado = "<vacia>";
+			resultado += "<vacia>";
 		}
 
 		return resultado;

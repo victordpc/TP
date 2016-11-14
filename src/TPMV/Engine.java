@@ -60,7 +60,7 @@ public class Engine {
 				+ "QUIT: Cierra la aplicacion " + System.getProperty("line.separator") + "RUN: Ejecuta el programa "
 				+ System.getProperty("line.separator")
 				+ "NEWINST BYTECODE: Introduce una nueva instruccion al programa "
-				+ System.getProperty("line.separator") + "RESET: VacIa el programa actual "
+				+ System.getProperty("line.separator") + "RESET: Vacia el programa actual "
 				+ System.getProperty("line.separator")
 				+ "REPLACE N: Reemplaza la instruccion N por la solicitada al usuario");
 		return true;

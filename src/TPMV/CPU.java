@@ -96,7 +96,6 @@ public class CPU {
 	public String toString() {
 		String resultado = "Estado de la CPU: " + System.getProperty("line.separator");
 		resultado += this.memory.toString() + System.getProperty("line.separator");
-		resultado += System.getProperty("line.separator");
 		resultado += this.stack.toString() + System.getProperty("line.separator")
 				+ System.getProperty("line.separator");
 		return resultado;
