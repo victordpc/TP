@@ -25,7 +25,8 @@ public enum ENUM_COMMAND {
 	 */
 	RESET,
 	/**
-	 * Solicita una nueva instruccion {@code ByteCode} que remplaza a una existente.
+	 * Solicita una nueva instruccion {@code ByteCode} que remplaza a una
+	 * existente.
 	 */
 	REPLACE
 }

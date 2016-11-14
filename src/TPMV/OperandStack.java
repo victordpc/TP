@@ -1,4 +1,3 @@
-
 package TPMV;
 
 /**
@@ -64,7 +63,6 @@ public class OperandStack {
 			return this.stack[this.contador - 1];
 		else
 			return null;
-
 	}
 
 	public String toString() {

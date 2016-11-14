@@ -20,10 +20,16 @@ public class ByteCodeParser {
 
 		switch (commandString) {
 		case "PUSH":
+			if (instructionArray.length == 3) {
+				resultado = new ByteCode(ENUM_BYTECODE.valueOf(commandString), Integer.parseInt(instructionArray[2]));
+			}
+			break;
 		case "LOAD":
 		case "STORE":
 			if (instructionArray.length == 3) {
-				resultado = new ByteCode(ENUM_BYTECODE.valueOf(commandString), Integer.parseInt(instructionArray[2]));
+				int valor = Integer.parseInt(instructionArray[2]);
+				if (valor >= 0)
+					resultado = new ByteCode(ENUM_BYTECODE.valueOf(commandString), valor);
 			}
 			break;
 		case "ADD":

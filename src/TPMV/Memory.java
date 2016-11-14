@@ -52,20 +52,20 @@ public class Memory {
 
 	public String toString() {
 		String resultado = "Memoria: ";
-		boolean isEmpty=true;
-		
+		boolean isEmpty = true;
+
 		for (int i = 0; i < this.memory.length; i++) {
 			Integer value = this.memory[i];
 			if (value != null) {
 				resultado += "[" + i + "]:" + value.intValue() + " ";
-				isEmpty=false;
+				isEmpty = false;
 			}
 		}
 
 		if (isEmpty) {
 			resultado = "<vacia>";
 		}
-		
+
 		return resultado;
 	}
 
