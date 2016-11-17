@@ -71,7 +71,13 @@ public class CPU {
 			if (this.stack.getLength() >= 2) {
 				value2 = this.stack.pop();
 				value1 = this.stack.pop();
-				this.stack.push(value1 / value2);
+				if (value2 != 0)
+					this.stack.push(value1 / value2);
+				else {
+					this.stack.push(value2);
+					this.stack.push(value1);
+				}
+				
 				success = true;
 			}
 			break;
