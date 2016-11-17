@@ -17,27 +17,28 @@ public class ByteCodeParser {
 		ByteCode resultado = null;
 		String[] instructionArray = linea.split(" ");
 		String commandString = instructionArray[1].toUpperCase();
+		ENUM_BYTECODE bydeCode = ENUM_BYTECODE.valueOf(commandString);
 
-		switch (commandString) {
-		case "PUSH":
+		switch (bydeCode) {
+		case PUSH:
 			if (instructionArray.length == 3) {
 				resultado = new ByteCode(ENUM_BYTECODE.valueOf(commandString), Integer.parseInt(instructionArray[2]));
 			}
 			break;
-		case "LOAD":
-		case "STORE":
+		case LOAD:
+		case STORE:
 			if (instructionArray.length == 3) {
 				int valor = Integer.parseInt(instructionArray[2]);
 				if (valor >= 0)
 					resultado = new ByteCode(ENUM_BYTECODE.valueOf(commandString), valor);
 			}
 			break;
-		case "ADD":
-		case "SUB":
-		case "MUL":
-		case "DIV":
-		case "OUT":
-		case "HALT":
+		case ADD:
+		case SUB:
+		case MUL:
+		case DIV:
+		case OUT:
+		case HALT:
 			if (instructionArray.length == 2) {
 				resultado = new ByteCode(ENUM_BYTECODE.valueOf(commandString));
 			}

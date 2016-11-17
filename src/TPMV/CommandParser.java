@@ -16,22 +16,24 @@ public class CommandParser {
 	public static Command parse(String linea) {
 		String[] instructionArray = linea.split(" ");
 		String commandString = instructionArray[0].toUpperCase();
+		ENUM_COMMAND userCommand = ENUM_COMMAND.valueOf(commandString);
+		
 		Command command = null;
-		switch (commandString) {
-		case "HELP":
-		case "QUIT":
-		case "RESET":
-		case "RUN":
+		switch (userCommand) {
+		case HELP:
+		case QUIT:
+		case RESET:
+		case RUN:
 			command = new Command(ENUM_COMMAND.valueOf(commandString));
 			break;
-		case "REPLACE":
+		case REPLACE:
 			if (instructionArray.length == 2) {
 				int position = Integer.parseInt(instructionArray[1]);
 				if (position >= 0)
 					command = new Command(ENUM_COMMAND.valueOf(commandString), position);
 			}
 			break;
-		case "NEWINST":
+		case NEWINST:
 			ByteCode newByteCode = ByteCodeParser.parse(linea);
 			if (newByteCode != null) {
 				command = new Command(ENUM_COMMAND.valueOf(commandString), newByteCode);

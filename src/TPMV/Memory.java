@@ -43,11 +43,12 @@ public class Memory {
 	 *            dirección de memoria en la que se lee.
 	 * @return valor almacenado en la dirección de memoria indicada
 	 */
-	public Integer read(int pos) {
-		if (pos >= 0)
-			return this.memory[pos];
-		else
-			return null;
+	public int read(int pos) {
+		if (pos >= 0 && (pos < this.memory.length)) {
+			if (this.memory[pos] != null)
+				return this.memory[pos];
+		}
+		return 0;
 	}
 
 	public String toString() {

@@ -46,11 +46,11 @@ public class OperandStack {
 	 * 
 	 * @return valor en la cima de la pila.
 	 */
-	public Integer pop() {
-		if (this.contador > 0)
+	public int pop() {
+		if (this.contador > 0) {
 			return this.stack[--this.contador];
-		else
-			return null;
+		}
+		return 0;
 	}
 
 	/**
