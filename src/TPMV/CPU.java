@@ -76,6 +76,7 @@ public class CPU {
 				else {
 					this.stack.push(value2);
 					this.stack.push(value1);
+					success=false;
 				}
 				
 				success = true;
