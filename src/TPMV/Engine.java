@@ -2,6 +2,12 @@ package TPMV;
 
 import java.util.Scanner;
 
+import ByteCode.ByteCode;
+import ByteCode.ByteCodeParser;
+import ByteCode.ByteCodeProgram;
+import Command.Command;
+import Command.CommandParser;
+
 /**
  * Clase para representar el bucle de control de la aplicación, se piden los
  * comandos a ejecutar y se realizan las ejecuciones de los comandos.
@@ -56,13 +62,7 @@ public class Engine {
 	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
 	static public boolean executeHelp() {
-		System.out.println("HELP: Muestra esta ayuda " + System.getProperty("line.separator")
-				+ "QUIT: Cierra la aplicacion " + System.getProperty("line.separator") + "RUN: Ejecuta el programa "
-				+ System.getProperty("line.separator")
-				+ "NEWINST BYTECODE: Introduce una nueva instruccion al programa "
-				+ System.getProperty("line.separator") + "RESET: Vacia el programa actual "
-				+ System.getProperty("line.separator")
-				+ "REPLACE N: Reemplaza la instruccion N por la solicitada al usuario");
+		CommandParser.showHelp();
 		return true;
 	}
 
@@ -80,16 +80,27 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando {@code NEWINST} para agregar una nueva instrucción al
-	 * programa.
+	 * Ejecuta el comando {@code AddByteCodeProgram} para agregar operaciones al
+	 * programa
 	 * 
-	 * @param byteCode
-	 *            ByteCode con la instrucción codificada.
 	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
-	public boolean executeNewInst(ByteCode byteCode) {
-		boolean resultado = byteCodeProgram.addByteCode(byteCode);
-		System.out.println(byteCodeProgram.toString());
+	public boolean executeAddByteCodeProgram() {
+		String instructionString = "";
+		boolean resultado = true;
+		ByteCode instruction = null;
+		instructionString = this.scanner.nextLine();
+
+		while (instructionString.toUpperCase() != "END" && resultado) {
+			instruction = ByteCodeParser.parse(instructionString);
+
+			if (instruction == null) {
+				resultado = this.byteCodeProgram.addByteCode(instruction);
+				instructionString = this.scanner.nextLine();
+			} else
+				resultado = false;
+		}
+
 		return resultado;
 	}
 
@@ -101,19 +112,18 @@ public class Engine {
 	 */
 	public boolean excuteCommandRun() {
 		boolean resultado = true;
-		for (int i = 0; i < this.byteCodeProgram.getLength() && !this.cpu.isHalted() && resultado; i++) {
-			ByteCode byteCode = this.byteCodeProgram.getProgram(i);
-			if (this.cpu.execute(byteCode)) {
-				System.out.println("El estado de la maquina tras ejecutar el bytecode " + byteCode.toString() + " es:"
-						+ System.getProperty("line.separator") + this.cpu.toString()
-						+ System.getProperty("line.separator"));
-			} else {
-				System.out.println("Error: Ejecucion incorrecta del comando " + System.getProperty("line.separator")
-						+ this.byteCodeProgram.toString() + System.getProperty("line.separator") + this.cpu.toString()
-						+ System.getProperty("line.separator"));
-				resultado = false;
-			}
+		if (this.cpu.run()) {
+			System.out.println("El estado de la maquina tras ejecutar el programa: "
+					+ System.getProperty("line.separator") + this.cpu.toString() + System.getProperty("line.separator")
+					+ System.getProperty("line.separator") + "Programa ejecutado: "
+					+ System.getProperty("line.separator") + this.byteCodeProgram.toString());
+		} else {
+			System.out.println("Error: Ejecucion incorrecta del programa " + System.getProperty("line.separator")
+					+ System.getProperty("line.separator") + this.cpu.toString()
+					+ System.getProperty("line.separator"));
+			resultado = false;
 		}
+
 		this.cpu.reset();
 		return resultado;
 	}
