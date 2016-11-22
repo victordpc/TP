@@ -43,11 +43,12 @@ public class Memory {
 	 *            dirección de memoria en la que se lee.
 	 * @return valor almacenado en la dirección de memoria indicada
 	 */
-	public Integer read(int pos) {
+	public int read(int pos) {
 		if (pos >= 0)
-			return this.memory[pos];
-		else
-			return null;
+			if (this.memory[pos] != null)
+				return this.memory[pos];
+		
+		return 0;
 	}
 
 	public String toString() {
@@ -84,5 +85,4 @@ public class Memory {
 	public void reset() {
 		this.memory = new Integer[REDIM_SIZE];
 	}
-
 }
