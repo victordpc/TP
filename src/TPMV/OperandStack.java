@@ -1,68 +1,86 @@
 package TPMV;
 
+/**
+ * Clase que representa una pila de valores enteros.
+ */
 public class OperandStack {
 
 	private int stack[];
 	private int contador;
-	private int STACK_SIZE=1000;
+	private int STACK_SIZE = 1000;
 
-    public OperandStack() {
-        this.stack = new int[STACK_SIZE];
+	/**
+	 * Constructor de la clase.
+	 */
+	public OperandStack() {
+		this.stack = new int[STACK_SIZE];
 		this.contador = 0;
-    }
+	}
 
-    public int length() {
-        return contador;
-    }
+	/**
+	 * Devuelve el número de elementos almacenados en la pila.
+	 * 
+	 * @return número de elementos en la pila.
+	 */
+	public int getLength() {
+		return this.stack.length;
+	}
 
-	public boolean push(int operando){
-		boolean resultado = false;
+	/**
+	 * Introduce un valor en cima de la pila.
+	 * 
+	 * @param operando
+	 *            valor que introduce
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 */
+	public boolean push(int operando) {
+		if (this.contador < this.stack.length) {
+			this.stack[this.contador++] = operando;
+			return true;
+		} else
+			return false;
+	}
 
-		if (contador >= this.stack.length) {
-			this.redim();
+	/**
+	 * Saca el valor de la cima de la pila y lo devuelve.
+	 * 
+	 * @return valor en la cima de la pila.
+	 */
+	public int pop() {
+		if (this.contador > 0) {
+			return this.stack[--this.contador];
 		}
-		this.stack[contador++]=operando;
-		resultado = true;
-
-		return resultado;
+		return 0;
 	}
 
-	public int pop(){
-	int resultado = 0;
-		if (contador>0)
-			resultado = this.stack[--contador];
+	/**
+	 * Obtiene el valor almacenado en la cima de la pila.
+	 * 
+	 * @return valor en la cima de la pila
+	 */
+	public Integer getLastPosition() {
+		if (this.contador > 0)
+			return this.stack[this.contador - 1];
 		else
-			resultado = this.stack[0];
-		return resultado;
-	}
-	
-	public int getLastPosition(){
-		int resultado = 0;
-		if (contador > 0)
-			resultado = stack[contador -1];
-		else
-			resultado = stack[0];
-		return resultado;
+			return null;
 	}
 
-	public String toString(){
-		String resultado="";
-        if (this.stack.length == 0) {
-            resultado="<vacía>";
-        } else {
-            for (int i = 0; i < contador; i++) {
-                resultado += this.stack[i] + " ";
-            }
-        }
-        return resultado;
+	public String toString() {
+		if (this.stack.length == 0) {
+			return "<vacia>";
+		} else {
+			String resultado = "Pila: ";
+			for (int i = 0; i < this.contador; i++) {
+				resultado += this.stack[i] + " ";
+			}
+			return resultado;
+		}
 	}
-	
-	private void redim(){
-		int newSize = this.stack.length + this.STACK_SIZE;
-        this.stack = java.util.Arrays.copyOf(this.stack, newSize);
-	}
-	
+
+	/**
+	 * Resetea la pila.
+	 */
 	public void reset() {
-		contador = 0;
+		this.contador = 0;
 	}
 }

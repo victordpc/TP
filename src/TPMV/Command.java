@@ -1,54 +1,80 @@
 package TPMV;
 
+/**
+ * Clase que representa los comandos admitidos.
+ */
 public class Command {
+	private final ENUM_COMMAND command;
+	private ByteCode instruction;
+	private int replace = -1;
 
-    private final ENUM_COMMAND command;
-    private ByteCode instruction;
-    private int replace;
+	/**
+	 * Constructor de la clase
+	 * 
+	 * @param command
+	 *            comando con el que construimos la clase.
+	 */
+	public Command(ENUM_COMMAND command) {
+		this.command = command;
+	}
 
-    public Command(ENUM_COMMAND command) {
-        this.command = command;
-    }
-    
-    public Command(ENUM_COMMAND command, ByteCode instruction) {
-        this.command = command;
-        this.instruction = instruction;
-    }
-      
-    public Command(ENUM_COMMAND command, int replace) {
-        this.command = command;
-        this.replace = replace;
-    }
+	/**
+	 * Constructor de la clase
+	 * 
+	 * @param command
+	 *            comando con el que construimos la clase.
+	 * @param instruction
+	 *            {@code ByteCode} asociado al comando
+	 */
+	public Command(ENUM_COMMAND command, ByteCode instruction) {
+		this.command = command;
+		this.instruction = instruction;
+	}
 
-    public boolean execute(Engine engine) {
-        boolean success = true;
-        switch (command) {
-            case HELP:
-                engine.executeHelp();
-                break;
-            case QUIT:
-                engine.executeQuit();
-                break;
-            case NEWINST:
-                engine.executeNewInst(instruction);
-                break;
-            case RUN:
-                engine.excuteCommandRun();
-                break;
-            case RESET:
-                engine.executeReset();
-                break;
-            case REPLACE:
-                engine.executeReplace(replace);
-                break;
-            default:
-                success = false;
-                break;
-        }
-        return success;
-    }
-    
-    public ByteCode getByteCode() {
-        return instruction;
-    }
+	/**
+	 * Constructor de la clase
+	 * 
+	 * @param command
+	 *            comando con el que construimos la clase.
+	 * @param replace
+	 *            parámetro asociado al comando.
+	 */
+	public Command(ENUM_COMMAND command, int replace) {
+		this.command = command;
+		this.replace = replace;
+	}
+
+	/**
+	 * Función que realiza las llamadas a los metodos asociados a cada comando.
+	 * 
+	 * @param engine
+	 *            instancia en la que se ejecutan los comandos.
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 */
+	public boolean execute(Engine engine) {
+		switch (this.command) {
+		case HELP:
+			return Engine.executeHelp();
+		case QUIT:
+			return engine.executeQuit();
+		case NEWINST:
+			return engine.executeNewInst(this.instruction);
+		case RUN:
+			return engine.excuteCommandRun();
+		case RESET:
+			return engine.executeReset();
+		case REPLACE:
+			return engine.executeReplace(this.replace);
+		}
+		return false;
+	}
+
+	public String toString() {
+		String resultado = this.command.toString();
+		if (this.instruction != null)
+			resultado += " " + this.instruction.toString();
+		if (this.replace > -1)
+			resultado += " " + this.replace;
+		return resultado;
+	}
 }
