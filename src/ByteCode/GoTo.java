@@ -40,5 +40,5 @@ public class GoTo extends ByteCode {
 		}
 		return null;
 	}
-
+	public String toString()	{return "GOTO "+ this.posicion+System.getProperty("line.separator");}
 }

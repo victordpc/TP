@@ -89,12 +89,13 @@ public class Engine {
 		String instructionString = "";
 		boolean resultado = true;
 		ByteCode instruction = null;
+		System.out.println("Introduzca las instrucciones: ");
 		instructionString = this.scanner.nextLine();
 
 		while (instructionString.toUpperCase() != "END" && resultado) {
 			instruction = ByteCodeParser.parse(instructionString);
 
-			if (instruction == null) {
+			if (instruction != null) {
 				resultado = this.byteCodeProgram.addByteCode(instruction);
 				instructionString = this.scanner.nextLine();
 			} else

@@ -27,4 +27,5 @@ public class Add extends ByteCode {
 		return null;
 	}
 
+	public String toString()	{return "ADD"+System.getProperty("line.separator");}
 }
