@@ -26,5 +26,5 @@ public class Div extends ByteCode {
 			return new Div();
 		return null;
 	}
-
+	public String toString()	{return "DIV"+System.getProperty("line.separator");}
 }

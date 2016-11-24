@@ -26,5 +26,5 @@ public class Halt extends ByteCode {
 			return new Div();
 		return null;
 	}
-
+	public String toString()	{return "HALT"+System.getProperty("line.separator");}
 }
