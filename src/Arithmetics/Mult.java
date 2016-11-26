@@ -16,7 +16,7 @@ public class Mult extends Arithmetics {
 	@Override
 	public ByteCode parse(String[] s) {
 		if(s.length == 1 && s[0].equalsIgnoreCase(ENUM_BYTECODE.MUL.toString())) {
-			return new Add();
+			return new Mult();
 		}
 		return null;
 	}

@@ -10,7 +10,7 @@ public class Sub extends Arithmetics {
 	public boolean execute(CPU cpu) {
 		int value2 = cpu.pop();
 		int value1 = cpu.pop();
-		return cpu.push(value1 + value2);
+		return cpu.push(value1 - value2);
 	}
 
 	@Override

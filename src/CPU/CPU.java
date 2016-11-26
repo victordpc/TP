@@ -29,28 +29,17 @@ public class CPU {
 		return this.stack.push(value);
 	}
 
-	public boolean store(int value) {
-		if (this.stack.getLength() >= 1) {
-			return this.memory.write(value, this.stack.pop());
-		}
-		return false;
+	public boolean store(int position) {
+		return this.memory.write(position, this.stack.pop());
 	}
 
-	public boolean load(int value) {
-		int valor = this.memory.read(value);
-		return this.stack.push(valor);
+	public boolean load(int position) {
+		int value = this.memory.read(position);
+		return this.stack.push(value);
 	}
 
 	public int pop() {
 		return this.stack.pop();
-	}
-
-	public int read(int position) {
-		return this.memory.read(position);
-	}
-
-	public boolean write(int position) {
-		return this.memory.write(position, this.stack.pop());
 	}
 
 	public void goTo(int n) {
@@ -70,23 +59,20 @@ public class CPU {
 	public boolean run() {
 		boolean success = true;
 		boolean seguir = true;
-		while (seguir && success && !this.isHalted()) {
+		while (seguir && success && !this.halt) {
 			ByteCode byteCode = this.byteCodeProgram.getProgram(programCounter);
-			programCounter++;
 			if (byteCode != null) {
+				programCounter++;
 				success = byteCode.execute(this);
-				if(!success) {
-					System.out.println("Falla " +byteCode.toString() + " Position " +programCounter);
-				}
 			} else {
 				seguir = false;
 			}
+			System.out.println(byteCode.toString() );
+			System.out.println(this.toString() );
 		}
-
-		if (success) {
-			System.out.println("El estado de la maquina tras ejecutar programa es: " + System.getProperty("line.separator") 
-			+ this.toString());
-		}
+		System.out.println("El estado de la maquina tras ejecutar programa es: " + System.getProperty("line.separator") 
+		+ System.getProperty("line.separator")
+				+ this.toString());
 		return success;
 	}
 
@@ -116,12 +102,11 @@ public class CPU {
 	}
 
 	/**
-	 * Devuelve el valor del atributo halt.
+	 * Cambia el valor del atributo halt.
 	 * 
-	 * @return valor del atributo halt
 	 */
-	public boolean isHalted() {
-		return this.halt;
+	public void setHalt() {
+		this.halt = true;
 	}
 
 	/**

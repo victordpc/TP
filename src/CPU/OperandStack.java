@@ -53,18 +53,6 @@ public class OperandStack {
 		return 0;
 	}
 
-	/**
-	 * Obtiene el valor almacenado en la cima de la pila.
-	 * 
-	 * @return valor en la cima de la pila
-	 */
-	public Integer getLastPosition() {
-		if (this.contador > 0)
-			return this.stack[this.contador - 1];
-		else
-			return null;
-	}
-
 	public String toString() {
 		String resultado = "Pila: ";
 		if (this.contador == 0) {

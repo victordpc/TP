@@ -8,7 +8,7 @@ public class Store extends ByteCode {
 	
 	@Override
 	public boolean execute(CPU cpu) {
-		return cpu.write(position);
+		return cpu.store(position);
 	}
 
 	@Override

@@ -11,6 +11,7 @@ public class IFLE extends ConditionalJumps {
 			int cima = cpu.pop();
 			int subcima = cpu.pop();
 			if(!(subcima < cima)) {
+				System.out.println("CIMA "+cima +" "+ subcima);
 				cpu.goTo(this.position);
 			}
 			return true;

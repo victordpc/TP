@@ -10,7 +10,7 @@ public class IFLEQ extends ConditionalJumps {
 		if (cpu.numeroValoresEnPila() >= 2) {
 			int cima = cpu.pop();
 			int subcima = cpu.pop();
-			if (!(subcima <= cima)) {
+			if (!(cima >= subcima)) {
 				cpu.goTo(this.position);
 				return true;
 			}

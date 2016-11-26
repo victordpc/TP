@@ -30,6 +30,9 @@ public class ByteCodeParser {
 			}
 			i++;
 		}
+		if(byteCode == null){
+			System.out.println("BYTECODE MAL " +Arrays.toString(linea));
+		}
 		return byteCode;
 	}
 }

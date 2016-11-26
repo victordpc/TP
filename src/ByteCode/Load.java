@@ -8,8 +8,7 @@ public class Load extends ByteCode {
 
 	@Override
 	public boolean execute(CPU cpu) {
-		int value = cpu.read(position); 
-		return cpu.push(value);
+		return cpu.load(position);
 	}
 
 	@Override

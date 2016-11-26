@@ -2,7 +2,6 @@ package ConditionalJumps;
 
 import ByteCode.ByteCode;
 import ByteCode.ENUM_BYTECODE;
-import ByteCode.Halt;
 import CPU.CPU;
 
 public class GoTo extends ConditionalJumps {
