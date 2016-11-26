@@ -1,4 +1,4 @@
-package TPMV;
+package Command;
 
 /**
  * Enumerado para indicar los comandos admitidos por el sistema.
@@ -15,7 +15,7 @@ public enum ENUM_COMMAND {
 	/**
 	 * Introduce una instruccion bytecode al programa actual.
 	 */
-	NEWINST,
+	BYTECODE,
 	/**
 	 * Ejecuta el programa actual.
 	 */

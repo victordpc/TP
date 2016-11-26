@@ -1,4 +1,4 @@
-package TPMV;
+package ByteCode;
 
 /**
  * Enumerado para indicar los {@code ByteCode} admitidos por el sistema.

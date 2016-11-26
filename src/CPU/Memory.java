@@ -1,4 +1,4 @@
-package TPMV;
+package CPU;
 
 /**
  * Clase que representa la memoria de la máquina virtual.
