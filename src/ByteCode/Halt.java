@@ -12,7 +12,7 @@ public class Halt extends ByteCode {
 	@Override
 	public ByteCode parse(String[] s) {
 		if(s.length == 1 && s[0].equalsIgnoreCase(ENUM_BYTECODE.HALT.toString())) {
-			return new Out();
+			return new Halt();
 		}
 		return null;
 	}

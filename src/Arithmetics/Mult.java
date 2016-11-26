@@ -21,4 +21,8 @@ public class Mult extends Arithmetics {
 		return null;
 	}
 
+	@Override
+	public String toString() {
+		return ENUM_BYTECODE.MUL.toString();
+	}
 }

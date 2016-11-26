@@ -43,5 +43,14 @@ public enum ENUM_BYTECODE {
 	/**
 	 * Para la ejecución del programa.
 	 */
-	HALT
+	HALT,
+	/**
+	 * Para la ejecución del programa.
+	 */
+	GOTO
+	/**
+	 * provoca un cambio en el contador de programa de la cpu, 
+	 * que pasa a ser N. Es decir el efecto de esta instrucción 
+	 * es pasar a ejecutar la instrucción N
+	 */
 }

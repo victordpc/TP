@@ -46,7 +46,7 @@ public class Engine {
 			if (command != null) {
 				System.out.println("Comienza la ejecución de " + command.toString());
 				if (!command.execute(this)) {
-					System.out.println("Error en la ejecución del comando" + System.getProperty("line.separator"));
+					System.out.println("Error en la ejecución del comando " + command.toString() + System.getProperty("line.separator"));
 				}
 			} else {
 				System.out.println("Comienza la ejecución de " + line);
@@ -62,7 +62,7 @@ public class Engine {
 	 * 
 	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
-	static public boolean executeHelp() {
+	public boolean executeHelp() {
 		System.out.println("HELP: Muestra esta ayuda " + System.getProperty("line.separator")
 				+ "QUIT: Cierra la aplicacion " + System.getProperty("line.separator") + "RUN: Ejecuta el programa "
 				+ System.getProperty("line.separator")
@@ -90,7 +90,7 @@ public class Engine {
 		boolean success = true;
 		String linea = "";
 		System.out
-				.println("Introduce el bytecode. Una instruccion por línea: " + System.getProperty("line.separator"));
+				.println("Introduce el bytecode. Una instruccion por linea: " + System.getProperty("line.separator"));
 		while (!linea.equalsIgnoreCase("end")) {
 			linea = scanner.nextLine();
 			if (!linea.equalsIgnoreCase("end")) {
@@ -111,20 +111,6 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando {@code NEWINST} para agregar una nueva instrucción al
-	 * programa.
-	 * 
-	 * @param byteCode
-	 *            ByteCode con la instrucción codificada.
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
-	 */
-	/**
-	 * public boolean executeNewInst(ByteCode byteCode) { boolean resultado =
-	 * byteCodeProgram.addByteCode(byteCode);
-	 * System.out.println(byteCodeProgram.toString()); return resultado; }
-	 */
-
-	/**
 	 * Ejecuta el comando {@code RUN}, reinicia la CPU y recorre el programa
 	 * efectuando las operaciones.
 	 * 
@@ -133,21 +119,6 @@ public class Engine {
 	public boolean excuteCommandRun() {
 		this.cpu.setByteCodeProgram(this.byteCodeProgram);
 		return this.cpu.run();
-		/**
-		 * for (int i = 0; i < this.byteCodeProgram.getLength() &&
-		 * !this.cpu.isHalted() && resultado; i++) { ByteCode byteCode =
-		 * this.byteCodeProgram.getProgram(i); if (this.cpu.execute(byteCode)) {
-		 * System.out.println("El estado de la maquina tras ejecutar el bytecode
-		 * " + byteCode.toString() + " es:" +
-		 * System.getProperty("line.separator") + this.cpu.toString() +
-		 * System.getProperty("line.separator")); } else {
-		 * System.out.println("Error: Ejecucion incorrecta del comando " +
-		 * System.getProperty("line.separator") +
-		 * this.byteCodeProgram.toString() +
-		 * System.getProperty("line.separator") + this.cpu.toString() +
-		 * System.getProperty("line.separator")); resultado = false; } }
-		 * this.cpu.reset();
-		 */
 	}
 
 	/**

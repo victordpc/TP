@@ -28,4 +28,9 @@ public class Div extends Arithmetics {
 		}
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		return ENUM_BYTECODE.DIV.toString();
+	}
 }

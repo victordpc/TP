@@ -29,33 +29,6 @@ public class CommandParser {
 			}
 			i++;
 		}
-
-		
-	/*	String commandString = instructionArray[0].toUpperCase();
-		ENUM_COMMAND userCommand = ENUM_COMMAND.valueOf(commandString);
-		
-		Command command = null;
-		switch (userCommand) {
-		case HELP:
-		case QUIT:
-		case RESET:
-		case RUN:
-			command = new Command(ENUM_COMMAND.valueOf(commandString));
-			break;
-		case REPLACE:
-			if (instructionArray.length == 2) {
-				int position = Integer.parseInt(instructionArray[1]);
-				if (position >= 0)
-					command = new Command(ENUM_COMMAND.valueOf(commandString), position);
-			}
-			break;
-		case NEWINST:
-			ByteCode newByteCode = ByteCodeParser.parse(linea);
-			if (newByteCode != null) {
-				command = new Command(ENUM_COMMAND.valueOf(commandString), newByteCode);
-			}
-			break;
-		}*/
 		return newCommand;
 	}
 	

@@ -20,4 +20,9 @@ public class Sub extends Arithmetics {
 		}
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		return ENUM_BYTECODE.SUB.toString();
+	}
 }

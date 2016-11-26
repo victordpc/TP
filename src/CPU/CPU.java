@@ -53,6 +53,14 @@ public class CPU {
 		return this.memory.write(position, this.stack.pop());
 	}
 
+	public void goTo(int n) {
+		this.programCounter = n;
+	}
+
+	public int numeroValoresEnPila() {
+		return this.stack.getContador();
+	}
+
 	public boolean replace(int position, ByteCode newByteCode) {
 		byteCodeProgram.replace(position, newByteCode);
 		System.out.println(byteCodeProgram.toString() + System.getProperty("line.separator"));
@@ -60,23 +68,26 @@ public class CPU {
 	}
 
 	public boolean run() {
-		boolean resultado = true;
-		for (int i = 0; i < this.programCounter && !this.isHalted() && resultado; i++) {
-			ByteCode byteCode = this.byteCodeProgram.getProgram(i);
-			resultado = this.execute(byteCode);
-//			if (this.execute(byteCode)) {
-//				System.out.println("El estado de la maquina tras ejecutar el bytecode " + byteCode.toString() + " es:"
-//						+ System.getProperty("line.separator") + this.cpu.toString()
-//						+ System.getProperty("line.separator"));
-//			} else {
-//				System.out.println("Error: Ejecucion incorrecta del comando " + System.getProperty("line.separator")
-//						+ this.byteCodeProgram.toString() + System.getProperty("line.separator") + this.cpu.toString()
-//						+ System.getProperty("line.separator"));
-//				resultado = false;
-//			}
+		boolean success = true;
+		boolean seguir = true;
+		while (seguir && success && !this.isHalted()) {
+			ByteCode byteCode = this.byteCodeProgram.getProgram(programCounter);
+			programCounter++;
+			if (byteCode != null) {
+				success = byteCode.execute(this);
+				if(!success) {
+					System.out.println("Falla " +byteCode.toString() + " Position " +programCounter);
+				}
+			} else {
+				seguir = false;
+			}
 		}
-		this.reset();
-		return resultado;
+
+		if (success) {
+			System.out.println("El estado de la maquina tras ejecutar programa es: " + System.getProperty("line.separator") 
+			+ this.toString());
+		}
+		return success;
 	}
 
 	/**
@@ -89,34 +100,6 @@ public class CPU {
 	 */
 	public boolean execute(ByteCode instruccion) {
 		return instruccion.execute(this);
-
-		/**
-		 * boolean success = false; int value1; int value2; switch
-		 * (instruccion.getName()) { case PUSH: success =
-		 * this.stack.push(instruccion.getParam()); break; case STORE: if
-		 * (this.stack.getLength() >= 1) { success =
-		 * this.memory.write(instruccion.getParam(), this.stack.pop()); } break;
-		 * case LOAD: Integer valor = this.memory.read(instruccion.getParam());
-		 * if (valor != null) success = this.stack.push(valor); break; case ADD:
-		 * if (this.stack.getLength() >= 2) { value2 = this.stack.pop(); value1
-		 * = this.stack.pop(); success = this.stack.push(value1 + value2); }
-		 * break; case SUB: if (this.stack.getLength() >= 2) { value2 =
-		 * this.stack.pop(); value1 = this.stack.pop(); success =
-		 * this.stack.push(value1 - value2); } break; case MUL: if
-		 * (this.stack.getLength() >= 2) { value2 = this.stack.pop(); value1 =
-		 * this.stack.pop(); this.stack.push(value1 * value2); success = true; }
-		 * break; case DIV: if (this.stack.getLength() >= 2) { value2 =
-		 * this.stack.pop(); value1 = this.stack.pop(); if (value2 != 0)
-		 * this.stack.push(value1 / value2); else { this.stack.push(value2);
-		 * this.stack.push(value1); success=false; }
-		 * 
-		 * success = true; } break; case HALT: this.halt = true; break; case
-		 * OUT: Integer valorPila = this.stack.getLastPosition(); if (valorPila
-		 * != null) System.out .println("El ultimo valor en la pila es: " +
-		 * valorPila + System.getProperty("line.separator")); else
-		 * System.out.println("La pila no contiene valores"); break; default:
-		 * break; } return success;
-		 */
 	}
 
 	@Override
@@ -131,7 +114,7 @@ public class CPU {
 	public void setByteCodeProgram(ByteCodeProgram newByteCodeProgram) {
 		this.byteCodeProgram = newByteCodeProgram;
 	}
-	
+
 	/**
 	 * Devuelve el valor del atributo halt.
 	 * 

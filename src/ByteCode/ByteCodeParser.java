@@ -1,9 +1,9 @@
 package ByteCode;
 
-import Arithmetics.Add;
-import Arithmetics.Div;
-import Arithmetics.Mult;
-import Arithmetics.Sub;
+import java.util.Arrays;
+
+import Arithmetics.*;
+import ConditionalJumps.*;
 
 /**
  * Clase que se encarga de convertir textos en {@code ByteCode}
@@ -11,7 +11,7 @@ import Arithmetics.Sub;
 public class ByteCodeParser {
 
 	private final static ByteCode[] byteCodes = { new Push(), new Load(), new Store(), new Halt(), new Out(), new Add(),
-			new Div(), new Mult(), new Sub() };
+			new Div(), new Mult(), new Sub(), new IFEQ(), new IFLE(), new IFLEQ(), new IFNEQ(), new GoTo() };
 
 	/**
 	 * Convierte un texto a un objeto de tipo {@code ByteCode}.
@@ -31,37 +31,5 @@ public class ByteCodeParser {
 			i++;
 		}
 		return byteCode;
-		
-		/**
-		String commandString = instructionArray[1].toUpperCase();
-		ENUM_BYTECODE bydeCode = ENUM_BYTECODE.valueOf(commandString);
-
-		switch (bydeCode) {
-		case PUSH:
-			if (instructionArray.length == 3) {
-				resultado = new ByteCode(ENUM_BYTECODE.valueOf(commandString), Integer.parseInt(instructionArray[2]));
-			}
-			break;
-		case LOAD:
-		case STORE:
-			if (instructionArray.length == 3) {
-				int valor = Integer.parseInt(instructionArray[2]);
-				if (valor >= 0)
-					resultado = new ByteCode(ENUM_BYTECODE.valueOf(commandString), valor);
-			}
-			break;
-		case ADD:
-		case SUB:
-		case MUL:
-		case DIV:
-		case OUT:
-		case HALT:
-			if (instructionArray.length == 2) {
-				resultado = new ByteCode(ENUM_BYTECODE.valueOf(commandString));
-			}
-			break;
-		}
-
-		return resultado;*/
 	}
 }
