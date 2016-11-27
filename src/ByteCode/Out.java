@@ -13,6 +13,7 @@ public class Out extends ByteCode {
 	 * Constructor de la clase
 	 */
 	public Out() {
+		super();
 	}
 
 	@Override
@@ -25,6 +26,11 @@ public class Out extends ByteCode {
 		if (s.length == 1 && s[0].equalsIgnoreCase("Out"))
 			return new Out();
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "OPUT " + System.getProperty("line.separator");
 	}
 
 }

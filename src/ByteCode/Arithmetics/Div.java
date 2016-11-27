@@ -1,0 +1,43 @@
+package ByteCode.Arithmetics;
+
+import ByteCode.ByteCode;
+import TPMV.CPU;
+
+/**
+ * Clase que representa la instrución {@code DIV}
+ * 
+ * @author victor
+ */
+public class Div extends Arithmetics {
+
+	/**
+	 * Constructor de la clase
+	 */
+	public Div() {
+		super();
+	}
+
+	@Override
+	protected ByteCode parseAux() {
+		return new Div();
+	}
+
+	@Override
+	protected boolean operador(String operador) {
+		return operador.compareToIgnoreCase("Div") == 0;
+	}
+
+	@Override
+	protected boolean operar(CPU cpu) {
+		if (this.subCima != 0) {
+			return cpu.push(this.cima / this.subCima);
+		}
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		return "DIV" + System.getProperty("line.separator");
+	}
+
+}

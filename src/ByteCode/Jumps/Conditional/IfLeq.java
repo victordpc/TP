@@ -1,6 +1,6 @@
-package ByteCode;
+package ByteCode.Jumps.Conditional;
 
-import TPMV.CPU;
+import ByteCode.ByteCode;
 
 /**
  * Clase que representa la instrución {@code IFLEQ}, salto a la direción del
@@ -14,6 +14,7 @@ public class IfLeq extends ConditionalJumps {
 	 * Constructor de la clase
 	 */
 	public IfLeq() {
+		super();
 	}
 
 	/**
@@ -27,17 +28,23 @@ public class IfLeq extends ConditionalJumps {
 	}
 
 	@Override
-	public boolean execute(CPU cpu) {
-		return cpu.ifLeq(posicion);
+	public boolean compare() {
+		return !(this.subCima <= this.cima);
 	}
 
 	@Override
-	public ByteCode parse(String[] s) {
-		if (s.length == 2 && s[0].equalsIgnoreCase("IfLeq")) {
-			int val = Integer.parseInt(s[1]);
-			return new IfLeq(val);
-		}
-		return null;
+	protected ByteCode parseAux(int val) {
+		return new IfLeq(val);
+	}
+
+	@Override
+	protected boolean operador(String operador) {
+		return operador.compareToIgnoreCase("IfLeq") == 0;
+	}
+
+	@Override
+	public String toString() {
+		return "IFLEQ " + this.posicion + System.getProperty("line.separator");
 	}
 
 }

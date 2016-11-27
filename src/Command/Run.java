@@ -13,6 +13,7 @@ public class Run extends Command {
 	 * Constructor de la clase
 	 */
 	public Run() {
+		super();
 	}
 
 	@Override

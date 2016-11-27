@@ -14,13 +14,14 @@ public class Store extends ByteCode {
 	 * Constructor de la clase
 	 */
 	public Store() {
+		super();
 	}
 
 	/**
 	 * Constructor de la clase
 	 * 
 	 * @param valor
-	 *            posición de memoria donde guarda la cima de la pila
+	 *            posición de memoria donde guardar la cima de la pila
 	 */
 	public Store(int valor) {
 		this.posicion = valor;
@@ -28,7 +29,8 @@ public class Store extends ByteCode {
 
 	@Override
 	public boolean execute(CPU cpu) {
-		return cpu.store(this.posicion);
+		int valor = cpu.pop();
+		return cpu.store(this.posicion, valor);
 	}
 
 	@Override
@@ -38,6 +40,11 @@ public class Store extends ByteCode {
 			return new Store(val);
 		}
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "PUSH " + this.posicion + System.getProperty("line.separator");
 	}
 
 }
