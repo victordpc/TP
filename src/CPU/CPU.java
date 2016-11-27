@@ -67,8 +67,6 @@ public class CPU {
 			} else {
 				seguir = false;
 			}
-			System.out.println(byteCode.toString() );
-			System.out.println(this.toString() );
 		}
 		System.out.println("El estado de la maquina tras ejecutar programa es: " + System.getProperty("line.separator") 
 		+ System.getProperty("line.separator")
