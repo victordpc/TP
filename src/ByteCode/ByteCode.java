@@ -27,6 +27,8 @@ public abstract class ByteCode {
 	 */
 	abstract public ByteCode parse(String[] s);
 
+	@Override
+	abstract public String toString();
 }
 
 // public class ByteCode {

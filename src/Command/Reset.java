@@ -14,6 +14,7 @@ public class Reset extends Command {
 	 * Constructor de la clase
 	 */
 	public Reset() {
+		super();
 	}
 
 	@Override

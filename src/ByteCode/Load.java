@@ -14,6 +14,7 @@ public class Load extends ByteCode {
 	 * Constructor de la clase
 	 */
 	public Load() {
+		super();
 	}
 
 	/**
@@ -28,7 +29,8 @@ public class Load extends ByteCode {
 
 	@Override
 	public boolean execute(CPU cpu) {
-		return cpu.load(this.posicion);
+		int valor = cpu.load(this.posicion);
+		return cpu.push(valor);
 	}
 
 	@Override
@@ -38,6 +40,11 @@ public class Load extends ByteCode {
 			return new Load(val);
 		}
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "LOAD " + this.posicion + System.getProperty("line.separator");
 	}
 
 }

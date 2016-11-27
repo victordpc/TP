@@ -13,6 +13,7 @@ public class AddByteCodeProgram extends Command {
 	 * Constructor de la clase
 	 */
 	public AddByteCodeProgram() {
+		super();
 	}
 
 	@Override

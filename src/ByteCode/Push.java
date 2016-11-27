@@ -14,6 +14,7 @@ public class Push extends ByteCode {
 	 * Constructor de la clase
 	 */
 	public Push() {
+		super();
 	}
 
 	/**
@@ -28,7 +29,11 @@ public class Push extends ByteCode {
 
 	@Override
 	public boolean execute(CPU cpu) {
-		return cpu.push(this.valor);
+		if (cpu.push(this.valor)) {
+			cpu.avanzaPc();
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -38,6 +43,11 @@ public class Push extends ByteCode {
 			return new Push(val);
 		}
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "PUSH " + this.valor + System.getProperty("line.separator");
 	}
 
 }

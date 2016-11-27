@@ -1,5 +1,15 @@
 package ByteCode;
 
+import ByteCode.Arithmetics.Add;
+import ByteCode.Arithmetics.Div;
+import ByteCode.Arithmetics.Mul;
+import ByteCode.Arithmetics.Sub;
+import ByteCode.Jumps.GoTo;
+import ByteCode.Jumps.Conditional.IfEq;
+import ByteCode.Jumps.Conditional.IfLe;
+import ByteCode.Jumps.Conditional.IfLeq;
+import ByteCode.Jumps.Conditional.IfNeq;
+
 /**
  * Clase que se encarga de convertir textos en {@code ByteCode}
  */

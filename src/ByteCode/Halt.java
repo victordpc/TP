@@ -1,5 +1,6 @@
 package ByteCode;
 
+import ByteCode.Arithmetics.Div;
 import TPMV.CPU;
 
 /**
@@ -13,6 +14,7 @@ public class Halt extends ByteCode {
 	 * Constructor de la clase
 	 */
 	public Halt() {
+		super();
 	}
 
 	@Override

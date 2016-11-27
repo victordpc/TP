@@ -13,7 +13,7 @@ public class Help extends Command {
 	 * Constructor de la clase
 	 */
 	public Help() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	@Override

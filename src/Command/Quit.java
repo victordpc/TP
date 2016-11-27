@@ -13,7 +13,7 @@ public class Quit extends Command {
 	 * Constructor de la clase
 	 */
 	public Quit() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	@Override

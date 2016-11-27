@@ -15,6 +15,7 @@ public class Replace extends Command {
 	 * Constructor de la clase
 	 */
 	public Replace() {
+		super();
 	}
 
 	/**
