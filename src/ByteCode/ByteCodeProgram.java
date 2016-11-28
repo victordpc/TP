@@ -5,9 +5,9 @@ package ByteCode;
  */
 public class ByteCodeProgram {
 
+	private static final int EXTEND_VALUE = 1000;
 	private final ByteCode[] program;
 	private int nextProgramPosition = 0;
-	private static final int EXTEND_VALUE = 1000;
 
 	/**
 	 * Constructor de la clase
@@ -29,6 +29,15 @@ public class ByteCodeProgram {
 			return true;
 		} else
 			return false;
+	}
+
+	/**
+	 * Obtiene el valor del numero de elementos almacenados en el programa.
+	 * 
+	 * @return número de elementos almacendos en el programa.
+	 */
+	public int getLength() {
+		return this.nextProgramPosition;
 	}
 
 	/**
@@ -55,30 +64,21 @@ public class ByteCodeProgram {
 		this.program[position] = newInstruction;
 	}
 
-	public String toString() {
-		String objectInfo = "";
-		if (nextProgramPosition > 0) {
-			objectInfo += "Programa almacenado: " + System.getProperty("line.separator");
-			for (int i = 0; i < this.nextProgramPosition; i++)
-				objectInfo += i +": " + this.program[i].toString() + System.getProperty("line.separator");
-		}
-		return objectInfo;
-	}
-
-	/**
-	 * Obtiene el valor del numero de elementos almacenados en el programa.
-	 * 
-	 * @return número de elementos almacendos en el programa.
-	 */
-	public int getLength() {
-		return this.nextProgramPosition;
-	}
-
 	/**
 	 * Reinicia el programa estableciendo el contador de elementos almacenados a
 	 * cero.
 	 */
 	public void reset() {
 		this.nextProgramPosition = 0;
+	}
+
+	public String toString() {
+		String objectInfo = "";
+		if (nextProgramPosition > 0) {
+			objectInfo += "Programa almacenado: " + System.getProperty("line.separator");
+			for (int i = 0; i < this.nextProgramPosition; i++)
+				objectInfo += i + ": " + this.program[i].toString();
+		}
+		return objectInfo;
 	}
 }

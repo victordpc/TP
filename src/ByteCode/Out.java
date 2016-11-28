@@ -30,7 +30,7 @@ public class Out extends ByteCode {
 
 	@Override
 	public String toString() {
-		return "OPUT " + System.getProperty("line.separator");
+		return "OUTPUT " + System.getProperty("line.separator");
 	}
 
 }

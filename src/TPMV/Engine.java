@@ -14,6 +14,17 @@ import Command.CommandParser;
  */
 public class Engine {
 
+	/**
+	 * Ejecuta el comando {@code HELP}, mostrando por pantalla la información de
+	 * los posibles comandos que puede introducir el usuario.
+	 * 
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 */
+	static public boolean executeHelp() {
+		CommandParser.showHelp();
+		return true;
+	}
+
 	private boolean end;
 	private ByteCodeProgram byteCodeProgram;
 	private final Scanner scanner;
@@ -29,54 +40,25 @@ public class Engine {
 	}
 
 	/**
-	 * Inicia la ejecucion de la maquina virtual leyendo sucesivamente los
-	 * comandos introducidos por el usuario
+	 * Ejecuta el comando {@code RUN}, reinicia la CPU y recorre el programa
+	 * efectuando las operaciones.
+	 * 
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
-	public void start() {
-		this.end = false;
-		System.out.println("Inicio del programa");
-		System.out.print(System.getProperty("line.separator"));
-		System.out.println("Empieze la introduccion de comandos:");
-		System.out.print(System.getProperty("line.separator"));
-
-		while (!this.end) {
-			String line = this.scanner.nextLine().trim();
-			Command command = CommandParser.parse(line);
-			if (command != null) {
-				System.out.println("Comienza la ejecución de " + command.toString());
-				if (!command.execute(this)) {
-					System.out.println("Error en la ejecución del comando" + System.getProperty("line.separator"));
-				}
-			} else {
-				System.out.println("Comienza la ejecución de " + line);
-				System.out.print("Error: Ejecución incorrecta del comando" + System.getProperty("line.separator"));
-			}
+	public boolean excuteCommandRun() {
+		boolean resultado = true;
+		if (this.cpu.run(this.byteCodeProgram)) {
+			System.out.println("El estado de la maquina tras ejecutar el programa: "
+					+ System.getProperty("line.separator") + this.cpu.toString());
+		} else {
+			System.out.println("Error: Ejecucion incorrecta del programa " + System.getProperty("line.separator")
+					+ System.getProperty("line.separator") + this.cpu.toString()
+					+ System.getProperty("line.separator"));
+			resultado = false;
 		}
-		System.out.print(System.getProperty("line.separator"));
-	}
 
-	/**
-	 * Ejecuta el comando {@code HELP}, mostrando por pantalla la información de
-	 * los posibles comandos que puede introducir el usuario.
-	 * 
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
-	 */
-	static public boolean executeHelp() {
-		CommandParser.showHelp();
-		return true;
-	}
-
-	/**
-	 * Ejecuta el comando {@code QUIT} finalizando la ejecución.
-	 * 
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
-	 */
-	public boolean executeQuit() {
-		this.end = true;
-		System.out.println(byteCodeProgram.toString());
-		System.out.println(System.getProperty("line.separator") + "Fin de la ejecucion...."
-				+ System.getProperty("line.separator"));
-		return true;
+		this.cpu.reset();
+		return resultado;
 	}
 
 	/**
@@ -89,10 +71,14 @@ public class Engine {
 		String instructionString = "";
 		boolean resultado = true;
 		ByteCode instruction = null;
+
+		if (this.byteCodeProgram.getLength() > 0)
+			System.out.println(this.byteCodeProgram.toString());
+
 		System.out.println("Introduzca las instrucciones: ");
 		instructionString = this.scanner.nextLine();
 
-		while (instructionString.toUpperCase() != "END" && resultado) {
+		while (!instructionString.equalsIgnoreCase("END") && resultado) {
 			instruction = ByteCodeParser.parse(instructionString);
 
 			if (instruction != null) {
@@ -106,27 +92,16 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando {@code RUN}, reinicia la CPU y recorre el programa
-	 * efectuando las operaciones.
+	 * Ejecuta el comando {@code QUIT} finalizando la ejecución.
 	 * 
 	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
-	public boolean excuteCommandRun() {
-		boolean resultado = true;
-		if (this.cpu.run()) {
-			System.out.println("El estado de la maquina tras ejecutar el programa: "
-					+ System.getProperty("line.separator") + this.cpu.toString() + System.getProperty("line.separator")
-					+ System.getProperty("line.separator") + "Programa ejecutado: "
-					+ System.getProperty("line.separator") + this.byteCodeProgram.toString());
-		} else {
-			System.out.println("Error: Ejecucion incorrecta del programa " + System.getProperty("line.separator")
-					+ System.getProperty("line.separator") + this.cpu.toString()
-					+ System.getProperty("line.separator"));
-			resultado = false;
-		}
-
-		this.cpu.reset();
-		return resultado;
+	public boolean executeQuit() {
+		this.end = true;
+		System.out.println(byteCodeProgram.toString());
+		System.out.println(System.getProperty("line.separator") + "Fin de la ejecucion...."
+				+ System.getProperty("line.separator"));
+		return true;
 	}
 
 	/**
@@ -157,6 +132,43 @@ public class Engine {
 	 */
 	public boolean executeReset() {
 		this.byteCodeProgram.reset();
+		return true;
+	}
+
+	/**
+	 * Inicia la ejecucion de la maquina virtual leyendo sucesivamente los
+	 * comandos introducidos por el usuario
+	 */
+	public void start() {
+		this.end = false;
+		System.out.println("Inicio del programa");
+		System.out.print(System.getProperty("line.separator"));
+		System.out.println("Empieze la introduccion de comandos:");
+		System.out.print(System.getProperty("line.separator"));
+
+		while (!this.end) {
+			String line = this.scanner.nextLine().trim();
+			Command command = CommandParser.parse(line);
+			if (command != null) {
+				System.out.println("Comienza la ejecución de " + command.toString());
+				if (!command.execute(this)) {
+					System.out.println("Error en la ejecución del comando" + System.getProperty("line.separator"));
+				}
+			} else {
+				System.out.println("Comienza la ejecución de " + line);
+				System.out.print("Error: Ejecución incorrecta del comando" + System.getProperty("line.separator"));
+			}
+		}
+		System.out.print(System.getProperty("line.separator"));
+	}
+
+	/**
+	 * Escribe por pantalla el programa almacenado
+	 * 
+	 * @return {@code true} en todo caso.
+	 */
+	public boolean printProgram() {
+		System.out.println(this.byteCodeProgram.toString());
 		return true;
 	}
 }

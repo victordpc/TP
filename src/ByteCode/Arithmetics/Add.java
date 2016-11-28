@@ -18,8 +18,8 @@ public class Add extends Arithmetics {
 	}
 
 	@Override
-	protected ByteCode parseAux() {
-		return new Add();
+	public String toString() {
+		return "ADD" + System.getProperty("line.separator");
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class Add extends Arithmetics {
 	}
 
 	@Override
-	public String toString() {
-		return "ADD" + System.getProperty("line.separator");
+	protected ByteCode parseAux() {
+		return new Add();
 	}
 }

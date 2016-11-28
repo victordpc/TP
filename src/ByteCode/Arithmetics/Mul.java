@@ -18,8 +18,8 @@ public class Mul extends Arithmetics {
 	}
 
 	@Override
-	protected ByteCode parseAux() {
-		return new Mul();
+	public String toString() {
+		return "MUL" + System.getProperty("line.separator");
 	}
 
 	@Override
@@ -33,8 +33,8 @@ public class Mul extends Arithmetics {
 	}
 
 	@Override
-	public String toString() {
-		return "MUL" + System.getProperty("line.separator");
+	protected ByteCode parseAux() {
+		return new Mul();
 	}
 
 }

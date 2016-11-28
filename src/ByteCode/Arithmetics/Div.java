@@ -18,8 +18,8 @@ public class Div extends Arithmetics {
 	}
 
 	@Override
-	protected ByteCode parseAux() {
-		return new Div();
+	public String toString() {
+		return "DIV" + System.getProperty("line.separator");
 	}
 
 	@Override
@@ -36,8 +36,8 @@ public class Div extends Arithmetics {
 	}
 
 	@Override
-	public String toString() {
-		return "DIV" + System.getProperty("line.separator");
+	protected ByteCode parseAux() {
+		return new Div();
 	}
 
 }

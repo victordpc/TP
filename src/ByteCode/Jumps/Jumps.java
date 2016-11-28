@@ -35,16 +35,6 @@ public abstract class Jumps extends ByteCode {
 	}
 
 	/**
-	 * Realiza el parseo específico del salto
-	 * 
-	 * @param val
-	 *            posicion del programa a donde salta si se cumple la condiciÃ³n
-	 * @return {@code ByteCode} correspondiente al salto, si es incorrecto
-	 *         devuelve {@code null}.
-	 */
-	protected abstract ByteCode parseAux(int val);
-
-	/**
 	 * Comprueba si el texto es un operador de salto válido
 	 * 
 	 * @param operador
@@ -53,5 +43,15 @@ public abstract class Jumps extends ByteCode {
 	 *         caso
 	 */
 	protected abstract boolean operador(String operador);
+
+	/**
+	 * Realiza el parseo específico del salto
+	 * 
+	 * @param val
+	 *            posicion del programa a donde salta si se cumple la condiciÃ³n
+	 * @return {@code ByteCode} correspondiente al salto, si es incorrecto
+	 *         devuelve {@code null}.
+	 */
+	protected abstract ByteCode parseAux(int val);
 
 }
