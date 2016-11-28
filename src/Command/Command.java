@@ -1,6 +1,6 @@
 package Command;
 
-import TPMV.*;
+import TPMV.Engine;
 
 /**
  * Clase que representa los comandos admitidos.

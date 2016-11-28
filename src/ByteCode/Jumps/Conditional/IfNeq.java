@@ -8,7 +8,7 @@ import ByteCode.ByteCode;
  * 
  * @author victor
  */
-public class IfNeq extends ConditionalJumps {
+public class IfNeq extends Conditional {
 
 	/**
 	 * Constructor de la clase
@@ -33,8 +33,8 @@ public class IfNeq extends ConditionalJumps {
 	}
 
 	@Override
-	protected ByteCode parseAux(int val) {
-		return new IfNeq(val);
+	public String toString() {
+		return "IFNEQ " + this.posicion + System.getProperty("line.separator");
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class IfNeq extends ConditionalJumps {
 	}
 
 	@Override
-	public String toString() {
-		return "IFNEQ " + this.posicion + System.getProperty("line.separator");
+	protected ByteCode parseAux(int val) {
+		return new IfNeq(val);
 	}
 
 }

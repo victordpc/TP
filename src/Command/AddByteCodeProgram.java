@@ -18,24 +18,26 @@ public class AddByteCodeProgram extends Command {
 
 	@Override
 	public boolean execute(Engine engine) {
-		return engine.executeAddByteCodeProgram();
+		boolean resultado= engine.executeAddByteCodeProgram();
+		System.out.println("Fin introducción de instrucciones ByteCode.");
+		return resultado;
 	}
 
 	@Override
 	public Command parse(String[] s) {
-		if (s.length == 1 && s[0].equalsIgnoreCase("AddByteCodeProgram"))
+		if (s.length == 1 && s[0].equalsIgnoreCase("ByteCode"))
 			return new AddByteCodeProgram();
 		return null;
 	}
 
 	@Override
 	public String textHelp() {
-		return "    ADDBYTECODEPROGRAM BYTECODE: Introduce nuevas instrucciones al programa "
+		return "    ByteCode: Introduce nuevas instrucciones ByteCode al programa "
 				+ System.getProperty("line.separator");
 	}
 
 	public String toString() {
-		return "ADDBYTECODEPROGRAM" + System.getProperty("line.separator");
+		return "ByteCode" + System.getProperty("line.separator");
 	}
 
 }

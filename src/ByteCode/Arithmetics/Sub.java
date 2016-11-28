@@ -18,8 +18,8 @@ public class Sub extends Arithmetics {
 	}
 
 	@Override
-	protected ByteCode parseAux() {
-		return new Sub();
+	public String toString() {
+		return "SUB" + System.getProperty("line.separator");
 	}
 
 	@Override
@@ -33,8 +33,8 @@ public class Sub extends Arithmetics {
 	}
 
 	@Override
-	public String toString() {
-		return "SUB" + System.getProperty("line.separator");
+	protected ByteCode parseAux() {
+		return new Sub();
 	}
 
 }

@@ -1,6 +1,5 @@
 package ByteCode;
 
-import ByteCode.Arithmetics.Div;
 import TPMV.CPU;
 
 /**
@@ -24,9 +23,12 @@ public class Halt extends ByteCode {
 
 	@Override
 	public ByteCode parse(String[] s) {
-		if (s.length == 1 && s[0].equalsIgnoreCase("Div"))
-			return new Div();
+		if (s.length == 1 && s[0].equalsIgnoreCase("Halt"))
+			return new Halt();
 		return null;
 	}
-	public String toString()	{return "HALT"+System.getProperty("line.separator");}
+
+	public String toString() {
+		return "HALT" + System.getProperty("line.separator");
+	}
 }

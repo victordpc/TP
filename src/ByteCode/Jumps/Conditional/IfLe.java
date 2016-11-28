@@ -7,9 +7,8 @@ import ByteCode.ByteCode;
  * programa indicado si los operadores son iguales
  * 
  * @author victor
- *
  */
-public class IfLe extends ConditionalJumps {
+public class IfLe extends Conditional {
 
 	/**
 	 * Constructor de la clase
@@ -34,8 +33,8 @@ public class IfLe extends ConditionalJumps {
 	}
 
 	@Override
-	protected ByteCode parseAux(int val) {
-		return new IfLe(val);
+	public String toString() {
+		return "IFLE " + this.posicion + System.getProperty("line.separator");
 	}
 
 	@Override
@@ -44,7 +43,7 @@ public class IfLe extends ConditionalJumps {
 	}
 
 	@Override
-	public String toString() {
-		return "IFLE " + this.posicion + System.getProperty("line.separator");
+	protected ByteCode parseAux(int val) {
+		return new IfLe(val);
 	}
 }

@@ -18,12 +18,35 @@ public class OperandStack {
 	}
 
 	/**
+	 * Obtiene el valor almacenado en la cima de la pila.
+	 * 
+	 * @return valor en la cima de la pila
+	 */
+	public Integer getLastPosition() {
+		if (this.contador > 0)
+			return this.stack[this.contador - 1];
+		else
+			return null;
+	}
+
+	/**
 	 * Devuelve el número de elementos almacenados en la pila.
 	 * 
 	 * @return número de elementos en la pila.
 	 */
 	public int getLength() {
 		return this.stack.length;
+	}
+
+	/**
+	 * Saca el valor de la cima de la pila y lo devuelve.
+	 * 
+	 * @return valor en la cima de la pila.
+	 */
+	public int pop() {
+		if (this.contador > 0)
+			return this.stack[--this.contador];
+		return 0;
 	}
 
 	/**
@@ -42,26 +65,10 @@ public class OperandStack {
 	}
 
 	/**
-	 * Saca el valor de la cima de la pila y lo devuelve.
-	 * 
-	 * @return valor en la cima de la pila.
+	 * Resetea la pila.
 	 */
-	public int pop() {
-		if (this.contador > 0)
-			return this.stack[--this.contador];
-		return 0;
-	}
-
-	/**
-	 * Obtiene el valor almacenado en la cima de la pila.
-	 * 
-	 * @return valor en la cima de la pila
-	 */
-	public Integer getLastPosition() {
-		if (this.contador > 0)
-			return this.stack[this.contador - 1];
-		else
-			return null;
+	public void reset() {
+		this.contador = 0;
 	}
 
 	public String toString() {
@@ -74,12 +81,5 @@ public class OperandStack {
 			}
 			return resultado;
 		}
-	}
-
-	/**
-	 * Resetea la pila.
-	 */
-	public void reset() {
-		this.contador = 0;
 	}
 }

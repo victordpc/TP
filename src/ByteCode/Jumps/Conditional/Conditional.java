@@ -6,14 +6,14 @@ import TPMV.CPU;
 /**
  * @author victor
  */
-public abstract class ConditionalJumps extends Jumps {
+public abstract class Conditional extends Jumps {
 	int cima;
 	int subCima;
 
 	/**
 	 * Constructor de la clase
 	 */
-	public ConditionalJumps() {
+	public Conditional() {
 	}
 
 	/**
@@ -22,9 +22,16 @@ public abstract class ConditionalJumps extends Jumps {
 	 * @param valor
 	 *            posicion del programa a donde salta si se cumple la condiciÃ³n
 	 */
-	public ConditionalJumps(int valor) {
+	public Conditional(int valor) {
 		super(valor);
 	}
+
+	/**
+	 * Función de comparación del salto
+	 * 
+	 * @return {@code true} si hay que saltar, {@code false} en otro caso.
+	 */
+	public abstract boolean compare();
 
 	public boolean execute(CPU cpu) {
 		if (cpu.getStackLength() >= 2) {
@@ -41,13 +48,5 @@ public abstract class ConditionalJumps extends Jumps {
 
 		return false;
 	}
-
-	/**
-	 * Función de comparación del salto
-	 * 
-	 * @return {@code true} si se cumple la condición. {@code false} en otro
-	 *         caso.
-	 */
-	public abstract boolean compare();
 
 }

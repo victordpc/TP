@@ -15,7 +15,7 @@ import ByteCode.Jumps.Conditional.IfNeq;
  */
 public class ByteCodeParser {
 	private final static ByteCode[] instructions = { new Add(), new Div(), new Halt(), new Load(), new Mul(), new Out(),
-			new Push(), new Store(), new Sub(), new GoTo(),new IfEq(), new IfLe(), new IfLeq(), new IfNeq() };
+			new Push(), new Store(), new Sub(), new GoTo(), new IfEq(), new IfLe(), new IfLeq(), new IfNeq() };
 
 	/**
 	 * Convierte un texto a un objeto de tipo {@code ByteCode}.
