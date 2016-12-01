@@ -69,7 +69,6 @@ public class Engine {
 	 */
 	public boolean executeAddByteCodeProgram() {
 		String instructionString = "";
-		boolean resultado = true;
 		ByteCode instruction = null;
 
 		if (this.byteCodeProgram.getLength() > 0)
@@ -78,19 +77,19 @@ public class Engine {
 		System.out.println("Introduzca las instrucciones: ");
 		instructionString = this.scanner.nextLine();
 
-		while (!instructionString.equalsIgnoreCase("END") && resultado) {
+		while (!instructionString.equalsIgnoreCase("END")) {
 			instruction = ByteCodeParser.parse(instructionString);
 
-			if (instruction != null) {
-				resultado = this.byteCodeProgram.addByteCode(instruction);
-				instructionString = this.scanner.nextLine();
-			} else
-				resultado = false;
+			if (instruction != null)
+				this.byteCodeProgram.addByteCode(instruction);
+			else
+				System.err.println("ByteCode incorrecto, vuelva a introducirlo");
+
+			instructionString = this.scanner.nextLine();
 		}
 
-		if (resultado)
-			System.out.println(this.byteCodeProgram.toString() + System.getProperty("line.separator"));
-		return resultado;
+		System.out.println(this.byteCodeProgram.toString() + System.getProperty("line.separator"));
+		return true;
 	}
 
 	/**
