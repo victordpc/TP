@@ -23,13 +23,7 @@ public abstract class Arithmetics extends ByteCode {
 			this.cima = cpu.pop();
 			this.subCima = cpu.pop();
 
-			if (operar(cpu)) {
-				cpu.avanzaPc();
-				return true;
-			} else {
-				cpu.push(subCima);
-				cpu.push(cima);
-			}
+			return operar(cpu);
 		}
 		return false;
 	}

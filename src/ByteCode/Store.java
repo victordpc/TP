@@ -31,6 +31,7 @@ public class Store extends ByteCode {
 	public boolean execute(CPU cpu) {
 		int valor = cpu.pop();
 		return cpu.store(this.posicion, valor);
+
 	}
 
 	@Override
@@ -44,7 +45,7 @@ public class Store extends ByteCode {
 
 	@Override
 	public String toString() {
-		return "PUSH " + this.posicion + System.getProperty("line.separator");
+		return "STORE " + this.posicion + System.getProperty("line.separator");
 	}
 
 }

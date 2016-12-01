@@ -88,6 +88,8 @@ public class Engine {
 				resultado = false;
 		}
 
+		if (resultado)
+			System.out.println(this.byteCodeProgram.toString() + System.getProperty("line.separator"));
 		return resultado;
 	}
 
@@ -116,7 +118,7 @@ public class Engine {
 	public boolean executeReplace(int position) {
 		System.out.print("Nueva instruccion: ");
 		String line = scanner.nextLine();
-		ByteCode bc = ByteCodeParser.parse("newinst " + line);
+		ByteCode bc = ByteCodeParser.parse(line);
 		if (bc != null) {
 			byteCodeProgram.replace(position, bc);
 			System.out.println(byteCodeProgram.toString() + System.getProperty("line.separator"));

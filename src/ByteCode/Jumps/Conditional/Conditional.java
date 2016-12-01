@@ -37,15 +37,10 @@ public abstract class Conditional extends Jumps {
 		if (cpu.getStackLength() >= 2) {
 			this.cima = cpu.pop();
 			this.subCima = cpu.pop();
-			cpu.push(subCima);
-			cpu.push(cima);
 			if (compare())
-				cpu.setProgramCounter(posicion);
-			else
-				cpu.avanzaPc();
+				cpu.setProgramCounter(posicion - 1);
 			return true;
 		}
-
 		return false;
 	}
 
