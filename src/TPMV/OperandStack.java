@@ -44,9 +44,10 @@ public class OperandStack {
 	 * @return valor en la cima de la pila.
 	 */
 	public int pop() {
+		int valor = 0;
 		if (this.contador > 0)
-			return this.stack[--this.contador];
-		return 0;
+			valor = this.stack[--this.contador];
+		return valor;
 	}
 
 	/**
@@ -72,10 +73,10 @@ public class OperandStack {
 	}
 
 	public String toString() {
-		if (this.stack.length == 0) {
-			return "<vacia>";
+		String resultado = "Pila: ";
+		if (this.contador == 0) {
+			return resultado += "<vacia>";
 		} else {
-			String resultado = "Pila: ";
 			for (int i = 0; i < this.contador; i++) {
 				resultado += this.stack[i] + " ";
 			}

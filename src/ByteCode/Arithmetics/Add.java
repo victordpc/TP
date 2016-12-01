@@ -29,7 +29,7 @@ public class Add extends Arithmetics {
 
 	@Override
 	protected boolean operar(CPU cpu) {
-		return cpu.push(this.cima + this.subCima);
+		return cpu.push(this.subCima + this.cima);
 	}
 
 	@Override

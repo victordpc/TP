@@ -135,6 +135,7 @@ public class CPU {
 		while (correcto && !halt) {
 			ByteCode instrucion = this.bcProgram.getProgram(programCounter);
 			correcto = instrucion.execute(this);
+			this.avanzaPc();
 		}
 
 		return correcto;

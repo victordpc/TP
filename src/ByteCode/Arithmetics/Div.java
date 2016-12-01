@@ -30,7 +30,7 @@ public class Div extends Arithmetics {
 	@Override
 	protected boolean operar(CPU cpu) {
 		if (this.subCima != 0) {
-			return cpu.push(this.cima / this.subCima);
+			return cpu.push(this.subCima / this.cima);
 		}
 		return false;
 	}

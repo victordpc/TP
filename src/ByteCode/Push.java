@@ -29,11 +29,7 @@ public class Push extends ByteCode {
 
 	@Override
 	public boolean execute(CPU cpu) {
-		if (cpu.push(this.valor)) {
-			cpu.avanzaPc();
-			return true;
-		}
-		return false;
+		return cpu.push(this.valor);
 	}
 
 	@Override
