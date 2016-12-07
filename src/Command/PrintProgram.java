@@ -30,7 +30,7 @@ public class PrintProgram extends Command {
 
 	@Override
 	public String textHelp() {
-		return "    PrintProgram: Escribre el programa actual" + System.getProperty("line.separator");
+		return "    PRINTPROGRAM: Escribre el programa actual" + System.getProperty("line.separator");
 	}
 
 	public String toString() {

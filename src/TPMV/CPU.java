@@ -51,7 +51,6 @@ public class CPU {
 	public boolean halt() {
 		this.halt = true;
 		return true;
-
 	}
 
 	/**

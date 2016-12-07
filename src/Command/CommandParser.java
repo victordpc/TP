@@ -5,7 +5,7 @@ package Command;
  */
 public class CommandParser {
 	private final static Command[] commands = { new Help(), new Quit(), new Reset(), new Replace(), new Run(),
-			new AddByteCodeProgram() };
+			new AddByteCodeProgram() ,new PrintProgram()};
 
 	/**
 	 * Convierte un texto a un objeto de tipo {@code Command}.
