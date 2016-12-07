@@ -133,6 +133,7 @@ public class Engine {
 	 */
 	public boolean executeReset() {
 		this.byteCodeProgram.reset();
+		System.out.println("RESET ejecutado");
 		return true;
 	}
 
@@ -170,6 +171,7 @@ public class Engine {
 	 */
 	public boolean printProgram() {
 		System.out.println(this.byteCodeProgram.toString());
+		System.out.println("Fin del programa.");
 		return true;
 	}
 }
