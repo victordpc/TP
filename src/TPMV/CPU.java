@@ -84,7 +84,6 @@ public class CPU {
 			System.out.println("El ultimo valor en la pila es: " + valorPila + System.getProperty("line.separator"));
 		else
 			System.out.println("La pila no contiene valores");
-		this.programCounter++;
 		return true;
 	}
 

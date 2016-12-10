@@ -33,6 +33,7 @@ public class Help extends Command {
 		return "    HELP: Muestra esta ayuda " + System.getProperty("line.separator");
 	}
 
+	@Override
 	public String toString() {
 		return "HELP" + System.getProperty("line.separator");
 	}

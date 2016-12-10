@@ -25,6 +25,7 @@ public class Replace extends Command {
 	 *            número de instrucción para cambiar
 	 */
 	public Replace(int posicion) {
+		super();
 		this.position = posicion;
 	}
 
