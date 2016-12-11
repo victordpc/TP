@@ -33,6 +33,7 @@ public class Run extends Command {
 		return "    RUN: Ejecuta el programa " + System.getProperty("line.separator");
 	}
 
+	@Override
 	public String toString() {
 		return "RUN" + System.getProperty("line.separator");
 	}

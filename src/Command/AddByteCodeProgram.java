@@ -18,7 +18,7 @@ public class AddByteCodeProgram extends Command {
 
 	@Override
 	public boolean execute(Engine engine) {
-		boolean resultado= engine.executeAddByteCodeProgram();
+		boolean resultado = engine.readByteCodeProgram();
 		System.out.println("Fin introducción de instrucciones ByteCode.");
 		return resultado;
 	}
@@ -36,6 +36,7 @@ public class AddByteCodeProgram extends Command {
 				+ System.getProperty("line.separator");
 	}
 
+	@Override
 	public String toString() {
 		return "ByteCode" + System.getProperty("line.separator");
 	}

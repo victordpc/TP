@@ -52,6 +52,7 @@ public class Replace extends Command {
 				+ System.getProperty("line.separator");
 	}
 
+	@Override
 	public String toString() {
 		return "REPLACE " + this.position + System.getProperty("line.separator");
 	}

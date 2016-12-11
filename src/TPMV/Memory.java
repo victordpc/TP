@@ -37,6 +37,7 @@ public class Memory {
 		this.memory = new Integer[REDIM_SIZE];
 	}
 
+	@Override
 	public String toString() {
 		String resultado = "Memoria: ";
 		boolean isEmpty = true;

@@ -28,6 +28,7 @@ public class Halt extends ByteCode {
 		return null;
 	}
 
+	@Override
 	public String toString() {
 		return "HALT" + System.getProperty("line.separator");
 	}

@@ -34,6 +34,7 @@ public class Reset extends Command {
 		return "    RESET: Vacia el programa actual " + System.getProperty("line.separator");
 	}
 
+	@Override
 	public String toString() {
 		return "RESET" + System.getProperty("line.separator");
 	}

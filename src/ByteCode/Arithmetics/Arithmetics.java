@@ -18,6 +18,7 @@ public abstract class Arithmetics extends ByteCode {
 		super();
 	}
 
+	@Override
 	public boolean execute(CPU cpu) {
 		if (cpu.getStackLength() >= 2) {
 			this.cima = cpu.pop();

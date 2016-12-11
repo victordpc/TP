@@ -72,6 +72,7 @@ public class OperandStack {
 		this.contador = 0;
 	}
 
+	@Override
 	public String toString() {
 		String resultado = "Pila: ";
 		if (this.contador == 0) {
