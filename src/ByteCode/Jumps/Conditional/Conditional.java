@@ -33,6 +33,7 @@ public abstract class Conditional extends Jumps {
 	 */
 	public abstract boolean compare();
 
+	@Override
 	public boolean execute(CPU cpu) {
 		if (cpu.getStackLength() >= 2) {
 			this.cima = cpu.pop();

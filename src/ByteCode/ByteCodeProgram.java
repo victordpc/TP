@@ -59,9 +59,14 @@ public class ByteCodeProgram {
 	 *            índice del array en el que queremos sustituir su valor.
 	 * @param newInstruction
 	 *            instruccion que queremos insertar.
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
-	public void replace(int position, ByteCode newInstruction) {
-		this.program[position] = newInstruction;
+	public boolean replace(int position, ByteCode newInstruction) {
+		if (position < nextProgramPosition) {
+			this.program[position] = newInstruction;
+			return true;
+		} else
+			return false;
 	}
 
 	/**
@@ -72,6 +77,7 @@ public class ByteCodeProgram {
 		this.nextProgramPosition = 0;
 	}
 
+	@Override
 	public String toString() {
 		String objectInfo = "";
 		if (nextProgramPosition > 0) {

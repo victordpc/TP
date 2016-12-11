@@ -62,37 +62,6 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando {@code AddByteCodeProgram} para agregar operaciones al
-	 * programa
-	 * 
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
-	 */
-	public boolean executeAddByteCodeProgram() {
-		String instructionString = "";
-		ByteCode instruction = null;
-
-		if (this.byteCodeProgram.getLength() > 0)
-			System.out.println(this.byteCodeProgram.toString());
-
-		System.out.println("Introduzca las instrucciones: ");
-		instructionString = this.scanner.nextLine();
-
-		while (!instructionString.equalsIgnoreCase("END")) {
-			instruction = ByteCodeParser.parse(instructionString);
-
-			if (instruction != null)
-				this.byteCodeProgram.addByteCode(instruction);
-			else
-				System.err.println("ByteCode incorrecto, vuelva a introducirlo");
-
-			instructionString = this.scanner.nextLine();
-		}
-
-		System.out.println(this.byteCodeProgram.toString() + System.getProperty("line.separator"));
-		return true;
-	}
-
-	/**
 	 * Ejecuta el comando {@code QUIT} finalizando la ejecución.
 	 * 
 	 * @return {@code true} exito de la operacion, {@code false} en otro caso
@@ -115,13 +84,14 @@ public class Engine {
 	 * @return {@code true} exito de la operacion, {@code false} en otro caso
 	 */
 	public boolean executeReplace(int position) {
-		System.out.print("Nueva instruccion: ");
-		String line = scanner.nextLine();
-		ByteCode bc = ByteCodeParser.parse(line);
-		if (bc != null) {
-			byteCodeProgram.replace(position, bc);
-			System.out.println(byteCodeProgram.toString() + System.getProperty("line.separator"));
-			return true;
+		if (position < byteCodeProgram.getLength()) {
+			System.out.print("Nueva instruccion: ");
+			String line = scanner.nextLine();
+			ByteCode bc = ByteCodeParser.parse(line);
+			if (bc != null && byteCodeProgram.replace(position, bc)) {
+				System.out.println(byteCodeProgram.toString() + System.getProperty("line.separator"));
+				return true;
+			}
 		}
 		return false;
 	}
@@ -134,6 +104,46 @@ public class Engine {
 	public boolean executeReset() {
 		this.byteCodeProgram.reset();
 		System.out.println("RESET ejecutado");
+		return true;
+	}
+
+	/**
+	 * Escribe por pantalla el programa almacenado
+	 * 
+	 * @return {@code true} en todo caso.
+	 */
+	public boolean printProgram() {
+		System.out.println(this.byteCodeProgram.toString());
+		System.out.println("Fin del programa.");
+		return true;
+	}
+
+	/**
+	 * Ejecuta el comando {@code ByteCode} para agregar operaciones al programa
+	 * 
+	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 */
+	public boolean readByteCodeProgram() {
+		String instructionString = "";
+		ByteCode instruction = null;
+
+		this.byteCodeProgram.reset();
+
+		System.out.println("Introduzca las instrucciones: ");
+		instructionString = this.scanner.nextLine();
+
+		while (!instructionString.equalsIgnoreCase("END")) {
+			instruction = ByteCodeParser.parse(instructionString);
+
+			if (instruction != null)
+				this.byteCodeProgram.addByteCode(instruction);
+			else
+				System.err.println("ByteCode incorrecto, vuelva a introducirlo");
+
+			instructionString = this.scanner.nextLine();
+		}
+
+		System.out.println(this.byteCodeProgram.toString() + System.getProperty("line.separator"));
 		return true;
 	}
 
@@ -162,16 +172,5 @@ public class Engine {
 			}
 		}
 		System.out.print(System.getProperty("line.separator"));
-	}
-
-	/**
-	 * Escribe por pantalla el programa almacenado
-	 * 
-	 * @return {@code true} en todo caso.
-	 */
-	public boolean printProgram() {
-		System.out.println(this.byteCodeProgram.toString());
-		System.out.println("Fin del programa.");
-		return true;
 	}
 }

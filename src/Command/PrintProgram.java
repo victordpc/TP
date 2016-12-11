@@ -2,7 +2,9 @@ package Command;
 
 import TPMV.Engine;
 
-/**Clase que representa el comando {@code PrintProgram}
+/**
+ * Clase que representa el comando {@code PrintProgram}
+ * 
  * @author victor
  *
  */
@@ -26,13 +28,14 @@ public class PrintProgram extends Command {
 		if (s.length == 1 && s[0].equalsIgnoreCase("PrintProgram"))
 			return new PrintProgram();
 		return null;
-		}
+	}
 
 	@Override
 	public String textHelp() {
 		return "    PRINTPROGRAM: Escribre el programa actual" + System.getProperty("line.separator");
 	}
 
+	@Override
 	public String toString() {
 		return "PrintProgram" + System.getProperty("line.separator");
 	}

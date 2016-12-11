@@ -30,7 +30,7 @@ public class GoTo extends Jumps {
 
 	@Override
 	public boolean execute(CPU cpu) {
-		return cpu.setProgramCounter(this.posicion-1);
+		return cpu.setProgramCounter(this.posicion - 1);
 	}
 
 	@Override

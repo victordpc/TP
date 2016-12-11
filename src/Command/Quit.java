@@ -33,6 +33,7 @@ public class Quit extends Command {
 		return "    QUIT: Cierra la aplicacion " + System.getProperty("line.separator");
 	}
 
+	@Override
 	public String toString() {
 		return "QUIT" + System.getProperty("line.separator");
 	}
