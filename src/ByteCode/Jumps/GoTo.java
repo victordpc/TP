@@ -4,7 +4,7 @@ import ByteCode.ByteCode;
 import TPMV.CPU;
 
 /**
- * Clase que representa la instrución {@code GOTO}, salto incondicional a la
+ * Clase que representa la instrución <code>GOTO</code>, salto incondicional a la
  * dirección del programa indicado
  * 
  * @author victor

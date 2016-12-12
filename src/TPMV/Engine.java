@@ -15,10 +15,11 @@ import Command.CommandParser;
 public class Engine {
 
 	/**
-	 * Ejecuta el comando {@code HELP}, mostrando por pantalla la información de
-	 * los posibles comandos que puede introducir el usuario.
+	 * Ejecuta el comando <code>HELP</code>, mostrando por pantalla la
+	 * información de los posibles comandos que puede introducir el usuario.
 	 * 
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	static public boolean executeHelp() {
 		CommandParser.showHelp();
@@ -40,10 +41,11 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando {@code RUN}, reinicia la CPU y recorre el programa
-	 * efectuando las operaciones.
+	 * Ejecuta el comando <code>RUN</code>, reinicia la CPU y recorre el
+	 * programa efectuando las operaciones.
 	 * 
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	public boolean excuteCommandRun() {
 		boolean resultado = true;
@@ -62,9 +64,10 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando {@code QUIT} finalizando la ejecución.
+	 * Ejecuta el comando <code>QUIT</code> finalizando la ejecución.
 	 * 
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	public boolean executeQuit() {
 		this.end = true;
@@ -75,13 +78,15 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando {@code REPLACE}, sustituyendo el valor del programa en
-	 * el indice indicado como parametro por una nueva instruccion que se pide
-	 * al usuario.
+	 * Ejecuta el comando <code>REPLACE</code>, sustituyendo el valor del
+	 * programa en el indice indicado como parametro por una nueva instruccion
+	 * que se pide al usuario.
 	 * 
 	 * @param position
 	 *            índice en el cual se efectua el remplazo.
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 * 
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	public boolean executeReplace(int position) {
 		if (position < byteCodeProgram.getLength()) {
@@ -97,9 +102,10 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando {@code RESET}, reiniciando el programa.
+	 * Ejecuta el comando <code>RESET</code>, reiniciando el programa.
 	 * 
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	public boolean executeReset() {
 		this.byteCodeProgram.reset();
@@ -110,7 +116,7 @@ public class Engine {
 	/**
 	 * Escribe por pantalla el programa almacenado
 	 * 
-	 * @return {@code true} en todo caso.
+	 * @return <code>true</code> en todo caso.
 	 */
 	public boolean printProgram() {
 		System.out.println(this.byteCodeProgram.toString());
@@ -119,9 +125,11 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando {@code ByteCode} para agregar operaciones al programa
+	 * Ejecuta el comando <code>ByteCode</code> para agregar operaciones al
+	 * programa
 	 * 
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	public boolean readByteCodeProgram() {
 		String instructionString = "";

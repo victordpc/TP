@@ -3,7 +3,7 @@ package Command;
 import TPMV.Engine;
 
 /**
- * Clase que representa el comando {@code RESET}
+ * Clase que representa el comando <code>RESET</code>
  * 
  * @author victor
  *

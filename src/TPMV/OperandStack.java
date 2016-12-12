@@ -55,7 +55,9 @@ public class OperandStack {
 	 * 
 	 * @param operando
 	 *            valor que introduce
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 * 
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	public boolean push(int operando) {
 		if (this.contador < this.stack.length) {

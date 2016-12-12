@@ -43,10 +43,11 @@ public class CPU {
 	}
 
 	/**
-	 * Ejecuta el {@code ByteCode} {@code HALT}, para la ejecuciÃ³n del
+	 * Ejecuta el <code>ByteCode</code> <code>HALT</code>, para la ejecución del
 	 * programa.
 	 * 
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	public boolean halt() {
 		this.halt = true;
@@ -67,6 +68,7 @@ public class CPU {
 	 * 
 	 * @param posicion
 	 *            dirección de memoria en la que se lee.
+	 *            
 	 * @return valor almacenado en la dirección de memoria indicada
 	 */
 	public int load(int posicion) {
@@ -74,9 +76,11 @@ public class CPU {
 	}
 
 	/**
-	 * Ejecuta el {@code ByteCode} {@code OUT}, muestra la cima de la pila.
+	 * Ejecuta el <code>ByteCode</code> <code>OUT</code>, muestra la cima de la
+	 * pila.
 	 * 
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	public boolean out() {
 		Integer valorPila = this.stack.getLastPosition();
@@ -101,7 +105,9 @@ public class CPU {
 	 * 
 	 * @param valor
 	 *            valor a introducir en la pila.
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 *            
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	public boolean push(int valor) {
 		return this.stack.push(valor);
@@ -118,12 +124,13 @@ public class CPU {
 	}
 
 	/**
-	 * Ejecutar el programa byte- code completo.
+	 * Ejecutar el programa <code>ByteCode</code> completo.
 	 * 
 	 * @param bcProgram
 	 *            programa a ejecutar.
 	 * 
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	public boolean run(ByteCodeProgram bcProgram) {
 		boolean correcto = true;
@@ -144,7 +151,9 @@ public class CPU {
 	 * 
 	 * @param programCounter
 	 *            direccion del programa a la que saltar
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 *            
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	public boolean setProgramCounter(int programCounter) {
 		if (programCounter >= 0 && programCounter < bcProgram.getLength()) {
@@ -162,8 +171,10 @@ public class CPU {
 	 *            valor que se introduce en memoria
 	 * 
 	 * @param posicion
-	 *            direcciÃ³n de memoria en la que se guarda.
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 *            dirección de memoria en la que se guarda.
+	 * 
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	public boolean store(int posicion, int valor) {
 		return this.memory.write(posicion, valor);
