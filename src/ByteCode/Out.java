@@ -3,7 +3,7 @@ package ByteCode;
 import TPMV.CPU;
 
 /**
- * Clase que representa la instrución {@code OUT}
+ * Clase que representa la instrución <code>OUT</code>
  * 
  * @author victor
  */

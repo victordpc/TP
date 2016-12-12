@@ -3,7 +3,7 @@ package Command;
 import TPMV.Engine;
 
 /**
- * Representa el comando {@code Quit}
+ * Representa el comando <code>QUIT</code>
  * 
  * @author victor
  */
