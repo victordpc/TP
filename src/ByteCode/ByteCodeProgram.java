@@ -49,6 +49,8 @@ public class ByteCodeProgram {
 	 * @return valor almacenado.
 	 */
 	public ByteCode getProgram(int posicion) {
+		if (posicion >= this.nextProgramPosition)
+			return null;
 		return this.program[posicion];
 	}
 

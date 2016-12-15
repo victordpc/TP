@@ -68,7 +68,7 @@ public class CPU {
 	 * 
 	 * @param posicion
 	 *            dirección de memoria en la que se lee.
-	 *            
+	 * 
 	 * @return valor almacenado en la dirección de memoria indicada
 	 */
 	public int load(int posicion) {
@@ -105,7 +105,7 @@ public class CPU {
 	 * 
 	 * @param valor
 	 *            valor a introducir en la pila.
-	 *            
+	 * 
 	 * @return <code>true</code> exito de la operacion, <code>false</code> en
 	 *         otro caso
 	 */
@@ -139,7 +139,10 @@ public class CPU {
 
 		while (correcto && !halt) {
 			ByteCode instrucion = this.bcProgram.getProgram(programCounter);
-			correcto = instrucion.execute(this);
+			if (instrucion != null)
+				correcto = instrucion.execute(this);
+			else
+				correcto = false;
 			this.avanzaPc();
 		}
 
@@ -151,7 +154,7 @@ public class CPU {
 	 * 
 	 * @param programCounter
 	 *            direccion del programa a la que saltar
-	 *            
+	 * 
 	 * @return <code>true</code> exito de la operacion, <code>false</code> en
 	 *         otro caso
 	 */
