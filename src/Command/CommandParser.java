@@ -8,12 +8,12 @@ public class CommandParser {
 			new AddByteCodeProgram(), new PrintProgram() };
 
 	/**
-	 * Convierte un texto a un objeto de tipo {@code Command}.
+	 * Convierte un texto a un objeto de tipo <code>Command</code>.
 	 * 
 	 * @param linea
 	 *            cadena de texto
-	 * @return {@code Command} correspondiente al texto, si es incorrecto
-	 *         devuelve {@code null}
+	 * @return <code>Command</code> correspondiente al texto, si es incorrecto
+	 *         devuelve <code>null</code>
 	 */
 	public static Command parse(String linea) {
 		String[] instructionArray = linea.split(" ");

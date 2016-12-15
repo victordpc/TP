@@ -3,7 +3,7 @@ package ByteCode.Jumps.Conditional;
 import ByteCode.ByteCode;
 
 /**
- * Clase que representa la instrución {@code IFEQ}, salto a la direción del
+ * Clase que representa la instrución <code>IFEQ</code>, salto a la direción del
  * programa indicado si los operadores son iguales
  * 
  * @author victor

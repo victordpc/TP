@@ -3,7 +3,7 @@ package Command;
 import TPMV.Engine;
 
 /**
- * Clase que representa el comando {@code AddByteCodeProgram}
+ * Clase que representa el comando <code>AddByteCodeProgram</code>
  * 
  * @author victor
  */

@@ -20,6 +20,7 @@ public class Memory {
 	 * 
 	 * @param pos
 	 *            dirección de memoria en la que se lee.
+	 * 
 	 * @return valor almacenado en la dirección de memoria indicada
 	 */
 	public int read(int pos) {
@@ -62,9 +63,12 @@ public class Memory {
 	 * 
 	 * @param pos
 	 *            direccion en la que se escribe.
+	 * 
 	 * @param value
 	 *            valor a almacenar
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 * 
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	public boolean write(int pos, int value) {
 		boolean result = false;
@@ -78,6 +82,14 @@ public class Memory {
 		return result;
 	}
 
+	/**
+	 * Redimensiona la memoria
+	 * 
+	 * @param pos
+	 *            tamaño objetivo de la memoria, para redimensionar se aplica la
+	 *            formula: (tamaño final) = [ pos / (tamaño inicial) ] * (tamaño
+	 *            inicial)
+	 */
 	private void resize(int pos) {
 		int newSize = ((pos / REDIM_SIZE) + 1) * REDIM_SIZE;
 		Integer auxiliar[] = new Integer[newSize];

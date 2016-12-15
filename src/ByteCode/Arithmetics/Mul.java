@@ -4,7 +4,7 @@ import ByteCode.ByteCode;
 import TPMV.CPU;
 
 /**
- * Clase que representa la instrución {@code MUL}
+ * Clase que representa la instrución <code>MUL</code>
  * 
  * @author victor
  */

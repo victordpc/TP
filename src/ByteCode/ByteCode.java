@@ -8,83 +8,25 @@ import TPMV.CPU;
 public abstract class ByteCode {
 
 	/**
-	 * Ejecuta el {@code ByteCode}
+	 * Ejecuta el <code>ByteCode</code>
 	 * 
 	 * @param cpu
-	 *            instancia en la que se ejecuta el {@code ByteCode}
+	 *            instancia en la que se ejecuta el <code>ByteCode</code>
 	 * 
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en otro caso
 	 */
 	abstract public boolean execute(CPU cpu);
 
 	/**
-	 * Convierte un texto a un objeto de tipo {@code ByteCode}.
+	 * Convierte un texto a un objeto de tipo <code>ByteCode</code>.
 	 * 
 	 * @param s
 	 *            cadena de texto.
-	 * @return {@code ByteCode} correspondiente al texto, si es incorrecto
-	 *         devuelve {@code null}.
+	 * @return <code>ByteCode</code> correspondiente al texto, si es incorrecto
+	 *         devuelve <code>null</code>.
 	 */
 	abstract public ByteCode parse(String[] s);
 
 	@Override
 	abstract public String toString();
 }
-
-// public class ByteCode {
-//
-// ENUM_BYTECODE name;
-// private int param; // PUSH, STORE, LOAD
-//
-// /**
-// * Constructor de la clase
-// *
-// * @param name
-// * nombre del enumerado {@code ENUM_BYTECODE} que identifica que
-// * {@code ByteCode} estamos creando.
-// * @param parametro
-// * entero necesario para las instrucciones {@code PUSH},
-// * {@code STORE}, {@code LOAD}.
-// */
-// public ByteCode(ENUM_BYTECODE name, int parametro) {
-// this.name = name;
-// this.param = parametro;
-// }
-//
-// /**
-// * Constructor de la clase
-// *
-// * @param name
-// * nombre del enumerado {@code ENUM_BYTECODE} que identifica que
-// * {@code ByteCode} estamos creando.
-// */
-// public ByteCode(ENUM_BYTECODE name) {
-// this.name = name;
-// }
-//
-// /**
-// * @return valor del atributo name
-// */
-// public ENUM_BYTECODE getName() {
-// return this.name;
-// }
-//
-// /**
-// * @return valor del atributo param
-// */
-// public int getParam() {
-// return this.param;
-// }
-//
-// @Override
-// public String toString() {
-// switch (this.name) {
-// case PUSH:
-// case LOAD:
-// case STORE:
-// return this.name + " " + this.param;
-// default:
-// return this.name.toString();
-// }
-// }
-// }

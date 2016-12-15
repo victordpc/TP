@@ -42,7 +42,7 @@ public abstract class Arithmetics extends ByteCode {
 	 * 
 	 * @param operador
 	 *            texto del operador
-	 * @return {@code true} si es un operador aritmetico, {@code false} en otro
+	 * @return <code>true</code> si es un operador aritmetico, <code>false</code> en otro
 	 *         caso
 	 */
 	protected abstract boolean operador(String operador);
@@ -52,8 +52,8 @@ public abstract class Arithmetics extends ByteCode {
 	/**
 	 * Realiza el parseo específico del salto
 	 * 
-	 * @return {@code ByteCode} correspondiente a la operación, si es incorrecto
-	 *         devuelve {@code null}.
+	 * @return <code>ByteCode</code> correspondiente a la operación, si es incorrecto
+	 *         devuelve <code>null</code>.
 	 */
 	protected abstract ByteCode parseAux();
 }

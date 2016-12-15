@@ -3,7 +3,7 @@ package Command;
 import TPMV.Engine;
 
 /**
- * Clase que representa el comando {@code RUN}
+ * Clase que representa el comando <code>RUN</code>
  * 
  * @author victor
  */

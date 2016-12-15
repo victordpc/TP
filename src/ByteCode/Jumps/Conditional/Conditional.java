@@ -20,7 +20,7 @@ public abstract class Conditional extends Jumps {
 	 * Constructor de la clase
 	 * 
 	 * @param valor
-	 *            posicion del programa a donde salta si se cumple la condiciÃ³n
+	 *            posicion del programa a donde salta si se cumple la condición
 	 */
 	public Conditional(int valor) {
 		super(valor);
@@ -29,7 +29,7 @@ public abstract class Conditional extends Jumps {
 	/**
 	 * Función de comparación del salto
 	 * 
-	 * @return {@code true} si hay que saltar, {@code false} en otro caso.
+	 * @return <code>true</code> si hay que saltar, <code>false</code> en otro caso.
 	 */
 	public abstract boolean compare();
 
