@@ -19,7 +19,7 @@ public abstract class Jumps extends ByteCode {
 	 * Constructor de la clase
 	 * 
 	 * @param valor
-	 *            posicion del programa a donde salta si se cumple la condiciÃ³n
+	 *            posicion del programa a donde salta si se cumple la condición
 	 */
 	public Jumps(int valor) {
 		this.posicion = valor;
@@ -39,7 +39,7 @@ public abstract class Jumps extends ByteCode {
 	 * 
 	 * @param operador
 	 *            texto del operador
-	 * @return {@code true} si es un operador de salto, {@code false} en otro
+	 * @return <code>true</code> si es un operador de salto, <code>false</code> en otro
 	 *         caso
 	 */
 	protected abstract boolean operador(String operador);
@@ -48,9 +48,9 @@ public abstract class Jumps extends ByteCode {
 	 * Realiza el parseo específico del salto
 	 * 
 	 * @param val
-	 *            posicion del programa a donde salta si se cumple la condiciÃ³n
-	 * @return {@code ByteCode} correspondiente al salto, si es incorrecto
-	 *         devuelve {@code null}.
+	 *            posicion del programa a donde salta si se cumple la condición
+	 * @return <code>ByteCode</code> correspondiente al salto, si es incorrecto
+	 *         devuelve <code>null</code>.
 	 */
 	protected abstract ByteCode parseAux(int val);
 

@@ -17,11 +17,11 @@ public class ByteCodeProgram {
 	}
 
 	/**
-	 * Añade un elemento de tipo ByteCode en la última posición del programa.
+	 * Añade un elemento de tipo <code>ByteCode</code> en la última posición del programa.
 	 * 
 	 * @param byteCode
-	 *            {@code ByteCode} que añadimos.
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 *            <code>ByteCode</code> que añadimos.
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en otro caso
 	 */
 	public boolean addByteCode(ByteCode byteCode) {
 		if (this.nextProgramPosition < EXTEND_VALUE) {
@@ -41,7 +41,7 @@ public class ByteCodeProgram {
 	}
 
 	/**
-	 * Obtiene el objeto de tipo ByteCode almacenado en el programa en la
+	 * Obtiene el objeto de tipo <code>ByteCode</code> almacenado en el programa en la
 	 * posición indicada.
 	 * 
 	 * @param posicion
@@ -49,6 +49,8 @@ public class ByteCodeProgram {
 	 * @return valor almacenado.
 	 */
 	public ByteCode getProgram(int posicion) {
+		if (posicion >= this.nextProgramPosition)
+			return null;
 		return this.program[posicion];
 	}
 
@@ -59,7 +61,7 @@ public class ByteCodeProgram {
 	 *            índice del array en el que queremos sustituir su valor.
 	 * @param newInstruction
 	 *            instruccion que queremos insertar.
-	 * @return {@code true} exito de la operacion, {@code false} en otro caso
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en otro caso
 	 */
 	public boolean replace(int position, ByteCode newInstruction) {
 		if (position < nextProgramPosition) {
