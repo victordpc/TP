@@ -1,4 +1,4 @@
-package ByteCode;
+package bytecode;
 
 /**
  * Clase para almacenar programas.
@@ -6,8 +6,8 @@ package ByteCode;
 public class ByteCodeProgram {
 
 	private static final int EXTEND_VALUE = 1000;
-	private final ByteCode[] program;
 	private int nextProgramPosition = 0;
+	private final ByteCode[] program;
 
 	/**
 	 * Constructor de la clase
@@ -17,11 +17,14 @@ public class ByteCodeProgram {
 	}
 
 	/**
-	 * Añade un elemento de tipo <code>ByteCode</code> en la última posición del programa.
+	 * Añade un elemento de tipo <code>ByteCode</code> en la última posición del
+	 * programa.
 	 * 
 	 * @param byteCode
 	 *            <code>ByteCode</code> que añadimos.
-	 * @return <code>true</code> exito de la operacion, <code>false</code> en otro caso
+	 * 
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	public boolean addByteCode(ByteCode byteCode) {
 		if (this.nextProgramPosition < EXTEND_VALUE) {
@@ -41,11 +44,12 @@ public class ByteCodeProgram {
 	}
 
 	/**
-	 * Obtiene el objeto de tipo <code>ByteCode</code> almacenado en el programa en la
-	 * posición indicada.
+	 * Obtiene el objeto de tipo <code>ByteCode</code> almacenado en el programa
+	 * en la posición indicada.
 	 * 
 	 * @param posicion
 	 *            índice que queremos recuperar
+	 * 
 	 * @return valor almacenado.
 	 */
 	public ByteCode getProgram(int posicion) {
@@ -61,7 +65,9 @@ public class ByteCodeProgram {
 	 *            índice del array en el que queremos sustituir su valor.
 	 * @param newInstruction
 	 *            instruccion que queremos insertar.
-	 * @return <code>true</code> exito de la operacion, <code>false</code> en otro caso
+	 * 
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	public boolean replace(int position, ByteCode newInstruction) {
 		if (position < nextProgramPosition) {

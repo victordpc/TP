@@ -1,13 +1,13 @@
-package ByteCode;
+package bytecode.oneparameter;
 
-import TPMV.CPU;
+import bytecode.ByteCode;
+import tpmv.CPU;
 
 /**
  * Clase que representa la instrución <code>LOAD</code>
  * 
- * @author victor
  */
-public class Load extends ByteCode {
+public class Load extends OneParameter {
 	private int posicion;
 
 	/**
@@ -34,17 +34,17 @@ public class Load extends ByteCode {
 	}
 
 	@Override
-	public ByteCode parse(String[] s) {
-		if (s.length == 2 && s[0].equalsIgnoreCase("Load")) {
-			int val = Integer.parseInt(s[1]);
-			return new Load(val);
-		}
-		return null;
+	public String toString() {
+		return "LOAD " + this.posicion + System.getProperty("line.separator");
 	}
 
 	@Override
-	public String toString() {
-		return "LOAD " + this.posicion + System.getProperty("line.separator");
+	protected ByteCode parseAux(String com, String par) {
+		if (com.compareToIgnoreCase("LOAD") == 0) {
+			int val = Integer.parseInt(par);
+			return new Load(val);
+		}
+		return null;
 	}
 
 }

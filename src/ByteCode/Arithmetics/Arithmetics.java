@@ -1,15 +1,13 @@
-package ByteCode.Arithmetics;
+package bytecode.arithmetics;
 
-import ByteCode.ByteCode;
-import TPMV.CPU;
+import bytecode.ByteCode;
+import tpmv.CPU;
 
 /**
- * @author victor
- *
+ * Clase abstracta que representa a los ByteCodes aritméticos
+ * 
  */
 public abstract class Arithmetics extends ByteCode {
-	protected int cima;
-	protected int subCima;
 
 	/**
 	 * Constructor de la clase
@@ -21,39 +19,41 @@ public abstract class Arithmetics extends ByteCode {
 	@Override
 	public boolean execute(CPU cpu) {
 		if (cpu.getStackLength() >= 2) {
-			this.cima = cpu.pop();
-			this.subCima = cpu.pop();
-
-			return operar(cpu);
+			int c = cpu.pop();
+			int sc = cpu.pop();
+			return executeAux(cpu, c, sc);
 		}
 		return false;
 	}
 
 	@Override
 	public ByteCode parse(String[] s) {
-		if (s.length == 1 && operador(s[0])) {
-			return parseAux();
-		}
-		return null;
+		if (s.length != 1)
+			return null;
+		return parseAux(s[0]);
 	}
 
 	/**
-	 * Comprueba si el texto es un operador aritmetico válido
+	 * Realiza la ejecución del comando
 	 * 
-	 * @param operador
-	 *            texto del operador
-	 * @return <code>true</code> si es un operador aritmetico, <code>false</code> en otro
-	 *         caso
+	 * @param cpu
+	 *            objeto en el que se ejecuta el comando
+	 * @param par1
+	 *            primer valor de la operación
+	 * @param par2
+	 *            segundo valor de la operación
+	 * @return <code>true</code> si se ha efectuado correctamente la operación,
+	 *         <code>false</code> en otro caso
 	 */
-	protected abstract boolean operador(String operador);
-
-	protected abstract boolean operar(CPU cpu);
+	protected abstract boolean executeAux(CPU cpu, int par1, int par2);
 
 	/**
-	 * Realiza el parseo específico del salto
+	 * Realiza el parseo específico del comando
 	 * 
-	 * @return <code>ByteCode</code> correspondiente a la operación, si es incorrecto
-	 *         devuelve <code>null</code>.
+	 * @param com
+	 *            cadena de texto que representa el comando
+	 * @return <code>ByteCode</code> correspondiente a la operación, si es
+	 *         incorrecto devuelve <code>null</code>.
 	 */
-	protected abstract ByteCode parseAux();
+	protected abstract ByteCode parseAux(String com);
 }
