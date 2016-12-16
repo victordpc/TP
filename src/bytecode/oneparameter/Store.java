@@ -1,13 +1,13 @@
-package ByteCode;
+package bytecode.oneparameter;
 
-import TPMV.CPU;
+import bytecode.ByteCode;
+import tpmv.CPU;
 
 /**
  * Clase que representa la instrución <code>STORE</code>
  * 
- * @author victor
  */
-public class Store extends ByteCode {
+public class Store extends OneParameter {
 	private int posicion;
 
 	/**
@@ -35,17 +35,17 @@ public class Store extends ByteCode {
 	}
 
 	@Override
-	public ByteCode parse(String[] s) {
-		if (s.length == 2 && s[0].equalsIgnoreCase("Store")) {
-			int val = Integer.parseInt(s[1]);
-			return new Store(val);
-		}
-		return null;
+	public String toString() {
+		return "STORE " + this.posicion + System.getProperty("line.separator");
 	}
 
 	@Override
-	public String toString() {
-		return "STORE " + this.posicion + System.getProperty("line.separator");
+	protected ByteCode parseAux(String com, String par) {
+		if (com.compareToIgnoreCase("STORE") == 0) {
+			int val = Integer.parseInt(par);
+			return new Store(val);
+		}
+		return null;
 	}
 
 }

@@ -1,12 +1,12 @@
-package TPMV;
+package tpmv;
 
 /**
  * Clase que representa una pila de valores enteros.
  */
 public class OperandStack {
 
-	private int stack[];
 	private int contador;
+	private int stack[];
 	private int STACK_SIZE = 1000;
 
 	/**

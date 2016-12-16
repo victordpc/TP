@@ -1,12 +1,12 @@
-package TPMV;
+package tpmv;
 
 import java.util.Scanner;
 
-import ByteCode.ByteCode;
-import ByteCode.ByteCodeParser;
-import ByteCode.ByteCodeProgram;
-import Command.Command;
-import Command.CommandParser;
+import bytecode.ByteCode;
+import bytecode.ByteCodeParser;
+import bytecode.ByteCodeProgram;
+import command.Command;
+import command.CommandParser;
 
 /**
  * Clase para representar el bucle de control de la aplicación, se piden los
@@ -26,10 +26,10 @@ public class Engine {
 		return true;
 	}
 
-	private boolean end;
 	private ByteCodeProgram byteCodeProgram;
-	private final Scanner scanner;
 	private final CPU cpu;
+	private boolean end;
+	private final Scanner scanner;
 
 	/**
 	 * Constructor de la clase

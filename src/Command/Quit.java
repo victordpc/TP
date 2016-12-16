@@ -1,6 +1,6 @@
-package Command;
+package command;
 
-import TPMV.Engine;
+import tpmv.Engine;
 
 /**
  * Representa el comando <code>QUIT</code>

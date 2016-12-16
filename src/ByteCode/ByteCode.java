@@ -1,6 +1,6 @@
-package ByteCode;
+package bytecode;
 
-import TPMV.CPU;
+import tpmv.CPU;
 
 /**
  * Clase que representa las instrucciones que puede manejar la máquina virtual.
@@ -13,7 +13,8 @@ public abstract class ByteCode {
 	 * @param cpu
 	 *            instancia en la que se ejecuta el <code>ByteCode</code>
 	 * 
-	 * @return <code>true</code> exito de la operacion, <code>false</code> en otro caso
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	abstract public boolean execute(CPU cpu);
 
@@ -21,7 +22,8 @@ public abstract class ByteCode {
 	 * Convierte un texto a un objeto de tipo <code>ByteCode</code>.
 	 * 
 	 * @param s
-	 *            cadena de texto.
+	 *            array de cadenas de texto.
+	 * 
 	 * @return <code>ByteCode</code> correspondiente al texto, si es incorrecto
 	 *         devuelve <code>null</code>.
 	 */

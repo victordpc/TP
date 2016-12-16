@@ -1,13 +1,13 @@
-package ByteCode;
+package bytecode.oneparameter;
 
-import TPMV.CPU;
+import bytecode.ByteCode;
+import tpmv.CPU;
 
 /**
  * Clase que representa la instrución <code>PUSH</code>
- * 
- * @author victor
+ *
  */
-public class Push extends ByteCode {
+public class Push extends OneParameter {
 	private int valor;
 
 	/**
@@ -33,17 +33,17 @@ public class Push extends ByteCode {
 	}
 
 	@Override
-	public ByteCode parse(String[] s) {
-		if (s.length == 2 && s[0].equalsIgnoreCase("Push")) {
-			int val = Integer.parseInt(s[1]);
-			return new Push(val);
-		}
-		return null;
+	public String toString() {
+		return "PUSH " + this.valor + System.getProperty("line.separator");
 	}
 
 	@Override
-	public String toString() {
-		return "PUSH " + this.valor + System.getProperty("line.separator");
+	protected ByteCode parseAux(String com, String par) {
+		if (com.compareToIgnoreCase("PUSH") == 0) {
+			int val = Integer.parseInt(par);
+			return new Push(val);
+		}
+		return null;
 	}
 
 }

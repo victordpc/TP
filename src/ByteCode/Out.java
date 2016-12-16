@@ -1,6 +1,6 @@
-package ByteCode;
+package bytecode;
 
-import TPMV.CPU;
+import tpmv.CPU;
 
 /**
  * Clase que representa la instrución <code>OUT</code>

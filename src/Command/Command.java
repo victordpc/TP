@@ -1,6 +1,6 @@
-package Command;
+package command;
 
-import TPMV.Engine;
+import tpmv.Engine;
 
 /**
  * Clase que representa los comandos admitidos.
@@ -11,7 +11,8 @@ public abstract class Command {
 	 * 
 	 * @param engine
 	 *            instancia en la que se ejecutan los comandos.
-	 * @return <code>true</code> exito de la operacion, <code>false</code> en otro caso
+	 * @return <code>true</code> exito de la operacion, <code>false</code> en
+	 *         otro caso
 	 */
 	abstract public boolean execute(Engine engine);
 

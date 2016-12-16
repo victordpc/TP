@@ -1,4 +1,4 @@
-package TPMV;
+package tpmv;
 
 /**
  * Clase de inicio de nuestra aplicación
