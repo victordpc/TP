@@ -1,14 +1,17 @@
-package ByteCode;
+package bytecode;
 
-import ByteCode.Arithmetics.Add;
-import ByteCode.Arithmetics.Div;
-import ByteCode.Arithmetics.Mul;
-import ByteCode.Arithmetics.Sub;
-import ByteCode.Jumps.GoTo;
-import ByteCode.Jumps.Conditional.IfEq;
-import ByteCode.Jumps.Conditional.IfLe;
-import ByteCode.Jumps.Conditional.IfLeq;
-import ByteCode.Jumps.Conditional.IfNeq;
+import bytecode.arithmetics.Add;
+import bytecode.arithmetics.Div;
+import bytecode.arithmetics.Mul;
+import bytecode.arithmetics.Sub;
+import bytecode.oneparameter.GoTo;
+import bytecode.oneparameter.Load;
+import bytecode.oneparameter.Push;
+import bytecode.oneparameter.Store;
+import bytecode.oneparameter.conditional.IfEq;
+import bytecode.oneparameter.conditional.IfLe;
+import bytecode.oneparameter.conditional.IfLeq;
+import bytecode.oneparameter.conditional.IfNeq;
 
 /**
  * Clase que se encarga de convertir textos en <code>ByteCode</code>
@@ -22,6 +25,7 @@ public class ByteCodeParser {
 	 * 
 	 * @param linea
 	 *            cadena de texto.
+	 * 
 	 * @return <code>ByteCode</code> correspondiente al texto, si es incorrecto
 	 *         devuelve <code>null</code>.
 	 */

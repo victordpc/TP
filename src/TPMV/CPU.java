@@ -1,7 +1,7 @@
-package TPMV;
+package tpmv;
 
-import ByteCode.ByteCode;
-import ByteCode.ByteCodeProgram;
+import bytecode.ByteCode;
+import bytecode.ByteCodeProgram;
 
 /**
  * Clase que contiene el procesamiento de la maquina virtual, contiene una
@@ -9,11 +9,11 @@ import ByteCode.ByteCodeProgram;
  */
 public class CPU {
 
-	private final Memory memory;
-	private final OperandStack stack;
-	private boolean halt;
-	private int programCounter;
 	private ByteCodeProgram bcProgram;
+	private boolean halt;
+	private final Memory memory;
+	private int programCounter;
+	private final OperandStack stack;
 
 	/**
 	 * Constructor de la clase.

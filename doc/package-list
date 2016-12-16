@@ -1,6 +1,6 @@
-ByteCode
-ByteCode.Arithmetics
-ByteCode.Jumps
-ByteCode.Jumps.Conditional
-Command
-TPMV
+bytecode
+bytecode.arithmetics
+bytecode.oneparameter
+bytecode.oneparameter.conditional
+command
+tpmv

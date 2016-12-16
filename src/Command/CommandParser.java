@@ -1,4 +1,4 @@
-package Command;
+package command;
 
 /**
  * Clase que se encarga de convertir textos en comandos

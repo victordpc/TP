@@ -1,6 +1,6 @@
-package Command;
+package command;
 
-import TPMV.Engine;
+import tpmv.Engine;
 
 /**
  * Clase que representa el comando <code>AddByteCodeProgram</code>

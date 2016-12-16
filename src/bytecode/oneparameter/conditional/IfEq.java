@@ -1,12 +1,11 @@
-package ByteCode.Jumps.Conditional;
+package bytecode.oneparameter.conditional;
 
-import ByteCode.ByteCode;
+import bytecode.ByteCode;
 
 /**
  * Clase que representa la instrución <code>IFEQ</code>, salto a la direción del
  * programa indicado si los operadores son iguales
  * 
- * @author victor
  */
 public class IfEq extends Conditional {
 
@@ -28,23 +27,22 @@ public class IfEq extends Conditional {
 	}
 
 	@Override
-	public boolean compare() {
-		return !(this.subCima == this.cima);
+	public boolean compare(int par1, int par2) {
+		return !(par2 == par1);
 	}
 
 	@Override
 	public String toString() {
-		return "IFEQ " + this.posicion + System.getProperty("line.separator");
+		return "IFEQ " + this.param + System.getProperty("line.separator");
 	}
 
 	@Override
-	protected boolean operador(String operador) {
-		return operador.compareToIgnoreCase("IfEq") == 0;
-	}
-
-	@Override
-	protected ByteCode parseAux(int val) {
-		return new IfEq(val);
+	protected ByteCode parseAux(String com, String par) {
+		if (com.compareToIgnoreCase("IFEQ") == 0) {
+			int val = Integer.parseInt(par);
+			return new IfEq(val);
+		}
+		return null;
 	}
 
 }

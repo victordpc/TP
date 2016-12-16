@@ -1,12 +1,11 @@
-package ByteCode.Arithmetics;
+package bytecode.arithmetics;
 
-import ByteCode.ByteCode;
-import TPMV.CPU;
+import bytecode.ByteCode;
+import tpmv.CPU;
 
 /**
  * Clase que representa la instrución <code>MUL</code>
  * 
- * @author victor
  */
 public class Mul extends Arithmetics {
 
@@ -23,18 +22,15 @@ public class Mul extends Arithmetics {
 	}
 
 	@Override
-	protected boolean operador(String operador) {
-		return operador.compareToIgnoreCase("Mul") == 0;
+	protected boolean executeAux(CPU cpu, int par1, int par2) {
+		return cpu.push(par2 * par1);
 	}
 
 	@Override
-	protected boolean operar(CPU cpu) {
-		return cpu.push(this.subCima * this.cima);
-	}
-
-	@Override
-	protected ByteCode parseAux() {
-		return new Mul();
+	protected ByteCode parseAux(String com) {
+		if (com.compareToIgnoreCase("Mul") == 0)
+			return new Mul();
+		return null;
 	}
 
 }
