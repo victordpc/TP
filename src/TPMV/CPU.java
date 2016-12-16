@@ -9,21 +9,24 @@ import bytecode.ByteCodeProgram;
  */
 public class CPU {
 
-	private ByteCodeProgram bcProgram;
 	private boolean halt;
 	private final Memory memory;
-	private int programCounter;
 	private final OperandStack stack;
+	private ByteCodeProgram bcProgram = null;
+	private int programCounter;
 
 	/**
 	 * Constructor de la clase.
+	 * 
+	 * @param prog
+	 *            programa de ByteCodes para cargar
 	 */
-	public CPU() {
+	public CPU(ByteCodeProgram prog) {
 		this.memory = new Memory();
 		this.stack = new OperandStack();
 		this.halt = false;
 		this.programCounter = 0;
-		this.bcProgram = new ByteCodeProgram();
+		this.bcProgram = prog;
 	}
 
 	/**
@@ -126,16 +129,12 @@ public class CPU {
 	/**
 	 * Ejecutar el programa <code>ByteCode</code> completo.
 	 * 
-	 * @param bcProgram
-	 *            programa a ejecutar.
-	 * 
 	 * @return <code>true</code> exito de la operacion, <code>false</code> en
 	 *         otro caso
 	 */
-	public boolean run(ByteCodeProgram bcProgram) {
+	public boolean run() {
 		boolean correcto = true;
 		this.reset();
-		this.bcProgram = bcProgram;
 
 		while (correcto && !halt) {
 			ByteCode instrucion = this.bcProgram.getProgram(programCounter);
