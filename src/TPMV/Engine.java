@@ -27,7 +27,7 @@ public class Engine {
 	}
 
 	private ByteCodeProgram byteCodeProgram;
-	private final CPU cpu;
+	private CPU cpu;
 	private boolean end;
 	private final Scanner scanner;
 
@@ -36,7 +36,6 @@ public class Engine {
 	 */
 	public Engine() {
 		this.byteCodeProgram = new ByteCodeProgram();
-		this.cpu = new CPU();
 		this.scanner = new Scanner(System.in);
 	}
 
@@ -49,7 +48,9 @@ public class Engine {
 	 */
 	public boolean excuteCommandRun() {
 		boolean resultado = true;
-		if (this.cpu.run(this.byteCodeProgram)) {
+		this.cpu= new CPU(this.byteCodeProgram);
+		
+		if (this.cpu.run()) {
 			System.out.println("El estado de la maquina tras ejecutar el programa: "
 					+ System.getProperty("line.separator") + this.cpu.toString());
 		} else {
