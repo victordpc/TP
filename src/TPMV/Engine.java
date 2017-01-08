@@ -1,12 +1,20 @@
 package tpmv;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
-
 import bytecode.ByteCode;
 import bytecode.ByteCodeParser;
 import bytecode.ByteCodeProgram;
 import command.Command;
 import command.CommandParser;
+import elements.CPU;
+import elements.LexicalParser;
+import exceptions.ArrayException;
+import exceptions.BadFormatByteCodeException;
+import exceptions.ExecutionErrorException;
+import exceptions.LexicalAnalysisException;
+import tpmv.compiler.*;
+import elements.Compiler;
 
 /**
  * Clase para representar el bucle de control de la aplicación, se piden los
@@ -14,22 +22,14 @@ import command.CommandParser;
  */
 public class Engine {
 
-	/**
-	 * Ejecuta el comando <code>HELP</code>, mostrando por pantalla la
-	 * información de los posibles comandos que puede introducir el usuario.
-	 * 
-	 * @return <code>true</code> exito de la operacion, <code>false</code> en
-	 *         otro caso
-	 */
-	static public boolean executeHelp() {
-		CommandParser.showHelp();
-		return true;
-	}
-
 	private ByteCodeProgram byteCodeProgram;
 	private CPU cpu;
 	private boolean end;
 	private final Scanner scanner;
+	private SourceProgram sProgram;
+	private ParsedProgram parsedProgram;
+	private LexicalParser lexicalParser;
+	private Compiler compiler;
 
 	/**
 	 * Constructor de la clase
@@ -37,6 +37,10 @@ public class Engine {
 	public Engine() {
 		this.byteCodeProgram = new ByteCodeProgram();
 		this.scanner = new Scanner(System.in);
+		this.sProgram = new SourceProgram();
+		this.lexicalParser = new LexicalParser(sProgram);
+		this.compiler = new Compiler();
+		this.parsedProgram = new ParsedProgram();
 	}
 
 	/**
@@ -46,19 +50,19 @@ public class Engine {
 	 * @return <code>true</code> exito de la operacion, <code>false</code> en
 	 *         otro caso
 	 */
-	public boolean excuteCommandRun() {
+	public boolean excuteCommandRun()throws ExecutionErrorException, ArrayException {
 		boolean resultado = true;
 		this.cpu= new CPU(this.byteCodeProgram);
-		
-		if (this.cpu.run()) {
-			System.out.println("El estado de la maquina tras ejecutar el programa: "
-					+ System.getProperty("line.separator") + this.cpu.toString());
-		} else {
-			System.out.println("Error: Ejecucion incorrecta del programa " + System.getProperty("line.separator")
-					+ System.getProperty("line.separator") + this.cpu.toString()
-					+ System.getProperty("line.separator"));
-			resultado = false;
-		}
+
+        if (this.cpu.run()) {
+            System.out.println("El estado de la maquina tras ejecutar el programa: "
+                    + System.getProperty("line.separator") + this.cpu.toString());
+        } else {
+            System.out.println("Error: Ejecucion incorrecta del programa " + System.getProperty("line.separator")
+                    + System.getProperty("line.separator") + this.cpu.toString()
+                    + System.getProperty("line.separator"));
+            resultado = false;
+        }
 
 		this.cpu.reset();
 		return resultado;
@@ -89,17 +93,21 @@ public class Engine {
 	 * @return <code>true</code> exito de la operacion, <code>false</code> en
 	 *         otro caso
 	 */
-	public boolean executeReplace(int position) {
+	public boolean executeReplace(int position) throws BadFormatByteCodeException, ArrayException {
 		if (position < byteCodeProgram.getLength()) {
 			System.out.print("Nueva instruccion: ");
 			String line = scanner.nextLine();
 			ByteCode bc = ByteCodeParser.parse(line);
 			if (bc != null && byteCodeProgram.replace(position, bc)) {
-				System.out.println(byteCodeProgram.toString() + System.getProperty("line.separator"));
+                System.out.println(sProgram.toString() + System.getProperty("line.separator")
+                        + System.getProperty("line.separator") + byteCodeProgram.toString());
 				return true;
-			}
-		}
-		return false;
+			}else {
+                throw new ArrayException("Excepcion-BadFormatByteCodeException: El bytecode introducido no existe, inténtalo de nuevo");
+            }
+		}else {
+		    throw new ArrayException("Excepcion-ArrayException, la posición a la que intenta acceder no existe");
+        }
 	}
 
 	/**
@@ -114,10 +122,22 @@ public class Engine {
 		return true;
 	}
 
-	/**
+    /**
+     * Ejecuta el comando <code>HELP</code>, mostrando por pantalla la
+     * información de los posibles comandos que puede introducir el usuario.
+     *
+     * @return <code>true</code> exito de la operacion, <code>false</code> en
+     *         otro caso
+     */
+    static public boolean executeHelp() {
+        CommandParser.showHelp();
+        return true;
+    }
+
+    /**
 	 * Escribe por pantalla el programa almacenado
 	 * 
-	 * @return <code>true</code> en todo caso.
+	 * @return <code>true</code> siempre.
 	 */
 	public boolean printProgram() {
 		System.out.println(this.byteCodeProgram.toString());
@@ -126,28 +146,26 @@ public class Engine {
 	}
 
 	/**
-	 * Ejecuta el comando <code>ByteCode</code> para agregar operaciones al
+	 * Ejecuta el comando <code>bytecode</code> para agregar operaciones al
 	 * programa
 	 * 
 	 * @return <code>true</code> exito de la operacion, <code>false</code> en
 	 *         otro caso
 	 */
-	public boolean readByteCodeProgram() {
-		String instructionString = "";
-		ByteCode instruction = null;
+	public boolean readByteCodeProgram() throws ArrayException {
 
 		this.byteCodeProgram.reset();
 
 		System.out.println("Introduzca las instrucciones: ");
-		instructionString = this.scanner.nextLine();
+        String instructionString = this.scanner.nextLine();
 
 		while (!instructionString.equalsIgnoreCase("END")) {
-			instruction = ByteCodeParser.parse(instructionString);
+            ByteCode instruction = ByteCodeParser.parse(instructionString);
 
 			if (instruction != null)
 				this.byteCodeProgram.addByteCode(instruction);
 			else
-				System.err.println("ByteCode incorrecto, vuelva a introducirlo");
+				System.err.println("bytecode incorrecto, vuelva a introducirlo");
 
 			instructionString = this.scanner.nextLine();
 		}
@@ -172,14 +190,45 @@ public class Engine {
 			Command command = CommandParser.parse(line);
 			if (command != null) {
 				System.out.println("Comienza la ejecución de " + command.toString());
-				if (!command.execute(this)) {
-					System.out.println("Error en la ejecución del comando" + System.getProperty("line.separator"));
-				}
-			} else {
+                try {
+                    try {
+                        if (!command.execute(this)) {
+                            System.out.println("Error en la ejecución del comando" + System.getProperty("line.separator"));
+                        }
+                    } catch (BadFormatByteCodeException e) {
+                        System.out.print(e.getMessage() + System.getProperty("line.separator"));
+                    }
+                } catch (FileNotFoundException e) {
+                   System.out.print(e.getMessage() + System.getProperty("line.separator"));
+                } catch (LexicalAnalysisException e) {
+                    System.out.print(e.getMessage() + System.getProperty("line.separator"));
+                } catch (ArrayException e) {
+                    System.out.print(e.getMessage() + System.getProperty("line.separator"));
+                }catch (ExecutionErrorException e) {
+                    System.out.print(e.getMessage() + System.getProperty("line.separator"));
+                }
+            } else {
 				System.out.println("Comienza la ejecución de " + line);
 				System.out.print("Error: Ejecución incorrecta del comando" + System.getProperty("line.separator"));
 			}
 		}
 		System.out.print(System.getProperty("line.separator"));
+	}
+
+	//NEW
+    public boolean executeLoad(String fileName)throws java.io.FileNotFoundException, ArrayException {
+	    boolean success = false;
+	    if (sProgram.readFile(fileName)) {
+            success = true;
+            System.out.println(sProgram.toString());
+        }
+        return success;
+    }
+
+	public void compile() throws LexicalAnalysisException,  ArrayException {
+        lexicalParser.lexicalParser(parsedProgram, "END");
+        compiler.initialize(byteCodeProgram);
+        compiler.compile(parsedProgram);
+        System.out.println(byteCodeProgram.toString());
 	}
 }

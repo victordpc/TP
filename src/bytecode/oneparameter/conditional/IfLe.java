@@ -7,7 +7,7 @@ import bytecode.ByteCode;
  * programa indicado si los operadores son iguales
  * 
  */
-public class IfLe extends Conditional {
+public class IfLe extends ConditionalJump {
 
 	/**
 	 * Constructor de la clase

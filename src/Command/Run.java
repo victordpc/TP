@@ -1,5 +1,7 @@
 package command;
 
+import exceptions.ArrayException;
+import exceptions.ExecutionErrorException;
 import tpmv.Engine;
 
 /**
@@ -17,7 +19,7 @@ public class Run extends Command {
 	}
 
 	@Override
-	public boolean execute(Engine engine) {
+	public boolean execute(Engine engine) throws ExecutionErrorException, ArrayException {
 		return engine.excuteCommandRun();
 	}
 

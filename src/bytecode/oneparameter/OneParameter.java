@@ -3,7 +3,7 @@ package bytecode.oneparameter;
 import bytecode.ByteCode;
 
 /**
- * Clase abstracta para los ByteCode que tengan un parámetro
+ * Clase abstracta para los bytecode que tengan un parámetro
  */
 public abstract class OneParameter extends ByteCode {
 	protected int param;
@@ -24,6 +24,10 @@ public abstract class OneParameter extends ByteCode {
 		this.param = param;
 	}
 
+	public void setJump(int param) {
+		this.param = param;
+	}
+
 	@Override
 	public ByteCode parse(String[] s) {
 		if (s.length != 2)
@@ -39,7 +43,7 @@ public abstract class OneParameter extends ByteCode {
 	 * 
 	 * @param par
 	 *            valor entero asociado al comando
-	 * @return <code>ByteCode</code> correspondiente al salto, si es incorrecto
+	 * @return <code>bytecode</code> correspondiente al salto, si es incorrecto
 	 *         devuelve <code>null</code>.
 	 */
 	protected abstract ByteCode parseAux(String com, String par);

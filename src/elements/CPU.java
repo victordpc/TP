@@ -1,7 +1,12 @@
-package tpmv;
+package elements;
 
 import bytecode.ByteCode;
 import bytecode.ByteCodeProgram;
+import exceptions.ArrayException;
+import exceptions.ExecutionErrorException;
+import exceptions.StackException;
+
+import java.lang.reflect.Array;
 
 /**
  * Clase que contiene el procesamiento de la maquina virtual, contiene una
@@ -46,7 +51,7 @@ public class CPU {
 	}
 
 	/**
-	 * Ejecuta el <code>ByteCode</code> <code>HALT</code>, para la ejecución del
+	 * Ejecuta el <code>bytecode</code> <code>HALT</code>, para la ejecución del
 	 * programa.
 	 * 
 	 * @return <code>true</code> exito de la operacion, <code>false</code> en
@@ -79,7 +84,7 @@ public class CPU {
 	}
 
 	/**
-	 * Ejecuta el <code>ByteCode</code> <code>OUT</code>, muestra la cima de la
+	 * Ejecuta el <code>bytecode</code> <code>OUT</code>, muestra la cima de la
 	 * pila.
 	 * 
 	 * @return <code>true</code> exito de la operacion, <code>false</code> en
@@ -99,7 +104,7 @@ public class CPU {
 	 * 
 	 * @return valor almacenado en la cima de la pila.
 	 */
-	public int pop() {
+	public int pop() throws StackException {
 		return this.stack.pop();
 	}
 
@@ -112,7 +117,7 @@ public class CPU {
 	 * @return <code>true</code> exito de la operacion, <code>false</code> en
 	 *         otro caso
 	 */
-	public boolean push(int valor) {
+	public boolean push(int valor) throws StackException {
 		return this.stack.push(valor);
 	}
 
@@ -127,22 +132,31 @@ public class CPU {
 	}
 
 	/**
-	 * Ejecutar el programa <code>ByteCode</code> completo.
+	 * Ejecutar el programa <code>bytecode</code> completo.
 	 * 
 	 * @return <code>true</code> exito de la operacion, <code>false</code> en
 	 *         otro caso
 	 */
-	public boolean run() {
+	public boolean run() throws ExecutionErrorException, ArrayException {
 		boolean correcto = true;
 		this.reset();
-
+        int i = 0;
 		while (correcto && !halt) {
-			ByteCode instrucion = this.bcProgram.getProgram(programCounter);
-			if (instrucion != null)
-				correcto = instrucion.execute(this);
-			else
-				correcto = false;
-			this.avanzaPc();
+			try {
+				ByteCode instrucion = this.bcProgram.getProgram(programCounter);
+				if (instrucion != null)
+					correcto = instrucion.execute(this);
+				else
+					correcto = false;
+				this.avanzaPc();
+			}catch (ExecutionErrorException e) {
+				throw new ExecutionErrorException("Excepcion en la ejecucion del bytecode " +
+						 + i +System.getProperty("line.separator") + e.getMessage());
+			}catch (ArrayException e) {
+                throw new ArrayException("Excepcion en la ejecucion del bytecode en la posicion " +
+                        + i + ": " + System.getProperty("line.separator") + e.getMessage());
+            }
+			i++;
 		}
 
 		return correcto;

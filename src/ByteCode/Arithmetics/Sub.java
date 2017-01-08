@@ -1,7 +1,8 @@
 package bytecode.arithmetics;
 
 import bytecode.ByteCode;
-import tpmv.CPU;
+import elements.CPU;
+import exceptions.StackException;
 
 /**
  * Clase que representa la instrución <code>SUB</code>
@@ -22,7 +23,7 @@ public class Sub extends Arithmetics {
 	}
 
 	@Override
-	protected boolean executeAux(CPU cpu, int par1, int par2) {
+	protected boolean executeAux(CPU cpu, int par1, int par2) throws StackException {
 		return cpu.push(par2 - par1);
 	}
 

@@ -1,6 +1,6 @@
 package bytecode;
 
-import tpmv.CPU;
+import elements.CPU;
 
 /**
  * Clase que representa la instrución <code>OUT</code>
@@ -30,7 +30,7 @@ public class Out extends ByteCode {
 
 	@Override
 	public String toString() {
-		return "OUTPUT " + System.getProperty("line.separator");
+		return "OUT " + System.getProperty("line.separator");
 	}
 
 }

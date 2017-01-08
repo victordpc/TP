@@ -1,6 +1,8 @@
 package bytecode;
 
-import tpmv.CPU;
+import elements.CPU;
+import exceptions.DivByZeroException;
+import exceptions.StackException;
 
 /**
  * Clase que representa las instrucciones que puede manejar la máquina virtual.
@@ -8,23 +10,23 @@ import tpmv.CPU;
 public abstract class ByteCode {
 
 	/**
-	 * Ejecuta el <code>ByteCode</code>
+	 * Ejecuta el <code>bytecode</code>
 	 * 
 	 * @param cpu
-	 *            instancia en la que se ejecuta el <code>ByteCode</code>
+	 *            instancia en la que se ejecuta el <code>bytecode</code>
 	 * 
 	 * @return <code>true</code> exito de la operacion, <code>false</code> en
 	 *         otro caso
 	 */
-	abstract public boolean execute(CPU cpu);
+	abstract public boolean execute(CPU cpu) throws DivByZeroException, StackException;
 
 	/**
-	 * Convierte un texto a un objeto de tipo <code>ByteCode</code>.
+	 * Convierte un texto a un objeto de tipo <code>bytecode</code>.
 	 * 
 	 * @param s
 	 *            array de cadenas de texto.
 	 * 
-	 * @return <code>ByteCode</code> correspondiente al texto, si es incorrecto
+	 * @return <code>bytecode</code> correspondiente al texto, si es incorrecto
 	 *         devuelve <code>null</code>.
 	 */
 	abstract public ByteCode parse(String[] s);

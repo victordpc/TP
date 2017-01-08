@@ -1,7 +1,8 @@
 package bytecode.oneparameter;
 
 import bytecode.ByteCode;
-import tpmv.CPU;
+import elements.CPU;
+import exceptions.StackException;
 
 /**
  * Clase que representa la instrución <code>PUSH</code>
@@ -28,7 +29,7 @@ public class Push extends OneParameter {
 	}
 
 	@Override
-	public boolean execute(CPU cpu) {
+	public boolean execute(CPU cpu) throws StackException {
 		return cpu.push(this.valor);
 	}
 

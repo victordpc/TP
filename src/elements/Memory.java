@@ -1,4 +1,4 @@
-package tpmv;
+package elements;
 
 /**
  * Clase que representa la memoria de la máquina virtual.

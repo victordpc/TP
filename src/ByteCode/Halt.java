@@ -1,6 +1,6 @@
 package bytecode;
 
-import tpmv.CPU;
+import elements.CPU;
 
 /**
  * Clase que representa la instrución <code>HALT</code>

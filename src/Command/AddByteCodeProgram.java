@@ -1,5 +1,6 @@
 package command;
 
+import exceptions.ArrayException;
 import tpmv.Engine;
 
 /**
@@ -17,28 +18,28 @@ public class AddByteCodeProgram extends Command {
 	}
 
 	@Override
-	public boolean execute(Engine engine) {
+	public boolean execute(Engine engine) throws ArrayException {
 		boolean resultado = engine.readByteCodeProgram();
-		System.out.println("Fin introducción de instrucciones ByteCode.");
+		System.out.println("Fin introducción de instrucciones bytecode.");
 		return resultado;
 	}
 
 	@Override
 	public Command parse(String[] s) {
-		if (s.length == 1 && s[0].equalsIgnoreCase("ByteCode"))
+		if (s.length == 1 && s[0].equalsIgnoreCase("bytecode"))
 			return new AddByteCodeProgram();
 		return null;
 	}
 
 	@Override
 	public String textHelp() {
-		return "    ByteCode: Introduce nuevas instrucciones ByteCode al programa "
+		return "    BYTECODE: Introduce nuevas instrucciones bytecode al programa "
 				+ System.getProperty("line.separator");
 	}
 
 	@Override
 	public String toString() {
-		return "ByteCode" + System.getProperty("line.separator");
+		return "bytecode" + System.getProperty("line.separator");
 	}
 
 }

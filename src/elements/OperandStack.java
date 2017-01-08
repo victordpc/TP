@@ -1,4 +1,6 @@
-package tpmv;
+package elements;
+
+import exceptions.StackException;
 
 /**
  * Clase que representa una pila de valores enteros.
@@ -24,7 +26,7 @@ public class OperandStack {
 	 */
 	public Integer getLastPosition() {
 		if (this.contador > 0)
-			return this.stack[this.contador - 1];
+			return this.stack[this.contador--];
 		else
 			return null;
 	}
@@ -35,7 +37,7 @@ public class OperandStack {
 	 * @return número de elementos en la pila.
 	 */
 	public int getLength() {
-		return this.stack.length;
+		return contador;
 	}
 
 	/**
@@ -43,10 +45,13 @@ public class OperandStack {
 	 * 
 	 * @return valor en la cima de la pila.
 	 */
-	public int pop() {
+	public int pop() throws StackException {
 		int valor = 0;
-		if (this.contador > 0)
-			valor = this.stack[--this.contador];
+		if (this.contador > 0) {
+            valor = this.stack[--this.contador];
+        }else {
+		    throw new StackException("Tamaño de pila insuficiente");
+        }
 		return valor;
 	}
 
@@ -59,12 +64,13 @@ public class OperandStack {
 	 * @return <code>true</code> exito de la operacion, <code>false</code> en
 	 *         otro caso
 	 */
-	public boolean push(int operando) {
+	public boolean push(int operando) throws StackException {
 		if (this.contador < this.stack.length) {
 			this.stack[this.contador++] = operando;
 			return true;
+		}else {
+			throw new StackException("Stack Overflow exception");
 		}
-		return false;
 	}
 
 	/**

@@ -1,17 +1,18 @@
 package bytecode.oneparameter.conditional;
 
 import bytecode.oneparameter.OneParameter;
-import tpmv.CPU;
+import elements.CPU;
+import exceptions.StackException;
 
 /**
  * @author victor
  */
-public abstract class Conditional extends OneParameter {
+public abstract class ConditionalJump extends OneParameter {
 
 	/**
 	 * Constructor de la clase
 	 */
-	public Conditional() {
+	public ConditionalJump() {
 	}
 
 	/**
@@ -20,7 +21,7 @@ public abstract class Conditional extends OneParameter {
 	 * @param valor
 	 *            posicion del programa a donde salta si se cumple la condición
 	 */
-	public Conditional(int valor) {
+	public ConditionalJump(int valor) {
 		super(valor);
 	}
 
@@ -37,8 +38,9 @@ public abstract class Conditional extends OneParameter {
 	 */
 	public abstract boolean compare(int par1, int par2);
 
+
 	@Override
-	public boolean execute(CPU cpu) {
+	public boolean execute(CPU cpu) throws StackException {
 		if (cpu.getStackLength() >= 2) {
 			int c = cpu.pop();
 			int sc = cpu.pop();

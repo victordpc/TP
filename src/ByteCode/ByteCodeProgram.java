@@ -1,5 +1,7 @@
 package bytecode;
 
+import exceptions.ArrayException;
+
 /**
  * Clase para almacenar programas.
  */
@@ -17,21 +19,23 @@ public class ByteCodeProgram {
 	}
 
 	/**
-	 * Añade un elemento de tipo <code>ByteCode</code> en la última posición del
+	 * Añade un elemento de tipo <code>bytecode</code> en la última posición del
 	 * programa.
 	 * 
 	 * @param byteCode
-	 *            <code>ByteCode</code> que añadimos.
+	 *            <code>bytecode</code> que añadimos.
 	 * 
 	 * @return <code>true</code> exito de la operacion, <code>false</code> en
 	 *         otro caso
 	 */
-	public boolean addByteCode(ByteCode byteCode) {
+	public boolean addByteCode(ByteCode byteCode) throws ArrayException {
 		if (this.nextProgramPosition < EXTEND_VALUE) {
 			this.program[this.nextProgramPosition++] = byteCode;
 			return true;
-		} else
-			return false;
+		} else{
+            throw new ArrayException("Excepcion-ArrayException se ha superado el tamaño máximo de program;" +
+                    " por favor refactorice su programa para que no exceda las 1000 instrucciones");
+        }
 	}
 
 	/**
@@ -44,7 +48,7 @@ public class ByteCodeProgram {
 	}
 
 	/**
-	 * Obtiene el objeto de tipo <code>ByteCode</code> almacenado en el programa
+	 * Obtiene el objeto de tipo <code>bytecode</code> almacenado en el programa
 	 * en la posición indicada.
 	 * 
 	 * @param posicion
@@ -52,10 +56,12 @@ public class ByteCodeProgram {
 	 * 
 	 * @return valor almacenado.
 	 */
-	public ByteCode getProgram(int posicion) {
-		if (posicion >= this.nextProgramPosition)
-			return null;
-		return this.program[posicion];
+	public ByteCode getProgram(int posicion) throws ArrayException {
+		if (posicion < this.nextProgramPosition){
+			return this.program[posicion];
+		}else {
+			throw new ArrayException("Se ha intentado acceder a una posicion que no existe");
+		}
 	}
 
 	/**
@@ -89,7 +95,7 @@ public class ByteCodeProgram {
 	public String toString() {
 		String objectInfo = "";
 		if (nextProgramPosition > 0) {
-			objectInfo += "Programa almacenado: " + System.getProperty("line.separator");
+			objectInfo += "Programa bytecode almacenado: " + System.getProperty("line.separator");
 			for (int i = 0; i < this.nextProgramPosition; i++)
 				objectInfo += i + ": " + this.program[i].toString();
 		}

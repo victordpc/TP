@@ -1,7 +1,7 @@
 package bytecode.oneparameter;
 
 import bytecode.ByteCode;
-import tpmv.CPU;
+import elements.CPU;
 
 /**
  * Clase que representa la instrución <code>GOTO</code>, salto incondicional a

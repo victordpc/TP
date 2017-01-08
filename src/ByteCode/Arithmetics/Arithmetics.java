@@ -1,7 +1,9 @@
 package bytecode.arithmetics;
 
 import bytecode.ByteCode;
-import tpmv.CPU;
+import elements.CPU;
+import exceptions.DivByZeroException;
+import exceptions.StackException;
 
 /**
  * Clase abstracta que representa a los ByteCodes aritméticos
@@ -17,13 +19,18 @@ public abstract class Arithmetics extends ByteCode {
 	}
 
 	@Override
-	public boolean execute(CPU cpu) {
-		if (cpu.getStackLength() >= 2) {
-			int c = cpu.pop();
-			int sc = cpu.pop();
-			return executeAux(cpu, c, sc);
-		}
-		return false;
+	public boolean execute(CPU cpu) throws DivByZeroException, StackException {
+	    try {
+            if (cpu.getStackLength() >= 2) {
+                int c = cpu.pop();
+                int sc = cpu.pop();
+                return executeAux(cpu, c, sc);
+            }else {
+                throw new StackException("Tamaño de pila insuficiente");
+            }
+        }catch (StackException e) {
+           throw new StackException("Excepcion-bytecode " + this.getClass().getSimpleName() + ": " + e.getMessage());
+        }
 	}
 
 	@Override
@@ -35,7 +42,7 @@ public abstract class Arithmetics extends ByteCode {
 
 	/**
 	 * Realiza la ejecución del comando
-	 * 
+	 *
 	 * @param cpu
 	 *            objeto en el que se ejecuta el comando
 	 * @param par1
@@ -45,14 +52,14 @@ public abstract class Arithmetics extends ByteCode {
 	 * @return <code>true</code> si se ha efectuado correctamente la operación,
 	 *         <code>false</code> en otro caso
 	 */
-	protected abstract boolean executeAux(CPU cpu, int par1, int par2);
+	protected abstract boolean executeAux(CPU cpu, int par1, int par2) throws DivByZeroException, StackException, StackException;
 
 	/**
 	 * Realiza el parseo específico del comando
 	 * 
 	 * @param com
 	 *            cadena de texto que representa el comando
-	 * @return <code>ByteCode</code> correspondiente a la operación, si es
+	 * @return <code>bytecode</code> correspondiente a la operación, si es
 	 *         incorrecto devuelve <code>null</code>.
 	 */
 	protected abstract ByteCode parseAux(String com);

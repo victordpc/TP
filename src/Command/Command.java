@@ -1,5 +1,9 @@
 package command;
 
+import exceptions.ArrayException;
+import exceptions.BadFormatByteCodeException;
+import exceptions.ExecutionErrorException;
+import exceptions.LexicalAnalysisException;
 import tpmv.Engine;
 
 /**
@@ -14,7 +18,8 @@ public abstract class Command {
 	 * @return <code>true</code> exito de la operacion, <code>false</code> en
 	 *         otro caso
 	 */
-	abstract public boolean execute(Engine engine);
+	abstract public boolean execute(Engine engine) throws java.io.FileNotFoundException,
+			LexicalAnalysisException, ArrayException, BadFormatByteCodeException, ExecutionErrorException;
 
 	/**
 	 * Convierte un texto en comando

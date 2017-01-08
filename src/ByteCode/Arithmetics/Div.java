@@ -1,7 +1,10 @@
 package bytecode.arithmetics;
 
 import bytecode.ByteCode;
-import tpmv.CPU;
+import elements.CPU;
+import exceptions.DivByZeroException;
+import exceptions.ExecutionErrorException;
+import exceptions.StackException;
 
 /**
  * Clase que representa la instrución <code>DIV</code>
@@ -22,11 +25,12 @@ public class Div extends Arithmetics {
 	}
 
 	@Override
-	protected boolean executeAux(CPU cpu, int par1, int par2) {
+	protected boolean executeAux(CPU cpu, int par1, int par2) throws DivByZeroException, StackException {
 		if (par1 != 0) {
 			return cpu.push(par2 / par1);
+		}else {
+			throw new DivByZeroException("Excepcion-bytecode DIV: No se puede dividir por cero");
 		}
-		return false;
 	}
 
 	@Override

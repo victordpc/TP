@@ -1,5 +1,7 @@
 package command;
 
+import exceptions.ArrayException;
+import exceptions.BadFormatByteCodeException;
 import tpmv.Engine;
 
 /**
@@ -7,14 +9,14 @@ import tpmv.Engine;
  * 
  * @author victor
  */
-public class Replace extends Command {
+public class ReplaceBC extends Command {
 
 	int position;
 
 	/**
 	 * Constructor de la clase
 	 */
-	public Replace() {
+	public ReplaceBC() {
 		super();
 	}
 
@@ -24,23 +26,23 @@ public class Replace extends Command {
 	 * @param posicion
 	 *            número de instrucción para cambiar
 	 */
-	public Replace(int posicion) {
+	public ReplaceBC(int posicion) {
 		super();
 		this.position = posicion;
 	}
 
 	@Override
-	public boolean execute(Engine engine) {
+	public boolean execute(Engine engine) throws BadFormatByteCodeException, ArrayException {
 		return engine.executeReplace(this.position);
 	}
 
 	@Override
 	public Command parse(String[] s) {
-		if (s.length == 2 && s[0].equalsIgnoreCase("Replace")) {
+		if (s.length == 2 && s[0].equalsIgnoreCase("ReplaceBC")) {
 			int pos = Integer.parseInt(s[1]);
 
 			if (pos >= 0) {
-				return new Replace(pos);
+				return new ReplaceBC(pos);
 			}
 		}
 		return null;
@@ -48,7 +50,8 @@ public class Replace extends Command {
 
 	@Override
 	public String textHelp() {
-		return "    REPLACE N: Reemplaza la instruccion N por la solicitada al usuario"
+		return "    REPLACE N: solicita al usuario una nueva instrucción bytecode y reemplaza la " +
+				"línea N del programa bytecode por la nueva instrucción introducida por el usuario."
 				+ System.getProperty("line.separator");
 	}
 

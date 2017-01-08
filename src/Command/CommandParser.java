@@ -4,15 +4,15 @@ package command;
  * Clase que se encarga de convertir textos en comandos
  */
 public class CommandParser {
-	private final static Command[] commands = { new Help(), new Quit(), new Reset(), new Replace(), new Run(),
-			new AddByteCodeProgram(), new PrintProgram() };
+	private final static Command[] commands = { new Load(), new Help(), new Quit(), new Reset(), new ReplaceBC(), new Run(),
+			new AddByteCodeProgram(), new Compile(), new PrintProgram()};
 
 	/**
-	 * Convierte un texto a un objeto de tipo <code>Command</code>.
+	 * Convierte un texto a un objeto de tipo <code>command</code>.
 	 * 
 	 * @param linea
 	 *            cadena de texto
-	 * @return <code>Command</code> correspondiente al texto, si es incorrecto
+	 * @return <code>command</code> correspondiente al texto, si es incorrecto
 	 *         devuelve <code>null</code>
 	 */
 	public static Command parse(String linea) {
