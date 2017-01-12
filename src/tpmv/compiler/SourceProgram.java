@@ -27,8 +27,8 @@ public class SourceProgram {
             }
             scanner.close();
         }catch (IOException exception){
-            System.out.println("Excepcion: Fichero no Encontrado...");
-            success = false;
+            throw new FileNotFoundException("Excepcion: Fichero no Encontrado...");
+//            System.out.println("Excepcion: Fichero no Encontrado...");
         }
         return success;
     }

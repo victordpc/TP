@@ -142,19 +142,18 @@ public class CPU {
 		this.reset();
         int i = 0;
 		while (correcto && !halt) {
+			ByteCode byteCode = null;
 			try {
-				ByteCode instrucion = this.bcProgram.getProgram(programCounter);
-				if (instrucion != null)
-					correcto = instrucion.execute(this);
+                byteCode = this.bcProgram.getProgram(programCounter);
+				if (byteCode != null)
+					correcto = byteCode.execute(this);
 				else
 					correcto = false;
 				this.avanzaPc();
 			}catch (ExecutionErrorException e) {
-				throw new ExecutionErrorException("Excepcion en la ejecucion del bytecode " +
-						 + i +System.getProperty("line.separator") + e.getMessage());
+				throw new ExecutionErrorException("Excepcion en la ejecucion del bytecode " + byteCode.getClass().getSimpleName() + " En la posición " +i +System.getProperty("line.separator") + e.getMessage());
 			}catch (ArrayException e) {
-                throw new ArrayException("Excepcion en la ejecucion del bytecode en la posicion " +
-                        + i + ": " + System.getProperty("line.separator") + e.getMessage());
+                throw new ExecutionErrorException("Excepcion en la ejecucion del bytecode " + byteCode.getClass().getSimpleName() + " En la posición " +i +System.getProperty("line.separator") + e.getMessage());
             }
 			i++;
 		}

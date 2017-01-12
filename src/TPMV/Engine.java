@@ -95,7 +95,7 @@ public class Engine {
      */
     public boolean executeReplace(int position) throws BadFormatByteCodeException, ArrayException {
         if (position < byteCodeProgram.getLength()) {
-            System.out.print("Nueva instruccion: ");
+            System.out.print("Nuevo bytecode: ");
             String line = scanner.nextLine();
             ByteCode bc = ByteCodeParser.parse(line);
             if (bc != null && byteCodeProgram.replace(position, bc)) {
@@ -223,6 +223,7 @@ public class Engine {
     }
 
     public void compile() throws LexicalAnalysisException, ArrayException {
+        lexicalParser.initialize();
         lexicalParser.lexicalParser(parsedProgram, "END");
         byteCodeProgram = new ByteCodeProgram();
         compiler.initialize(byteCodeProgram);
