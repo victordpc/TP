@@ -91,9 +91,9 @@ public class CPU {
 	 *         otro caso
 	 */
 	public boolean out() {
-		Integer valorPila = this.stack.getLastPosition();
+		Integer valorPila = this.stack.getLasValue();
 		if (valorPila != null)
-			System.out.println("El ultimo valor en la pila es: " + valorPila + System.getProperty("line.separator"));
+			System.out.println("consola: " + valorPila);
 		else
 			System.out.println("La pila no contiene valores");
 		return true;
@@ -201,7 +201,6 @@ public class CPU {
 		String resultado = "Estado de la CPU: " + System.getProperty("line.separator");
 		resultado += this.memory.toString() + System.getProperty("line.separator");
 		resultado += this.stack.toString() + System.getProperty("line.separator");
-		resultado += this.bcProgram.toString() + System.getProperty("line.separator");
 		return resultado;
 	}
 

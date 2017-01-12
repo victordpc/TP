@@ -34,7 +34,7 @@ public class Load extends Command {
 
     @Override
     public String toString() {
-        return "LOAD" + System.getProperty("line.separator");
+        return "LOAD " + fileName + System.getProperty("line.separator");
     }
 
     public void setFileName(String fileName) {

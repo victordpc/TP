@@ -24,9 +24,9 @@ public class OperandStack {
 	 * 
 	 * @return valor en la cima de la pila
 	 */
-	public Integer getLastPosition() {
+	public Integer getLasValue() {
 		if (this.contador > 0)
-			return this.stack[this.contador--];
+			return this.stack[--this.contador];
 		else
 			return null;
 	}

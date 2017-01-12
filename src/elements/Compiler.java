@@ -50,8 +50,8 @@ public class Compiler {
         if (index == -1) {
             index = numVars;
             varTable[index] = varName;
+            numVars++;
         }
-        numVars++;
         return index;
     }
 

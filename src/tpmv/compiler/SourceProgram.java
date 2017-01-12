@@ -3,6 +3,7 @@ package tpmv.compiler;
 import exceptions.ArrayException;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class SourceProgram {
 
@@ -16,20 +17,17 @@ public class SourceProgram {
 
     public boolean readFile(String fileName) throws FileNotFoundException, ArrayException {
         boolean success = true;
+        nextProgramPosition = 0;
         try {
-            FileInputStream fstream = new FileInputStream(fileName);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(fstream));
-
-            String nextLine;
+            Scanner scanner = new Scanner(new File(fileName));
             boolean stop = false;
             //Read File Line By Line
-            while (((nextLine = reader.readLine()) != null) && !stop)   {
-                stop = addInstruction(nextLine);
+            while (scanner.hasNextLine() && !stop)   {
+                stop = addInstruction(scanner.nextLine());
             }
-            //Close the input stream
-            reader.close();
+            scanner.close();
         }catch (IOException exception){
-            System.out.println("IOException al intentar leer el archivo del programa: " + exception.getMessage());
+            System.out.println("Excepcion: Fichero no Encontrado...");
             success = false;
         }
         return success;
@@ -57,8 +55,28 @@ public class SourceProgram {
     public String toString() {
         String sourceProgramString = "Programa fuente almacenado: " + System.getProperty("line.separator");
         int i = 0;
+        int lastSpaceCount = 0;
+        String space = "";
         while (i < nextProgramPosition) {
-            sourceProgramString += "[" + i + "]: " + sourceProgram[i] + System.getProperty("line.separator");
+            if (sourceProgram[i].contains("endif") || sourceProgram[i].contains("endwhile")) {
+                int index = 0;
+                lastSpaceCount -= 3;
+                space = "";
+                while (index < lastSpaceCount) {
+                    space += " ";
+                    index++;
+                }
+            }
+            sourceProgramString +=  i +": " + space + sourceProgram[i] + System.getProperty("line.separator");
+            if ((sourceProgram[i].contains("if") || sourceProgram[i].contains("while"))
+                    && !(sourceProgram[i].contains("endif") || sourceProgram[i].contains("endwhile"))) {
+                int index = 0;
+                while (index < 3) {
+                    space += " ";
+                    index++;
+                }
+                lastSpaceCount += 3;
+            }
             i++;
         }
         return sourceProgramString;
