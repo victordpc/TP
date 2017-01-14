@@ -1,7 +1,8 @@
 package command;
 
-import exceptions.ArrayException;
-import tpmv.Engine;
+import tp.pr3.command.Command;
+import tp.pr3.exceptions.ArrayException;
+import tp.pr3.mv.Engine;
 
 /**
  * Clase que representa el comando <code>AddByteCodeProgram</code>
