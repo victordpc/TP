@@ -1,6 +1,8 @@
 package tp.pr3.inst.assignments;
 
 import tp.pr3.bc.ByteCode;
+import tp.pr3.bc.Load;
+import tp.pr3.elements.Compiler;
 
 /**
  * Clase que representa un termino de tipo variable
@@ -20,19 +22,17 @@ public class Variable implements Term {
 
 	@Override
 	public ByteCode compile(Compiler compiler) {
-		// TODO Auto-generated method stub
-		return null;
+		int varIndex = compiler.indexOf(nombre);
+		return new Load(varIndex);
 	}
 
 	@Override
 	public Term parse(String term) {
-		if (term.length() != 1)
-			return null;
-
-		char name = term.charAt(0);
-		if ('a' <= name && name <= 'z')
-			return new Variable(term);
-
+		if (term.length() == 1) {
+			char name = term.charAt(0);
+			if ('a' <= name && name <= 'z')
+				return new Variable(term);
+		}
 		return null;
 
 	}

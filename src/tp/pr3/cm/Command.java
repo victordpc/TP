@@ -14,6 +14,22 @@ import tp.pr3.mv.Engine;
 public interface Command {
 
 	/**
+	 * Convierte un texto en comando
+	 * 
+	 * @param s
+	 *            descomposicion de la cadena introducida
+	 * @return representa la cadena recibida
+	 */
+	public Command parse(String[] s);
+
+	/**
+	 * Muestra la ayuda del comando
+	 * 
+	 * @return cadena de texto con la explicación del comando
+	 */
+	public String textHelp();
+
+	/**
 	 * Realiza la operación del comando
 	 * 
 	 * @param engine
@@ -34,21 +50,5 @@ public interface Command {
 	 */
 	void execute(Engine engine) throws BadFormatByteCodeException, ArrayException, ExecutionErrorException,
 			FileNotFoundException, LexicalAnalysisException;
-
-	/**
-	 * Convierte un texto en comando
-	 * 
-	 * @param s
-	 *            descomposicion de la cadena introducida
-	 * @return representa la cadena recibida
-	 */
-	public Command parse(String[] s);
-
-	/**
-	 * Muestra la ayuda del comando
-	 * 
-	 * @return cadena de texto con la explicación del comando
-	 */
-	public String textHelp();
 
 }

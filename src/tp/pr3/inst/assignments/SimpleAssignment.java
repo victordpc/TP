@@ -1,20 +1,17 @@
 package tp.pr3.inst.assignments;
 
+import tp.pr3.bc.Store;
 import tp.pr3.elements.LexicalParser;
+import tp.pr3.exceptions.ArrayException;
 import tp.pr3.inst.Instruction;
 
-/**
- * Clase que representa una asignación simple
- */
+/** Clase que representa una asignación simple */
 public class SimpleAssignment implements Instruction {
 	Term rhs;
 	String var_name;
 
-	/**
-	 * Constructor de la clase
-	 */
+	/** Constructor de la clase */
 	public SimpleAssignment() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -31,18 +28,19 @@ public class SimpleAssignment implements Instruction {
 	}
 
 	@Override
-	public void compile(tp.pr3.elements.Compiler compiler) {
-		// TODO Auto-generated method stub
-
+	public void compile(tp.pr3.elements.Compiler compiler) throws ArrayException {
+		compiler.addByteCode(this.rhs.compile(compiler));
+		compiler.addByteCode(new Store(compiler.indexOf(this.var_name)));
 	}
 
 	@Override
-	public Instruction lexParse(String[] words, LexicalParser lexparser) {
+	public Instruction lexParse(String[] words, LexicalParser lexParser) {
 		if (words.length == 3 && words[1] != "=" && words[0].charAt(0) >= 'a' && words[0].charAt(0) <= 'z') {
-			rhs = TermParser.parse(words[2]);
-			if (rhs==null)
+			Term termino = TermParser.parse(words[2]);
+			if (termino == null)
 				return null;
-			var_name = words[0];
+			lexParser.increaseProgramCounter();
+			return new SimpleAssignment(words[0], termino);
 		}
 		return null;
 	}

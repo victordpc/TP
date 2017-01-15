@@ -37,6 +37,8 @@ public class ByteCodeProgram {
 	 *             array
 	 */
 	public boolean addByteCode(ByteCode bc, int pos) throws ArrayException {
+		if (this.nextProgramPosition >= EXTEND_VALUE)
+			throw new ArrayException("Acceso incorrecto al array del programa");
 		if (0 <= pos && pos < this.nextProgramPosition) {
 			this.bcProgram[pos] = bc;
 		} else
@@ -53,7 +55,7 @@ public class ByteCodeProgram {
 	 * 
 	 * @return valor almacenado.
 	 * @throws ArrayException
-	 *             TODO
+	 *             Errores de acceso en el programa
 	 */
 	public ByteCode getInst(int i) throws ArrayException {
 		if (i < 0 || i >= this.nextProgramPosition)

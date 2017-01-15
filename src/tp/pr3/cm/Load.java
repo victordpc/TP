@@ -10,13 +10,13 @@ import tp.pr3.mv.Engine;
 public class Load implements Command {
 
 	private String fichName;
-
-	/**
+	
+	 /**
 	 * Constructor de la clase
 	 */
-	public Load() {
-		super();
-	}
+	 public Load() {
+	 super();
+	 }
 
 	/**
 	 * Constructor de la clase
@@ -31,13 +31,17 @@ public class Load implements Command {
 
 	@Override
 	public void execute(Engine engine) throws java.io.FileNotFoundException, ArrayException {
-		engine.load(fichName);
+		try {
+			engine.load(fichName);
+		} catch (java.io.FileNotFoundException e) {
+			throw new java.io.FileNotFoundException("Ejecución incorrecta del comando Load " + e.getMessage());
+		}
 	}
 
 	@Override
 	public Command parse(String[] s) {
-		if (s.length == 2 && s[0].equalsIgnoreCase("LOAD") && s[1].equalsIgnoreCase("FICH"))
-			return new Load();
+		if (s.length == 2 && s[0].equalsIgnoreCase("LOAD"))
+			return new Load(s[1]);
 		return null;
 	}
 

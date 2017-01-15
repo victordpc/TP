@@ -1,6 +1,8 @@
 package tp.pr3.inst.conditionals;
 
+import tp.pr3.bc.jumps.GoTo;
 import tp.pr3.elements.LexicalParser;
+import tp.pr3.exceptions.ArrayException;
 import tp.pr3.exceptions.LexicalAnalysisException;
 import tp.pr3.inst.Instruction;
 import tp.pr3.mv.ParsedProgram;
@@ -9,14 +11,13 @@ import tp.pr3.mv.ParsedProgram;
  * Clase que representa un bloque While
  */
 public class While implements Instruction {
-	Condition condition;
-	ParsedProgram whileBody;
+	private Condition condition;
+	private ParsedProgram whileBody;
 
 	/**
 	 * Constructor de la clase
 	 */
 	public While() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -33,19 +34,26 @@ public class While implements Instruction {
 	}
 
 	@Override
-	public void compile(tp.pr3.elements.Compiler compiler) {
-		// TODO Auto-generated method stub
+	public void compile(tp.pr3.elements.Compiler compiler) throws ArrayException {
+		int bucle = compiler.getSizeBcProgram();
+		this.condition.compile(compiler);
+		compiler.compile(this.whileBody);
+		compiler.addByteCode(new GoTo(bucle));
+		int jump = compiler.getSizeBcProgram();
+		this.condition.cj.setN(jump);
 	}
 
 	@Override
-	public Instruction lexParse(String[] words, LexicalParser lexparser) {
-		if (words[0].equalsIgnoreCase("while")) {
+	public Instruction lexParse(String[] words, LexicalParser lexParser) {
+		if (words.length == 4 && words[0].equalsIgnoreCase("while")) {
 			Condition cnd = ConditionParser.parse(words);
 			ParsedProgram wBody = null;
 			if (cnd != null) {
 				try {
 					wBody = new ParsedProgram();
-					lexparser.lexicalParser(wBody, "endwhile");
+					lexParser.increaseProgramCounter();
+					lexParser.lexicalParser(wBody, "endwhile");
+					lexParser.increaseProgramCounter();
 					return new While(cnd, wBody);
 				} catch (LexicalAnalysisException e) {
 					System.err.println("Se ha producido un error mientras se realizaba el "
@@ -54,6 +62,11 @@ public class While implements Instruction {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "While [condition=" + condition.toString() + ", whileBody=" + whileBody.toString() + "]";
 	}
 
 }

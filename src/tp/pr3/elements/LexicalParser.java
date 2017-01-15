@@ -11,14 +11,13 @@ import tp.pr3.mv.SourceProgram;
  * Clase que representa el traductor léxico de la máquina virtual
  */
 public class LexicalParser {
-	private SourceProgram sProgram;
-	private int programCounter;
+	private int programCounter = 0;
+	private SourceProgram sProgram = null;
 
 	/**
 	 * Constructor de la clase
 	 */
 	public LexicalParser() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -36,11 +35,14 @@ public class LexicalParser {
 	 */
 	public void initialize(SourceProgram sourceProgram) {
 		this.sProgram = sourceProgram;
+		this.programCounter = 0;
 	}
 
 	/**
 	 * @param pProgram
+	 *            programa donde agregar el resultado del parseo
 	 * @param stopKey
+	 *            clave para parar el parseo
 	 * @throws LexicalAnalysisException
 	 *             Detecta errores que se pueden producir en el análisis
 	 *             léxico, por incorreciones en el programa fuente.
@@ -48,25 +50,29 @@ public class LexicalParser {
 	public void lexicalParser(ParsedProgram pProgram, String stopKey) throws LexicalAnalysisException {
 		boolean stop = false;
 		try {
-			while (programCounter < sProgram.getSize() && !stop) {
+			if (sProgram.getSize() == 0)
+				throw new LexicalAnalysisException("El programa fuente no tiene elementos");
 
-				String line = sProgram.getInstr(programCounter);
-
+			while (this.programCounter < sProgram.getSize() && !stop) {
+				String line = sProgram.getInstr(programCounter).trim();
 				if (line.equalsIgnoreCase(stopKey))
 					stop = true;
 				else {
-					Instruction instruction = InstructionParser.parse(line.split(" "), this);
-					// Si instruction es null
+					Instruction instruction = InstructionParser.parse(line.split(" +"), this);
 					if (instruction == null)
-						throw new LexicalAnalysisException("Error en la traducción léxica del programa");
+
+						throw new LexicalAnalysisException("Error en la traducción léxica del programa en la línea "
+								+ this.programCounter + ": " + line);
 
 					pProgram.addInst(instruction);
-					// Aumentar programCounter
-					this.programCounter++;
 				}
 			}
+			if (!stop) {
+				throw new LexicalAnalysisException(
+						"Palabra clave [" + stopKey + "] no encontrada en el programa fuente");
+			}
 		} catch (ArrayException e) {
-			throw new LexicalAnalysisException("Error en la traducción léxica del programa");
+			throw new LexicalAnalysisException("Se ha llenado el espacio reservado para el Programa Parseado");
 		}
 
 	}

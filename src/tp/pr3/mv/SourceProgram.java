@@ -69,7 +69,7 @@ public class SourceProgram {
 		if (nextProgramPosition > 0) {
 			objectInfo += "Programa fuente almacenado: " + System.getProperty("line.separator");
 			for (int i = 0; i < this.nextProgramPosition; i++)
-				objectInfo += i + ": " + this.sProgram[i].toString();
+				objectInfo += i + ": " + this.sProgram[i].toString() + System.getProperty("line.separator");
 		}
 		return objectInfo;
 	}

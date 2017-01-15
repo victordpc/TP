@@ -31,11 +31,10 @@ public class Memory {
 	 * @return valor almacenado en la dirección de memoria indicada
 	 */
 	public Integer read(int pos) {
-		if (pos >= 0)
+		if (pos >= 0 && (pos < this.memory.length))
 			if (this.memory[pos] != null)
 				return this.memory[pos];
-
-		return null;
+		return 0;
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package tp.pr3.inst.assignments;
 
 import tp.pr3.bc.ByteCode;
+import tp.pr3.bc.Push;
+import tp.pr3.elements.Compiler;
 
 /**
  * Clase que representa un termino de tipo numero
@@ -20,8 +22,7 @@ public class Number implements Term {
 
 	@Override
 	public ByteCode compile(Compiler compiler) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Push(numero);
 	}
 
 	@Override

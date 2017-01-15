@@ -9,8 +9,8 @@ import tp.pr3.inst.Instruction;
 public class ParsedProgram {
 
 	private static final int EXTEND_VALUE = 1000;
-	private final Instruction[] pProgram;
 	private int nextProgramPosition = 0;
+	private final Instruction[] pProgram;
 
 	/**
 	 * Constructor de la clase
@@ -31,17 +31,7 @@ public class ParsedProgram {
 	public void addInst(Instruction ins) throws ArrayException {
 		if (this.nextProgramPosition >= EXTEND_VALUE)
 			throw new ArrayException("Acceso incorrecto al array del programa");
-
 		this.pProgram[this.nextProgramPosition++] = ins;
-	}
-
-	/**
-	 * Tamaño del programa
-	 * 
-	 * @return número de elementos del programa
-	 */
-	public int getSize() {
-		return this.nextProgramPosition;
 	}
 
 	/**
@@ -55,6 +45,15 @@ public class ParsedProgram {
 		if (k < 0 || k >= this.nextProgramPosition)
 			return null;
 		return this.pProgram[k];
+	}
+
+	/**
+	 * Tamaño del programa
+	 * 
+	 * @return número de elementos del programa
+	 */
+	public int getSize() {
+		return this.nextProgramPosition;
 	}
 
 	/**

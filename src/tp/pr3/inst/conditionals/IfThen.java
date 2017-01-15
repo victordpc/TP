@@ -17,7 +17,6 @@ public class IfThen implements Instruction {
 	 * Constructor de la clase
 	 */
 	public IfThen() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -33,26 +32,30 @@ public class IfThen implements Instruction {
 		this.ifBody = pP;
 	}
 
+	@Override
 	public void compile(tp.pr3.elements.Compiler compiler) throws ArrayException {
 		this.condition.compile(compiler);
 		compiler.compile(this.ifBody);
-		// TODO: revisar
-		// this.condition.setJump(compiler.getProgramCounter());
+		int jump = compiler.getSizeBcProgram();
+		this.condition.cj.setN(jump);
 	}
 
 	@Override
-	public Instruction lexParse(String[] words, LexicalParser lexparser) {
-		if (words[0].equalsIgnoreCase("if")) {
+	public Instruction lexParse(String[] words, LexicalParser lexParser) {
+		if (words.length == 4 && words[0].equalsIgnoreCase("if")) {
 			Condition cnd = ConditionParser.parse(words);
-			ParsedProgram iBody = null;
+
 			if (cnd != null) {
 				try {
-					iBody = new ParsedProgram();
-					lexparser.lexicalParser(iBody, "endif");
+					ParsedProgram iBody = new ParsedProgram();
+					lexParser.increaseProgramCounter();
+					lexParser.lexicalParser(iBody, "endif");
+					lexParser.increaseProgramCounter();
 					return new IfThen(cnd, iBody);
 				} catch (LexicalAnalysisException e) {
-					System.err.println(
-							"Se ha producido un error mientras se realizaba el análisis léxico del cuerpo del If");
+					System.out.println(
+							"Se ha producido un error mientras se realizaba el análisis léxico del cuerpo del If"
+									+ System.getProperty("line.separator") + e.getMessage());
 				}
 			}
 		}

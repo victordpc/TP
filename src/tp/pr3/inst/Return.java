@@ -21,9 +21,11 @@ public class Return implements Instruction {
 	}
 
 	@Override
-	public Instruction lexParse(String[] words, LexicalParser lexparser) {
-		if (words.length == 1 && words[0].compareToIgnoreCase("Return") == 0)
+	public Instruction lexParse(String[] words, LexicalParser lexParser) {
+		if (words.length == 1 && words[0].compareToIgnoreCase("Return") == 0) {
+			lexParser.increaseProgramCounter();
 			return new Return();
+		}
 		return null;
 	}
 

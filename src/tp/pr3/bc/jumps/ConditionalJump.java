@@ -26,11 +26,19 @@ public abstract class ConditionalJump extends Jump {
 	 * @param sc
 	 *            valor de la subcima para comparar
 	 * @param cpu
-	 *            TODO
+	 *            CPU donde se ejecuta
 	 * @return <code>true</code> si hay que saltar, <code>false</code> en otro
 	 *         caso.
 	 */
 	public abstract boolean compares(int c, int sc, CPU cpu);
+
+	@Override
+	public void execute(CPU cpu) throws StackException {
+		int c = cpu.pop();
+		int sc = cpu.pop();
+		if (compares(c, sc, cpu))
+			cpu.jump(n - 1);
+	}
 
 	/**
 	 * Setter para la propiedad n
@@ -43,11 +51,8 @@ public abstract class ConditionalJump extends Jump {
 	}
 
 	@Override
-	public void execute(CPU cpu) throws StackException {
-		int c = cpu.pop();
-		int sc = cpu.pop();
-		if (compares(c, sc, cpu))
-			cpu.jump(n - 1);
+	public String toString() {
+		return "ConditionalJump [n=" + n + "]"+ System.getProperty("line.separator");
 	}
 
 }

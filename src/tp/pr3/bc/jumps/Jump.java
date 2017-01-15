@@ -25,6 +25,11 @@ public abstract class Jump implements ByteCode {
 		return parseJump(s[0], Integer.parseInt(s[1]));
 	}
 
+	@Override
+	public String toString() {
+		return "Jump [n=" + n + "]" + System.getProperty("line.separator");
+	}
+
 	/**
 	 * Realiza el parseo específico de los comandos con un parámetro
 	 * 

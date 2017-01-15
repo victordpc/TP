@@ -11,9 +11,9 @@ import tp.pr3.inst.assignments.TermParser;
  * Clase abstracta que representa una condicion
  */
 public abstract class Condition {
-	protected ConditionalJump condition;
 	private Term term1;
 	private Term term2;
+	protected ConditionalJump cj;
 
 	/**
 	 * Constructor de la clase
@@ -44,22 +44,11 @@ public abstract class Condition {
 	 *             un array
 	 */
 	public void compile(Compiler compiler) throws ArrayException {
+		compiler.addByteCode(this.term1.compile(compiler));
+		compiler.addByteCode(this.term2.compile(compiler));
+		this.cj = compileOp();
+		compiler.addByteCode(this.cj);
 	}
-
-	/**
-	 * Operación de parseo propia de la condición
-	 * 
-	 * @param t1
-	 *            primer termino
-	 * @param op
-	 *            operador
-	 * @param t2
-	 *            segundo término
-	 * @param parser
-	 *            parseador usado
-	 * @return Condición
-	 */
-	protected abstract Condition parseOp(Term t1, java.lang.String op, Term t2, LexicalParser lexParser);
 
 	/**
 	 * Parsea una condicion
@@ -78,7 +67,7 @@ public abstract class Condition {
 		this.term1 = TermParser.parse(t1);
 		if (term1 == null)
 			return null;
-		
+
 		this.term2 = TermParser.parse(t2);
 		if (term2 == null)
 			return null;
@@ -86,8 +75,31 @@ public abstract class Condition {
 		return parseOp(term1, op, term2, parser);
 	}
 
+	@Override
+	public String toString() {
+		return "Condition [term1=" + term1 + ", term2=" + term2 + ", Salto=" + cj + "]"
+				+ System.getProperty("line.separator");
+	}
+
 	/**
 	 * Compila la condición propia de la clase
+	 * 
+	 * @return salto conficional que se corresponde a la condición
 	 */
 	protected abstract ConditionalJump compileOp();
+
+	/**
+	 * Operación de parseo propia de la condición
+	 * 
+	 * @param t1
+	 *            primer termino
+	 * @param op
+	 *            operador
+	 * @param t2
+	 *            segundo término
+	 * @param lexParser
+	 *            parseador usado
+	 * @return Condición
+	 */
+	protected abstract Condition parseOp(Term t1, java.lang.String op, Term t2, LexicalParser lexParser);
 }

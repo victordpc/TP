@@ -8,12 +8,6 @@ public class CommandParser {
 			new Run() };
 
 	/**
-	 * Constructor de la clase
-	 */
-	public CommandParser() {
-	}
-
-	/**
 	 * Convierte un texto a un objeto de tipo <code>Command</code>.
 	 * 
 	 * @param linea
@@ -42,5 +36,11 @@ public class CommandParser {
 			cadena += comando.textHelp();
 		}
 		System.out.println(cadena);
+	}
+
+	/**
+	 * Constructor de la clase
+	 */
+	public CommandParser() {
 	}
 }

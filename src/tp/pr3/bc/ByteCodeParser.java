@@ -18,12 +18,6 @@ public class ByteCodeParser {
 			new Push(0), new Store(0), new Sub(), new GoTo(0), new IfEq(0), new IfLe(0), new IfLeq(0), new IfNeq(0) };
 
 	/**
-	 * Constructor de la clase
-	 */
-	public ByteCodeParser() {
-	}
-
-	/**
 	 * Convierte un texto a un objeto de tipo <code>ByteCode</code>.
 	 * 
 	 * @param line
@@ -42,5 +36,11 @@ public class ByteCodeParser {
 				return ins;
 		}
 		return null;
+	}
+
+	/**
+	 * Constructor de la clase
+	 */
+	public ByteCodeParser() {
 	}
 }

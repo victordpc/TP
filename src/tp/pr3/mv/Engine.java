@@ -1,5 +1,6 @@
 package tp.pr3.mv;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -8,6 +9,7 @@ import tp.pr3.bc.ByteCodeParser;
 import tp.pr3.cm.Command;
 import tp.pr3.cm.CommandParser;
 import tp.pr3.elements.CPU;
+import tp.pr3.elements.Compiler;
 import tp.pr3.elements.LexicalParser;
 import tp.pr3.exceptions.ArrayException;
 import tp.pr3.exceptions.BadFormatByteCodeException;
@@ -20,19 +22,25 @@ import tp.pr3.exceptions.LexicalAnalysisException;
  */
 public class Engine {
 
-	private ByteCodeProgram byteCodeProgram;
+	private ByteCodeProgram bcProgram;
 	private CPU cpu;
 	private boolean end;
 	private ParsedProgram pProgram;
 	private final Scanner scanner;
 	private SourceProgram sProgram;
+	Compiler comp = null;
+	LexicalParser lparser = null;
 
 	/**
 	 * Constructor de la clase
 	 */
 	public Engine() {
-		this.byteCodeProgram = new ByteCodeProgram();
+		this.bcProgram = new ByteCodeProgram();
 		this.scanner = new Scanner(System.in);
+		this.lparser = new LexicalParser();
+		this.comp = new Compiler();
+		this.pProgram = new ParsedProgram();
+		this.sProgram = new SourceProgram();
 	}
 
 	/**
@@ -49,7 +57,7 @@ public class Engine {
 	 */
 	public boolean excuteRun() throws ArrayException, ExecutionErrorException {
 		boolean resultado = true;
-		this.cpu = new CPU(this.byteCodeProgram);
+		this.cpu = new CPU(this.bcProgram);
 
 		if (this.cpu.run()) {
 			System.out.println("El estado de la maquina tras ejecutar el programa: "
@@ -73,11 +81,17 @@ public class Engine {
 	 *         otro caso
 	 * 
 	 * @throws LexicalAnalysisException
+	 *             fallo en el parseo
 	 * @throws ArrayException
+	 *             llenado de programa
 	 */
-	public boolean executeCompile() throws LexicalAnalysisException {
+	public boolean executeCompile() throws LexicalAnalysisException, ArrayException {
+		System.out.println(this.sProgram + System.getProperty("line.separator"));
+		this.pProgram.reset();
 		this.lexicalAnalysis();
+		this.bcProgram.reset();
 		this.generateByteCode();
+		System.out.println(this.bcProgram + System.getProperty("line.separator"));
 		return true;
 	}
 
@@ -94,7 +108,7 @@ public class Engine {
 	 *
 	 */
 	public void executePrintProgram() {
-		System.out.println(this.byteCodeProgram.toString());
+		System.out.println(this.bcProgram.toString());
 		System.out.println("Fin del programa.");
 	}
 
@@ -106,7 +120,7 @@ public class Engine {
 	 */
 	public boolean executeQuit() {
 		this.end = true;
-		System.out.println(byteCodeProgram.toString());
+		System.out.println(bcProgram.toString());
 		System.out.println(System.getProperty("line.separator") + "Fin de la ejecucion...."
 				+ System.getProperty("line.separator"));
 		return true;
@@ -130,16 +144,18 @@ public class Engine {
 	 *             un array.
 	 */
 	public boolean executeReplace(int position) throws BadFormatByteCodeException, ArrayException {
-		if (position < byteCodeProgram.size()) {
+		if (0 < position && position < bcProgram.size()) {
 			System.out.print("Nueva instruccion: ");
 			String line = scanner.nextLine();
-			ByteCode bc = ByteCodeParser.parse(line);
-			if (bc != null && byteCodeProgram.addByteCode(bc, position)) {
-				System.out.println(byteCodeProgram.toString() + System.getProperty("line.separator"));
+			ByteCode bc = ByteCodeParser.parse(line.trim());
+			if (bc != null && bcProgram.addByteCode(bc, position)) {
+				System.out.println(bcProgram.toString() + System.getProperty("line.separator"));
 				return true;
+			} else {
+				throw new BadFormatByteCodeException("ByteCode [" + line + "] no es un ByteCode admitido");
 			}
 		}
-		return false;
+		throw new ArrayException("La posición indicada [" + position + "] no es una posición válida del programa");
 	}
 
 	/**
@@ -149,7 +165,7 @@ public class Engine {
 	 *         otro caso
 	 */
 	public boolean executeReset() {
-		this.byteCodeProgram.reset();
+		this.bcProgram.reset();
 		System.out.println("RESET ejecutado");
 		return true;
 	}
@@ -166,7 +182,20 @@ public class Engine {
 	 *             un array
 	 */
 	public void load(String fichName) throws FileNotFoundException, ArrayException {
-		// TODO Auto-generated method stub
+		sProgram.reset();
+
+		try {
+			Scanner scanner = new Scanner(new File(fichName));
+			while (scanner.hasNextLine()) {
+				sProgram.addInst(scanner.nextLine().trim());
+			}
+			scanner.close();
+			System.out.println(sProgram.toString());
+
+		} catch (FileNotFoundException exception) {
+			throw new FileNotFoundException("Fichero no Encontrado");
+			// System.out.println("Excepcion: Fichero no Encontrado...");
+		}
 	}
 
 	/**
@@ -187,33 +216,33 @@ public class Engine {
 				System.out.println("Comienza la ejecución de " + command.toString());
 				try {
 					command.execute(this);
+					System.out.println("Fin de ejecución de " + command.toString());
 				} catch (LexicalAnalysisException e) {
-					System.err.println("Error en el análisis lexico del programa " + e.getMessage());
+					System.err.println("Error en el análisis lexico del programa: " + e.getMessage());
 				} catch (ArrayException e) {
-					System.err.println("Error en la ejecución del programa " + e.getMessage());
+					System.err.println("Error en la ejecución del comando " + command + " " + e.getMessage());
 				} catch (FileNotFoundException e) {
-					System.err.println("Error en la ejecución del programa " + e.getMessage());
+					System.err.println("Error en la ejecución del comando " + command + " " + e.getMessage());
 				} catch (BadFormatByteCodeException e) {
-					System.err.println("Error en la ejecución del programa " + e.getMessage());
+					System.err.println("Error en la ejecución del comando " + command + " " + e.getMessage());
 				} catch (ExecutionErrorException e) {
-					System.err.println("Error en la ejecución del programa " + e.getMessage());
+					System.err.println("Error en la ejecución del comando " + command + " " + e.getMessage());
 				}
 			} else {
-				System.out.print("Comando no reconocido" + System.getProperty("line.separator"));
+				System.err.print("Comando no reconocido" + System.getProperty("line.separator"));
 			}
 		}
 		System.out.print(System.getProperty("line.separator"));
 	}
 
-	private void generateByteCode() {
-		// TODO Auto-generated method stub
-
+	private void generateByteCode() throws ArrayException {
+		this.comp.initialize(bcProgram);
+		this.comp.compile(pProgram);
 	}
 
 	private void lexicalAnalysis() throws LexicalAnalysisException {
-		LexicalParser lparser = new LexicalParser();
-		lparser.initialize(sProgram);
-		lparser.lexicalParser(pProgram, "END");
+		this.lparser.initialize(sProgram);
+		this.lparser.lexicalParser(pProgram, "END");
 	}
 }
 

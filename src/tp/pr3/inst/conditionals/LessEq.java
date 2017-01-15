@@ -1,6 +1,7 @@
 package tp.pr3.inst.conditionals;
 
 import tp.pr3.bc.jumps.ConditionalJump;
+import tp.pr3.bc.jumps.conditionaljumps.IfLeq;
 import tp.pr3.elements.LexicalParser;
 import tp.pr3.inst.assignments.Term;
 
@@ -13,7 +14,6 @@ public class LessEq extends Condition {
 	 * Constructor de la clase
 	 */
 	public LessEq() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -29,15 +29,16 @@ public class LessEq extends Condition {
 	}
 
 	@Override
-	protected Condition parseOp(Term t1, String op, Term t2, LexicalParser lexParser) {
-		if (op == "<=")
-			return new LessEq(t1, t2);
-		return null;
+	protected ConditionalJump compileOp() {
+		return new IfLeq(0);
 	}
 
 	@Override
-	protected ConditionalJump compileOp() {
-		// TODO Auto-generated method stub
+	protected Condition parseOp(Term t1, String op, Term t2, LexicalParser lexParser) {
+		if (op.equalsIgnoreCase("<=")) {
+			lexParser.increaseProgramCounter();
+			return new LessEq(t1, t2);
+		}
 		return null;
 	}
 

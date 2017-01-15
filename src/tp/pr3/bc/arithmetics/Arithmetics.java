@@ -43,7 +43,9 @@ public abstract class Arithmetics implements ByteCode {
 	 *            objeto en el que se ejecuta el comando
 	 * 
 	 * @throws DivByZeroException
+	 *             division por cero
 	 * @throws StackException
+	 *             fallo de pila
 	 */
 	protected abstract void operates(int c, int sc, CPU cpu) throws DivByZeroException, StackException;
 

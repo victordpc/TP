@@ -1,6 +1,7 @@
 package tp.pr3.inst.assignments;
 
 import tp.pr3.bc.ByteCode;
+import tp.pr3.elements.Compiler;
 
 /**
  * Representa los terminos existentes en una instrución

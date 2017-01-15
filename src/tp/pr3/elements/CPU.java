@@ -100,7 +100,6 @@ public class CPU {
 	 */
 	public void out() throws StackException {
 		int valorPila = this.stack.pop();
-		this.stack.push(valorPila);
 		System.out.println("El ultimo valor en la pila es: " + valorPila + System.getProperty("line.separator"));
 	}
 
@@ -153,17 +152,22 @@ public class CPU {
 	 * 
 	 * @return <code>true</code> exito de la operacion, <code>false</code> en
 	 *         otro caso
-	 * @throws ArrayException
 	 * @throws ExecutionErrorException
+	 *             fallo en la ejecución del programa
 	 */
-	public boolean run() throws ArrayException, ExecutionErrorException {
+	public boolean run() throws ExecutionErrorException {
 		boolean correcto = true;
 		this.reset();
 
 		while (correcto && !halt) {
-			ByteCode instrucion = this.bcProgram.getInst(programCounter);
-			if (instrucion != null)
-				instrucion.execute(this);
+			ByteCode instruccion;
+			try {
+				instruccion = this.bcProgram.getInst(programCounter);
+			} catch (ArrayException e) {
+				instruccion = null;
+			}
+			if (instruccion != null)
+				instruccion.execute(this);
 			else
 				correcto = false;
 			this.next();

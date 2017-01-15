@@ -27,8 +27,10 @@ public class InstructionParser {
 		for (Instruction ins : instructions) {
 			Instruction instructionParsed = ins.lexParse(linea, lpar);
 
-			if (instructionParsed != null)
+			if (instructionParsed != null) {
+				// lpar.increaseProgramCounter();
 				return instructionParsed;
+			}
 		}
 		return null;
 	}

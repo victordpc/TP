@@ -1,6 +1,7 @@
 package tp.pr3.inst.conditionals;
 
 import tp.pr3.bc.jumps.ConditionalJump;
+import tp.pr3.bc.jumps.conditionaljumps.IfLe;
 import tp.pr3.elements.LexicalParser;
 import tp.pr3.inst.assignments.Term;
 
@@ -8,11 +9,11 @@ import tp.pr3.inst.assignments.Term;
  * Clase que representa una condicion de menor estricto
  */
 public class Less extends Condition {
+
 	/**
 	 * Constructor de la clase
 	 */
 	public Less() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -28,15 +29,16 @@ public class Less extends Condition {
 	}
 
 	@Override
-	protected Condition parseOp(Term t1, String op, Term t2, LexicalParser lexParser) {
-		if(op=="<")
-			return new Less(t1,t2);
-		return null;
+	protected ConditionalJump compileOp() {
+		return new IfLe(0);
 	}
 
 	@Override
-	protected ConditionalJump compileOp() {
-		// TODO Auto-generated method stub
+	protected Condition parseOp(Term t1, String op, Term t2, LexicalParser lexParser) {
+		if (op.equalsIgnoreCase("<")) {
+			lexParser.increaseProgramCounter();
+			return new Less(t1, t2);
+		}
 		return null;
 	}
 

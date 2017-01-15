@@ -1,6 +1,13 @@
 package tp.pr3.inst.assignments;
 
+import tp.pr3.bc.Store;
+import tp.pr3.bc.arithmetics.Add;
+import tp.pr3.bc.arithmetics.Arithmetics;
+import tp.pr3.bc.arithmetics.Div;
+import tp.pr3.bc.arithmetics.Mul;
+import tp.pr3.bc.arithmetics.Sub;
 import tp.pr3.elements.LexicalParser;
+import tp.pr3.exceptions.ArrayException;
 import tp.pr3.inst.Instruction;
 
 /**
@@ -16,7 +23,6 @@ public class CompoundAssignment implements Instruction {
 	 * Constructor de la clase
 	 */
 	public CompoundAssignment() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -39,14 +45,33 @@ public class CompoundAssignment implements Instruction {
 	}
 
 	@Override
-	public void compile(tp.pr3.elements.Compiler compiler) {
-		// TODO Auto-generated method stub
+	public void compile(tp.pr3.elements.Compiler compiler) throws ArrayException {
+		compiler.addByteCode(this.term1.compile(compiler));
+		compiler.addByteCode(this.term2.compile(compiler));
 
+		Arithmetics op = null;
+		switch (operator) {
+		case "+":
+			op = new Add();
+			break;
+		case "-":
+			op = new Sub();
+			break;
+		case "*":
+			op = new Mul();
+			break;
+		case "/":
+			op = new Div();
+			break;
+		}
+
+		compiler.addByteCode(op);
+		compiler.addByteCode(new Store(compiler.indexOf(this.var_name)));
 	}
 
 	@Override
-	public Instruction lexParse(String[] words, LexicalParser lexparser) {
-		if (words.length == 3 && words[1] != "=" && words[0].charAt(0) >= 'a' && words[0].charAt(0) <= 'z'
+	public Instruction lexParse(String[] words, LexicalParser lexParser) {
+		if (words.length == 5 && words[0].charAt(0) >= 'a' && words[0].charAt(0) <= 'z' && words[1] != "="
 				&& !(words[3].charAt(0) != '+' && words[3].charAt(0) != '/' && words[3].charAt(0) != '*'
 						&& words[3].charAt(0) != '-')) {
 			Term t1 = TermParser.parse(words[2]);
@@ -55,15 +80,20 @@ public class CompoundAssignment implements Instruction {
 			Term t2 = TermParser.parse(words[4]);
 			if (t2 == null)
 				return null;
-			return new CompoundAssignment(words[0], words[3], t1, t2);
+
+			String operator = words[3];
+
+			String var = words[0];
+			lexParser.increaseProgramCounter();
+			return new CompoundAssignment(var, operator, t1, t2);
 		}
 		return null;
 	}
 
 	@Override
 	public String toString() {
-		return "CompoundAssignment [var_name=" + var_name + ", term1=" + term1 + ", operator=" + operator + ", term2="
-				+ term2 + "]";
+		return "CompoundAssignment [var_name=" + var_name + ", term1=" + term1.toString() + ", operator=" + operator
+				+ ", term2=" + term2.toString() + "]";
 	}
 
 }
