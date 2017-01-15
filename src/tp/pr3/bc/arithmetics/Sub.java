@@ -1,0 +1,37 @@
+package tp.pr3.bc.arithmetics;
+
+import tp.pr3.bc.ByteCode;
+import tp.pr3.elements.CPU;
+import tp.pr3.exceptions.StackException;
+
+/**
+ * Clase que representa la instrución <code>SUB</code>
+ * 
+ */
+public class Sub extends Arithmetics {
+
+	/**
+	 * Constructor de la clase
+	 */
+	public Sub() {
+		super();
+	}
+
+	@Override
+	public String toString() {
+		return "SUB" + System.getProperty("line.separator");
+	}
+
+	@Override
+	protected void operates(int c, int sc, CPU cpu) throws StackException {
+		cpu.push(sc - c);
+	}
+
+	@Override
+	protected ByteCode parseOperation(String com) {
+		if (com.compareToIgnoreCase("Sub") == 0)
+			return new Sub();
+		return null;
+	}
+
+}
