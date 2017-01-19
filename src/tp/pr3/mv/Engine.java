@@ -144,7 +144,7 @@ public class Engine {
 	 *             un array.
 	 */
 	public boolean executeReplace(int position) throws BadFormatByteCodeException, ArrayException {
-		if (0 < position && position < bcProgram.size()) {
+		if (position >= 0 && position < bcProgram.size()) {
 			System.out.print("Nueva instruccion: ");
 			String line = scanner.nextLine();
 			ByteCode bc = ByteCodeParser.parse(line.trim());
