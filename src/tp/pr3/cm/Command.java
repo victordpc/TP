@@ -19,8 +19,9 @@ public interface Command {
 	 * @param s
 	 *            descomposicion de la cadena introducida
 	 * @return representa la cadena recibida
+	 * @throws BadFormatByteCodeException 
 	 */
-	public Command parse(String[] s);
+	public Command parse(String[] s) throws BadFormatByteCodeException;
 
 	/**
 	 * Muestra la ayuda del comando

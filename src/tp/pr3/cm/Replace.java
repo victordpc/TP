@@ -37,9 +37,14 @@ public class Replace implements Command {
 	}
 
 	@Override
-	public Command parse(String[] s) {
+	public Command parse(String[] s) throws BadFormatByteCodeException {
 		if (s.length == 2 && s[0].equalsIgnoreCase("ReplaceBC")) {
-			int pos = Integer.parseInt(s[1]);
+			int pos;
+			try {
+				pos = Integer.parseInt(s[1]);
+			} catch (NumberFormatException e) {
+				throw new tp.pr3.exceptions.BadFormatByteCodeException(s[0]+" "+s[1]+" no es un ByteCode válido");
+			}
 
 			if (pos >= 0) {
 				return new Replace(pos);

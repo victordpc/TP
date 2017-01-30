@@ -20,9 +20,13 @@ public abstract class Jump implements ByteCode {
 
 	@Override
 	public ByteCode parse(String[] s) {
-		if (s.length != 2)
+		try {
+			if (s.length != 2)
+				return null;
+			return parseJump(s[0], Integer.parseInt(s[1]));
+		} catch (NumberFormatException e) {
 			return null;
-		return parseJump(s[0], Integer.parseInt(s[1]));
+		}
 	}
 
 	@Override

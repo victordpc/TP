@@ -1,5 +1,7 @@
 package tp.pr3.cm;
 
+import tp.pr3.exceptions.BadFormatByteCodeException;
+
 /**
  * Clase que se encarga de convertir textos en comandos
  */
@@ -14,8 +16,9 @@ public class CommandParser {
 	 *            cadena de texto
 	 * @return <code>Command</code> correspondiente al texto, si es incorrecto
 	 *         devuelve <code>null</code>
+	 * @throws BadFormatByteCodeException
 	 */
-	public static Command parse(String linea) {
+	public static Command parse(String linea) throws BadFormatByteCodeException {
 		String[] instructionArray = linea.split(" ");
 
 		for (Command comando : commands) {

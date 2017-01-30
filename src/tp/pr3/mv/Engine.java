@@ -147,12 +147,17 @@ public class Engine {
 		if (position >= 0 && position < bcProgram.size()) {
 			System.out.print("Nueva instruccion: ");
 			String line = scanner.nextLine();
-			ByteCode bc = ByteCodeParser.parse(line.trim());
-			if (bc != null && bcProgram.addByteCode(bc, position)) {
-				System.out.println(bcProgram.toString() + System.getProperty("line.separator"));
-				return true;
-			} else {
-				throw new BadFormatByteCodeException("ByteCode [" + line + "] no es un ByteCode admitido");
+			ByteCode bc = null;
+			while (bc == null) {
+				bc = ByteCodeParser.parse(line.trim());
+				if (bc != null && bcProgram.addByteCode(bc, position)) {
+					System.out.println(bcProgram.toString() + System.getProperty("line.separator"));
+					return true;
+				} else {
+					System.out.println("ByteCode [" + line + "] no es un ByteCode admitido");
+					// throw new BadFormatByteCodeException("ByteCode [" + line
+					// + "] no es un ByteCode admitido");
+				}
 			}
 		}
 		throw new ArrayException("La posición indicada [" + position + "] no es una posición válida del programa");
@@ -211,7 +216,12 @@ public class Engine {
 
 		while (!this.end) {
 			String line = this.scanner.nextLine().trim();
-			Command command = CommandParser.parse(line);
+			Command command = null;
+			try {
+				command = CommandParser.parse(line);
+			} catch (BadFormatByteCodeException e) {
+				System.err.println("Error en el comando " + line + " " + e.getMessage());
+			}
 			if (command != null) {
 				System.out.println("Comienza la ejecución de " + command.toString());
 				try {
