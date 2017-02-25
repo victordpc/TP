@@ -16,7 +16,7 @@ public class CommandParser {
 	 *            cadena de texto
 	 * @return <code>Command</code> correspondiente al texto, si es incorrecto
 	 *         devuelve <code>null</code>
-	 * @throws BadFormatByteCodeException
+	 * @throws BadFormatByteCodeException se lanza la excepción cuando no se recibe un ByteCode correcto
 	 */
 	public static Command parse(String linea) throws BadFormatByteCodeException {
 		String[] instructionArray = linea.split(" ");
