@@ -1,1 +1,9 @@
 /bin/
+
+src/TPMV/CommandParser.java
+
+src/TPMV/ByteCodeParser.java
+
+src/TPMV/OperandStack.java
+
+src/tp/pr3/elements/Memory.java
